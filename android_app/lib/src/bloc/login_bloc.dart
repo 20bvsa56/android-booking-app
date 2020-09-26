@@ -12,7 +12,7 @@ class LoginBloc extends Object with LoginValidator implements BaseBloc{
   Stream<String> get emailStream => _emailController.stream.transform(emailValidator);
   Stream<String> get passwordStream => _passwordController.stream.transform(passwordValidator);
 
-  //using rxdart comp to check data. rxdart's stream is called observable. observable is replace by Rx
+  //using rxdart comp to check data. rxdart's stream is called observable. observable is replaced by Rx
   Stream<bool> get loginCheck => Rx.combineLatest2(emailStream,passwordStream,(e,p)=> true);
 
   Function(String) get emailChanged => _emailController.sink.add;

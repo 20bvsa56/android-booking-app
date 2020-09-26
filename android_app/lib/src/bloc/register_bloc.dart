@@ -23,7 +23,7 @@ class RegisterBloc extends Object with RegisterValidator implements BaseBloc{
   Stream<String> get phoneNumberStream => _phoneNumberController.stream.transform(phoneNumberValidator);
 
 
-  //using rxdart comp to check data. rxdart's stream is called observable. observable is replace by Rx
+  //using rxdart comp to check data. rxdart's stream is called observable. observable is replaced by Rx
   Stream<bool> get registerCheck => Rx.combineLatest6(phoneNumberStream,fnameStream,lnameStream,emailStream,passwordStream,confirmPasswordStream,(ph,f,l,e,p,cp)=> true);
 
   Function(String) get fnameChanged => _fnameController.sink.add;

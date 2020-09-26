@@ -17,8 +17,14 @@ class _RegisterPageState extends State<RegisterPage> {
     //   context,
     //   MaterialPageRoute(builder: (context) => LoginPage()),
     // );
-    scaffoldkey.currentState.showSnackBar(SnackBar(content: Text('Registration Suuccessful. You can login now.', style: TextStyle(fontSize: 14),),backgroundColor: Color(0xfff2a407), duration: Duration(seconds: 10),));
-
+    scaffoldkey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        'Registration Suuccessful. You can login now.',
+        style: TextStyle(fontSize: 14),
+      ),
+      backgroundColor: Color(0xfff2a407),
+      duration: Duration(seconds: 10),
+    ));
   }
 
   @override
@@ -31,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
       // backgroundColor: Color(0xffdedcdc),
       // appBar: AppBar(title: Text('Jhun Jhun Travels'),
       appBar: AppBar(
+        elevation: 25,
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
           onPressed: () => Navigator.pop(context, false),
@@ -93,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       onChanged: registerBloc.fnameChanged,
                                       decoration: InputDecoration(
                                         errorText: snapshot.error,
+                                        hintText: '  John',
                                         labelText: '   First Name',
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
@@ -112,6 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       decoration: InputDecoration(
                                         errorText: snapshot.error,
                                         labelText: '   Last Name',
+                                        hintText: '   Perry',
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.black12,
@@ -128,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   return TextField(
                                       onChanged: registerBloc.emailChanged,
                                       decoration: InputDecoration(
+                                        hintText: '  abc@gmail.com',
                                         errorText: snapshot.error,
                                         labelText: '   Email Address',
                                         enabledBorder: OutlineInputBorder(
@@ -186,10 +196,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 stream: registerBloc.passwordStream,
                                 builder: (context, snapshot) {
                                   return TextField(
-                                    obscureText: true,
+                                      obscureText: true,
                                       onChanged: registerBloc.passwordChanged,
                                       decoration: InputDecoration(
-                                        
+                                        hintText: '  *********',
                                         errorText: snapshot.error,
                                         labelText: '   Password',
                                         enabledBorder: OutlineInputBorder(
@@ -206,10 +216,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 stream: registerBloc.confirmPasswordStream,
                                 builder: (context, snapshot) {
                                   return TextField(
-                                    obscureText: true,
+                                      obscureText: true,
                                       onChanged:
                                           registerBloc.confirmPasswordChanged,
                                       decoration: InputDecoration(
+                                        hintText: '  *********',
                                         errorText: snapshot.error,
                                         labelText: '   Confirm Password',
                                         enabledBorder: OutlineInputBorder(
@@ -229,6 +240,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       onChanged:
                                           registerBloc.phoneNumberChanged,
                                       decoration: InputDecoration(
+                                        hintText: '  9999999999',
                                         errorText: snapshot.error,
                                         labelText: '   Phone Number',
                                         enabledBorder: OutlineInputBorder(

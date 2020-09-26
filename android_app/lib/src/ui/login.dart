@@ -1,7 +1,6 @@
 import 'package:android_app/src/bloc/login_bloc.dart';
 import 'package:android_app/src/ui/register.dart';
 import 'package:flutter/material.dart';
-
 import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,20 +19,19 @@ class _LoginPageState extends State<LoginPage> {
       MaterialPageRoute(builder: (context) => HomePage()),
     );
 
-   // scaffoldkey.currentState.showSnackBar(SnackBar(content: Text('Registration Suuccessful. You can login now.')));
-
+    // scaffoldkey.currentState.showSnackBar(SnackBar(content: Text('Registration Suuccessful. You can login now.')));
   }
 
   @override
   Widget build(BuildContext context) {
-       final loginBloc = LoginBloc();
+    final loginBloc = LoginBloc();
     final data =
         MediaQuery.of(context); // variable to get the media screen size
     return Scaffold(
-          
       // backgroundColor: Color(0xffdedcdc),
       // appBar: AppBar(title: Text('Jhun Jhun Travels'),
       appBar: AppBar(
+        elevation: 25,
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
           onPressed: () => Navigator.pop(context, false),
@@ -94,8 +92,10 @@ class _LoginPageState extends State<LoginPage> {
                                 stream: loginBloc.emailStream,
                                 builder: (context, snapshot) {
                                   return TextField(
+                                      keyboardType: TextInputType.emailAddress,
                                       onChanged: loginBloc.emailChanged,
                                       decoration: InputDecoration(
+                                        hintText: '  abc@gmail.com',
                                         errorText: snapshot.error,
                                         labelText: '   Email address',
                                         enabledBorder: OutlineInputBorder(
@@ -116,7 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         errorText: snapshot.error,
-                                        labelText: '   ************',
+                                        hintText: '   ************',
+                                        labelText: '   Password',
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.black12,
