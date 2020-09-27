@@ -14,11 +14,9 @@ class _LoginPageState extends State<LoginPage> {
   bool checkBoxValue = false;
 
   goToHomePage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-    );
-
+     // Navigate to the main view screen using a named route '/navbarpage'.
+    Navigator.pushNamed(context, '/navbarpage');
+   
     // scaffoldkey.currentState.showSnackBar(SnackBar(content: Text('Registration Suuccessful. You can login now.')));
   }
 

@@ -1,3 +1,4 @@
+import 'package:android_app/src/ui/bottom_nav_bar.dart';
 import 'package:android_app/src/ui/login.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +12,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Booking App',
-       home: LoginPage(),
+      // Starting the app with the "/" named route.
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the Login Page widget.
+        '/': (context) => LoginPage(),
+        // When navigating to the "/navbarpage" route, build the Login widget.
+        '/navbarpage': (context) => NavigationBarPage(),
+      },
     );
   }
 }
-

@@ -1,5 +1,7 @@
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:android_app/src/ui/image_carousel.dart';
 import 'package:flutter/material.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -7,44 +9,124 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
-    Widget imageCarousel = new Container(
-        height: data.size.height / 4,
-        width: data.size.width,
-        child: Carousel(
-          boxFit: BoxFit.cover,
-          images: [
-            AssetImage('lib/src/images/image_carousel/pokhara.jpg'),
-            AssetImage('lib/src/images/image_carousel/kathmandu.jpg'),
-            AssetImage('lib/src/images/image_carousel/chitwan.jpg'),
-            AssetImage('lib/src/images/image_carousel/koshi.jpg'),
-            AssetImage('lib/src/images/image_carousel/birgunj.jpg'),
-          ],
-          autoplay: true,
-          dotSize: 8.0,
-          animationCurve: Curves.fastOutSlowIn,
-          animationDuration: Duration(milliseconds: 1000),
-          dotSpacing: 25.0,
-          dotColor: Colors.white,
-          indicatorBgPadding: 4.0,
-          dotBgColor: Color(0xfff2a407).withOpacity(0.3),
-          borderRadius: true,
-        ));
+    final format = DateFormat("yyyy-MM-dd");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff2a407),
         // automaticallyImplyLeading: false,
       ),
-      backgroundColor: Color(0xfff2a407),
-      body: Column(
-        children: [
-          imageCarousel,
-          SizedBox(height: 10),
-          Container(
-              child: Text(
-            'Ticket',
-            style: TextStyle(fontSize: 40, color: Colors.white),
-          ))
-        ],
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ImageCarousel(),
+            SizedBox(height: 40),
+            Center(
+              child: Container(
+                  child: Text(
+                'Choose your destination.',
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Color(0xfff2a407),
+                    fontWeight: FontWeight.bold),
+              )),
+            ),
+            SizedBox(height: 30),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(color: Colors.white),
+                width: data.size.width / 1.2,
+                child: Column(children: <Widget>[
+                  TextField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.directions_walk,
+                            size: 26, color: Color(0xfff2a407)),
+                        hintText: 'Kathmandu',
+                        hintStyle: TextStyle(fontSize: 15),
+                        labelText: 'Enter initial destination',
+                        labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.0),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      )),
+                  SizedBox(height: 20),
+                  TextField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.directions_bus,
+                            size: 25, color: Color(0xfff2a407)),
+                        hintText: 'Pokhara',
+                        hintStyle: TextStyle(fontSize: 15),
+                        labelText: 'Enter final destination',
+                        labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.0),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      )),
+                  SizedBox(height: 20),
+                  DateTimeField(
+                    decoration: InputDecoration(
+                        icon: Icon(Icons.calendar_today,
+                            size: 25, color: Color(0xfff2a407)),
+                        labelText: 'Select travel date',
+                        labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1),
+                          borderRadius: BorderRadius.circular(5.0),
+                        )),
+                    format: format,
+                    onShowPicker: (context, currentValue) {
+                      return showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100));
+                    },
+                  ),
+                  SizedBox(height: 25),
+                  // Center(
+                  //   child: RaisedButton(
+                  //     elevation: 500,
+                  //     child: Text('Book Ticket',style: TextStyle(fontSize: 25,color: Colors.white),),
+                  //     color: Color(0xfff2a407),
+                  //     onPressed: null,
+                  //   ),
+                  // )
+
+                  RaisedButton(
+                    onPressed: () {},
+                    textColor: Colors.white,
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xfff2a407),
+                            offset: Offset(5, 2),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                          )
+                        ],
+                        color: Color(0xfff2a407),
+                      ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: const Text('Book Ticket',
+                          style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                ]),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
