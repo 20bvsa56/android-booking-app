@@ -14,7 +14,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     final data = MediaQuery.of(context);
 
     return Container(
-        height: data.size.height / 3.4,
+        height: data.size.height / 3.6,
         width: data.size.width,
         child: Carousel(
           boxFit: BoxFit.cover,

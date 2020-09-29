@@ -17,8 +17,10 @@ class MyApp extends StatelessWidget {
       routes: {
         // When navigating to the "/" route, build the Login Page widget.
         '/': (context) => LoginPage(),
-        // When navigating to the "/navbarpage" route, build the Login widget.
+        // When navigating to the "/navbarpage" route, build the navbarpage widget.
         '/navbarpage': (context) => NavigationBarPage(),
+        // When navigating to the "/navbarpage" route, build the Login widget.
+        '/login':(context)=> LoginPage()
       },
     );
   }

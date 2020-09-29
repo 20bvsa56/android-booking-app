@@ -1,7 +1,6 @@
 import 'package:android_app/src/bloc/login_bloc.dart';
 import 'package:android_app/src/ui/register.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -29,11 +28,9 @@ class _LoginPageState extends State<LoginPage> {
       // backgroundColor: Color(0xffdedcdc),
       // appBar: AppBar(title: Text('Jhun Jhun Travels'),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 25,
-        leading: IconButton(
-          icon: Icon(Icons.chevron_left),
-          onPressed: () => Navigator.pop(context, false),
-        ),
+       
         backgroundColor: Color(0xfff2a407),
         title: Text(
           'Jhun Jhun Travels',

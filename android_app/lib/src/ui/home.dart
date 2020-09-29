@@ -1,4 +1,5 @@
 import 'package:android_app/src/ui/image_carousel.dart';
+import 'package:android_app/src/ui/menu_option.dart';
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
@@ -14,14 +15,16 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff2a407),
+
         // automaticallyImplyLeading: false,
       ),
+      drawer: MenuOption(),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             ImageCarousel(),
-            SizedBox(height: 40),
+            SizedBox(height: 20),
             Center(
               child: Container(
                   child: Text(
@@ -32,7 +35,7 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               )),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 25),
             Center(
               child: Container(
                 decoration: BoxDecoration(color: Colors.white),
@@ -41,45 +44,61 @@ class HomePage extends StatelessWidget {
                   TextField(
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.directions_walk,
+                        prefixIcon: Icon(Icons.directions_walk,
                             size: 26, color: Color(0xfff2a407)),
                         hintText: 'Kathmandu',
                         hintStyle: TextStyle(fontSize: 15),
-                        labelText: 'Enter initial destination',
+                        labelText: 'Enter initial place',
                         labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1.0),
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
                       )),
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
                   TextField(
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                        icon: Icon(Icons.directions_bus,
+                       prefixIcon: Icon(Icons.directions_bus,
                             size: 25, color: Color(0xfff2a407)),
                         hintText: 'Pokhara',
                         hintStyle: TextStyle(fontSize: 15),
-                        labelText: 'Enter final destination',
+                        labelText: 'Enter final place',
                         labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1.0),
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
                       )),
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
+                  TextField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.accessibility,
+                            size: 26, color: Color(0xfff2a407)),
+                        hintText: 'Kathmandu',
+                        hintStyle: TextStyle(fontSize: 15),
+                        labelText: 'Enter stoppage place',
+                        labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 1.0),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      )),
+                  SizedBox(height: 15),
                   DateTimeField(
                     decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today,
+                        prefixIcon: Icon(Icons.calendar_today,
                             size: 25, color: Color(0xfff2a407)),
                         labelText: 'Select travel date',
                         labelStyle: TextStyle(fontSize: 18, color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(color: Colors.black, width: 1),
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: BorderRadius.circular(10.0),
                         )),
                     format: format,
                     onShowPicker: (context, currentValue) {
@@ -90,31 +109,14 @@ class HomePage extends StatelessWidget {
                           lastDate: DateTime(2100));
                     },
                   ),
-                  SizedBox(height: 25),
-                  // Center(
-                  //   child: RaisedButton(
-                  //     elevation: 500,
-                  //     child: Text('Book Ticket',style: TextStyle(fontSize: 25,color: Colors.white),),
-                  //     color: Color(0xfff2a407),
-                  //     onPressed: null,
-                  //   ),
-                  // )
-
+                  SizedBox(height: 10),
                   RaisedButton(
                     onPressed: () {},
                     textColor: Colors.white,
                     padding: const EdgeInsets.all(0.0),
                     child: Container(
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xfff2a407),
-                            offset: Offset(5, 2),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                          )
-                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Color(0xfff2a407),
                       ),
                       padding: const EdgeInsets.all(10.0),
