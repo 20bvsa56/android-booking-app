@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   TextField(
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                       prefixIcon: Icon(Icons.directions_bus,
+                        prefixIcon: Icon(Icons.directions_bus,
                             size: 25, color: Color(0xfff2a407)),
                         hintText: 'Pokhara',
                         hintStyle: TextStyle(fontSize: 15),
@@ -110,18 +110,14 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 10),
-                  RaisedButton(
-                    onPressed: () {},
+                  FlatButton(
+                    color: Color(0xfff2a407),
                     textColor: Colors.white,
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Color(0xfff2a407),
-                      ),
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Text('Book Ticket',
-                          style: TextStyle(fontSize: 20)),
+                    padding: EdgeInsets.all(8.0),
+                    onPressed: () {},
+                    child: Text(
+                      "Find Bus",
+                      style: TextStyle(fontSize: 22.0),
                     ),
                   ),
                 ]),

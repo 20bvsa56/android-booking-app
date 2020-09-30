@@ -18,14 +18,28 @@ class AccountPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.5),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Icon(Icons.person, size: 100, color: Colors.grey),
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 0.5),
+                            borderRadius: BorderRadius.circular(50)),
+                        child:
+                            Icon(Icons.person, size: 100, color: Colors.grey),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Center(
+                      child: Text(
+                        'Customer',
+                        style: TextStyle(fontSize: 18, color: Colors.orange),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(width: 120),
                 Column(
@@ -74,18 +88,6 @@ class AccountPage extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: <Widget>[
-                  TextField(
-                      readOnly: true,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: 'Customer',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.black26, width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      )),
-                  SizedBox(height: 10),
                   TextField(
                       keyboardType: TextInputType.text,
                       readOnly: true,
@@ -152,7 +154,7 @@ class AccountPage extends StatelessWidget {
                     "Logout",
                     style: TextStyle(fontSize: 22.0),
                   ),
-                )
+                ),
               ],
             ),
           ],
@@ -165,6 +167,9 @@ class AccountPage extends StatelessWidget {
 void _userEditBottomSheet(BuildContext context) {
   showModalBottomSheet(
       context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
       builder: (BuildContext bc) {
         return SingleChildScrollView(
           child: Container(
@@ -232,7 +237,7 @@ void _userEditBottomSheet(BuildContext context) {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

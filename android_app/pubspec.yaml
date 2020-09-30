@@ -45,6 +45,7 @@ flutter:
   assets:
     - lib/src/images/
     - lib/src/images/image_carousel/
+    - lib/src/images/on_boarding_screen/
 
   fonts:
     - family: Oswald-VariableFont_wght
