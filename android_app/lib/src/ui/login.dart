@@ -164,11 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                                     );
                                   }),
                             ),
-                            Container(
-                              height: 50,
-                              width: 50,
-                              child: FlatButton(onPressed: null, child: Text('Testttt')),
-                            ),
+                           
                             SizedBox(height: 20),
                             Text(
                               'Forgot Password?',
