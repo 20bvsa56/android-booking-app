@@ -8,7 +8,7 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xfff2a407),
+        backgroundColor: Colors.blueGrey,
       ),
       drawer: MenuOption(),
       body: SingleChildScrollView(
@@ -108,7 +108,10 @@ class AccountPage extends StatelessWidget {
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                               color: Colors.black26, width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(10.0)
+                          
+                          
+                          ,
                         ),
                       )),
                   SizedBox(height: 10),

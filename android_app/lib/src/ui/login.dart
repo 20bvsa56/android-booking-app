@@ -2,6 +2,8 @@ import 'package:android_app/src/bloc/login_bloc.dart';
 import 'package:android_app/src/ui/register.dart';
 import 'package:flutter/material.dart';
 
+import 'bottom_nav_bar.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
 
@@ -13,9 +15,11 @@ class _LoginPageState extends State<LoginPage> {
   bool checkBoxValue = false;
 
   goToHomePage(BuildContext context) {
-     // Navigate to the main view screen using a named route '/navbarpage'.
-    Navigator.pushNamed(context, '/navbarpage');
-   
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NavigationBarPage()),
+    );
+
     // scaffoldkey.currentState.showSnackBar(SnackBar(content: Text('Registration Suuccessful. You can login now.')));
   }
 
@@ -30,8 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 25,
-       
-        backgroundColor: Color(0xfff2a407),
+        backgroundColor: Colors.blueGrey,
         title: Text(
           'Jhun Jhun Travels',
           style: TextStyle(
@@ -160,6 +163,11 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     );
                                   }),
+                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              child: FlatButton(onPressed: null, child: Text('Testttt')),
                             ),
                             SizedBox(height: 20),
                             Text(

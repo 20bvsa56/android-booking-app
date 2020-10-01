@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
           icon: Icon(Icons.chevron_left),
           onPressed: () => Navigator.pop(context, false),
         ),
-        backgroundColor: Color(0xfff2a407),
+        backgroundColor: Colors.blueGrey,
         title: Text(
           'Jhun Jhun Travels',
           style: TextStyle(

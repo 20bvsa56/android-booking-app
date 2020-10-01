@@ -1,4 +1,5 @@
 import 'package:android_app/src/model/slider.dart';
+import 'package:android_app/src/ui/bottom_nav_bar.dart';
 import 'package:android_app/src/ui/login.dart';
 import 'package:flutter/material.dart';
 
@@ -12,17 +13,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          accentColor: Colors.redAccent,
+          buttonTheme: ButtonThemeData(
+            buttonColor: Colors.blueAccent,
+            shape: RoundedRectangleBorder(),
+            textTheme: ButtonTextTheme.accent,
+          )),
+
       home: OnBoardingScreens(),
       // Starting the app with the "/" named route.
       // initialRoute: '/',
-      // routes: {
-      //   // When navigating to the "/" route, build the Login Page widget.
-      //   '/': (context) => LoginPage(),
-      //   // When navigating to the "/navbarpage" route, build the navbarpage widget.
-      //   '/navbarpage': (context) => NavigationBarPage(),
-      //   // When navigating to the "/navbarpage" route, build the Login widget.
-      //   '/login':(context)=> LoginPage()
-      // },
+      routes: {
+        // When navigating to the "/" route, build the Login Page widget.
+        // '/': (context) => LoginPage(),
+        // When navigating to the "/navbarpage" route, build the navbarpage widget.
+        '/navbarpage': (context) => NavigationBarPage(),
+        // When navigating to the "/navbarpage" route, build the Login widget.
+        '/login': (context) => LoginPage()
+      },
     );
   }
 }
@@ -51,7 +60,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
       height: isCurrentPage ? 15 : 10,
       width: isCurrentPage ? 15 : 10,
       decoration: BoxDecoration(
-          color: isCurrentPage ? Colors.white : Colors.grey[300],
+          color: isCurrentPage ? Colors.blueGrey[400] : Colors.grey[400],
           borderRadius: BorderRadius.circular(2)),
     );
   }
@@ -59,7 +68,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2a407),
+      backgroundColor: Colors.blueGrey,
       body: PageView.builder(
         controller: _pageController,
         itemCount: slides.length,
@@ -79,7 +88,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
       bottomSheet: currentIndex != slides.length - 1
           ? Container(
               padding: EdgeInsets.all(15),
-              color: Color(0xfff0c369),
+              color: Colors.white,
               height: MediaQuery.of(context).size.height / 10,
               width: MediaQuery.of(context).size.width,
               child: Row(
@@ -95,8 +104,8 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                         'SKIP',
                         style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                            color: Colors.blueGrey,
+                            fontWeight: FontWeight.w900),
                       )),
                   Row(
                     children: [
@@ -116,8 +125,8 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                         'NEXT',
                         style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                            color: Colors.blueGrey,
+                            fontWeight: FontWeight.w900),
                       )),
                 ],
               ),
@@ -133,12 +142,12 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height / 10,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.teal,
+                color: Colors.white,
                 child: Text('GET STARTED',
                     style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800)),
+                        fontSize: 30,
+                        color: Colors.teal,
+                        fontWeight: FontWeight.w900)),
               ),
             ),
     );

@@ -8,7 +8,7 @@ class TicketInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xfff2a407),
+        backgroundColor: Colors.blueGrey,
       ),
       drawer: MenuOption(),
        body: Center(child: Text('Ticket')),
