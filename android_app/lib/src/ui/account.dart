@@ -83,61 +83,63 @@ class AccountPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 60),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  TextField(
-                      keyboardType: TextInputType.text,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        labelText: 'First Name',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.black26, width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      )),
+                  Divider(thickness: 1, color: Colors.blueGrey),
                   SizedBox(height: 10),
-                  TextField(
-                      keyboardType: TextInputType.text,
-                      readOnly: true,
-                      decoration: InputDecoration(
-                        labelText: 'Last Name',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.black26, width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0)
-                          
-                          
-                          ,
-                        ),
-                      )),
+                  RichText(
+                    text:
+                        new TextSpan(style: TextStyle(fontSize: 22), children: [
+                      TextSpan(
+                          text: 'Name:  ',
+                          style: TextStyle(
+                              color: Color(0xfff2a407).withAlpha(255))),
+                      TextSpan(
+                          text: 'Matthew Perry',
+                          style: TextStyle(
+                              color: Colors.blueGrey.withAlpha(255), fontSize: 20))
+                    ]),
+                  ),
                   SizedBox(height: 10),
-                  TextField(
-                      readOnly: true,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Email Address',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.black26, width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      )),
+                  Divider(thickness: 1, color: Colors.blueGrey),
                   SizedBox(height: 10),
-                  TextField(
-                      readOnly: true,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.black26, width: 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      )),
+                  RichText(
+                    text:
+                        new TextSpan(style: TextStyle(fontSize: 22), children: [
+                      TextSpan(
+                          text: 'Email:  ',
+                          style: TextStyle(
+                              color: Color(0xfff2a407).withAlpha(255))),
+                      TextSpan(
+                          text: 'matthewperry@gmail.com',
+                          style: TextStyle(
+                            color: Colors.blueGrey.withAlpha(255),
+                          ))
+                    ]),
+                  ),
+                  SizedBox(height: 10),
+                  Divider(thickness: 1, color: Colors.blueGrey),
+                  SizedBox(height: 10),
+                  RichText(
+                    text:
+                        new TextSpan(style: TextStyle(fontSize: 22), children: [
+                      TextSpan(
+                          text: 'Phone Number:  ',
+                          style: TextStyle(
+                              color: Color(0xfff2a407).withAlpha(255))),
+                      TextSpan(
+                          text: '9999999999',
+                          style: TextStyle(
+                            color: Colors.blueGrey.withAlpha(255),
+                          ))
+                    ]),
+                  ),
+                  SizedBox(height: 10),
+                  Divider(thickness: 1, color: Colors.blueGrey),
                 ],
               ),
             ),

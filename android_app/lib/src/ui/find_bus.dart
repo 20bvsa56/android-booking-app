@@ -489,7 +489,7 @@ void _showBusSeatsBottomSheet(BuildContext context) {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
-                child: Text('Edit Details',
+                child: Text('View Seats',
                     style: TextStyle(
                         fontSize: 20,
                         color: Color(0xfff2a407),
@@ -667,10 +667,10 @@ void _showBusSeatsBottomSheet(BuildContext context) {
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
                           children:[
-                            Icon(Icons.crop_din,color: Colors.red,),
-                            Text('Entry'),
+                            Icon(Icons.crop_din,color: Colors.red, size: 35),
+                            Text('  Entry',style: TextStyle(fontSize:16,color: Colors.black),),
                             Spacer(),
-                            Icon(Icons.data_usage,color: Colors.red,)
+                            Icon(Icons.data_usage,color: Colors.red, size: 35)
                           ]
                         ),
                       ),

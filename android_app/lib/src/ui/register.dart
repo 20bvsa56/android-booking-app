@@ -1,7 +1,6 @@
 import 'package:android_app/src/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key key}) : super(key: key);
 
@@ -21,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
     scaffoldkey.currentState.showSnackBar(SnackBar(
       content: Text(
         'Registration Suuccessful. You can login now.',
-        style: TextStyle(fontSize: 18,fontWeight: FontWeight.w300),
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
       ),
       backgroundColor: Color(0xfff2a407),
       duration: Duration(seconds: 12),
@@ -35,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final data =
         MediaQuery.of(context); // variable to get the media screen size
     return Scaffold(
-      key: scaffoldkey,
+        key: scaffoldkey,
         appBar: AppBar(
           elevation: 25,
           backgroundColor: Colors.blueGrey,
@@ -166,7 +165,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                               onChanged:
                                                   registerBloc.emailChanged,
                                               decoration: InputDecoration(
-                                                hintText: 'abc@gmail.com',
+                                                hintText:
+                                                    'matthewperry@gmail.com',
                                                 hintStyle: TextStyle(
                                                     fontSize: 18,
                                                     color: Colors.white),

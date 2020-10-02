@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   TextInputType.emailAddress,
                                               onChanged: loginBloc.emailChanged,
                                               decoration: InputDecoration(
-                                                hintText: 'abc@gmail.com',
+                                                hintText: 'matthewperry@gmail.com',
                                                 hintStyle: TextStyle(
                                                     fontSize: 18,
                                                     color: Colors.white),
