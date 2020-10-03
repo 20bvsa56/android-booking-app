@@ -28,16 +28,16 @@ class _NavigationBarPageState extends State<NavigationBarPage> {
 
   Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey[400],
+        backgroundColor: Colors.blueGrey,
         selectedFontSize: 22,
         unselectedFontSize: 19,
         onTap: (int index) => setState(() => _selectedIndex = index),
         currentIndex: selectedIndex,
         selectedItemColor: Colors.red,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,size: 30,), title: Text('Home',style: TextStyle(color: Colors.blueGrey,fontWeight: FontWeight.bold))),
-          BottomNavigationBarItem(icon: Icon(Icons.import_contacts,color: Colors.white,size: 30,), title: Text('Tickets',style: TextStyle(color: Colors.blueGrey,fontWeight: FontWeight.bold))),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle,color: Colors.white,size: 30,), title: Text('Account',style: TextStyle(color: Colors.blueGrey,fontWeight: FontWeight.bold))),
+          BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,size: 30,), title: Text('Home',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
+          BottomNavigationBarItem(icon: Icon(Icons.import_contacts,color: Colors.white,size: 30,), title: Text('Tickets',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle,color: Colors.white,size: 30,), title: Text('Account',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
         ],
       );
 

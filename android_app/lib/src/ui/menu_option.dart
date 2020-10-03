@@ -16,7 +16,7 @@ class _MenuOptionState extends State<MenuOption> {
     return Drawer(
         elevation: 16.0,
         child: Container(
-          color: Colors.white24,
+          color: Colors.blueGrey,
           child: ListView(padding: EdgeInsets.zero, children: [
             DrawerHeader(
               child: Image(image: AssetImage('lib/src/images/logo.png')),
@@ -35,7 +35,7 @@ class _MenuOptionState extends State<MenuOption> {
               child: ListTile(
                 title: Text(
                   'Home',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 leading: Icon(Icons.home, size: 26, color: Color(0xfff2a407)),
                 onTap: () {
@@ -56,7 +56,7 @@ class _MenuOptionState extends State<MenuOption> {
               child: ListTile(
                 title: Text(
                   'Tickets',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 leading: Icon(Icons.import_contacts,
                     size: 26, color: Color(0xfff2a407)),
@@ -78,7 +78,7 @@ class _MenuOptionState extends State<MenuOption> {
               child: ListTile(
                 title: Text(
                   'Account',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 leading: Icon(Icons.account_circle,
                     size: 26, color: Color(0xfff2a407)),
@@ -100,7 +100,7 @@ class _MenuOptionState extends State<MenuOption> {
               child: ListTile(
                 title: Text(
                   'Change Password',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 leading: Icon(Icons.account_circle,
                     size: 26, color: Color(0xfff2a407)),
@@ -121,7 +121,7 @@ class _MenuOptionState extends State<MenuOption> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: ListTile(
                 title: Text('Logout',
-                    style: TextStyle(fontSize: 20, color: Colors.black)),
+                    style: TextStyle(fontSize: 20, color: Colors.white)),
                 leading:
                     Icon(Icons.exit_to_app, size: 26, color: Color(0xfff2a407)),
                 onTap: () {

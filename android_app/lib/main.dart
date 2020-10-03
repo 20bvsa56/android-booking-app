@@ -135,7 +135,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => NavigationBarPage()),
                 );
               },
               child: Container(
