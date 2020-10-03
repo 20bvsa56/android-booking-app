@@ -33,6 +33,7 @@ dependencies:
   carousel_pro: ^1.0.0
   datetime_picker_formfield: ^1.0.0
   http: ^0.12.0+4
+  syncfusion_flutter_datepicker: ^18.3.35-beta
 
 dev_dependencies:
   flutter_test:

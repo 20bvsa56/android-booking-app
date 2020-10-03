@@ -13,10 +13,6 @@ class _RegisterPageState extends State<RegisterPage> {
   bool checkBoxValue = false;
 
   registeredMessage(BuildContext context) {
-    //   Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => LoginPage()),
-    // );
     scaffoldkey.currentState.showSnackBar(SnackBar(
       content: Text(
         'Registration Suuccessful. You can login now.',
@@ -29,7 +25,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = RegisterBloc();
     final registerBloc = RegisterBloc();
     final data =
         MediaQuery.of(context); // variable to get the media screen size

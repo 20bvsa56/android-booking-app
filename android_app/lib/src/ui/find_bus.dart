@@ -167,16 +167,7 @@ class _FindBusState extends State<FindBus> {
                     ]),
                   ),
                   SizedBox(height: 10),
-                  FlatButton(
-                      onPressed: () {
-                        print('hello');
-                      },
-                      color: Color(0xfff2a407),
-                      highlightColor: Colors.green,
-                      child: Text(
-                        'View Seats',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ))
+                  BusSeatBottomSheet()
                 ],
               ),
             ),
@@ -253,16 +244,7 @@ class _FindBusState extends State<FindBus> {
                     ]),
                   ),
                   SizedBox(height: 10),
-                  FlatButton(
-                      onPressed: () {
-                        print('hello');
-                      },
-                      color: Color(0xfff2a407),
-                      highlightColor: Colors.green,
-                      child: Text(
-                        'View Seats',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ))
+                  BusSeatBottomSheet()
                 ],
               ),
             ),
@@ -339,16 +321,7 @@ class _FindBusState extends State<FindBus> {
                     ]),
                   ),
                   SizedBox(height: 10),
-                  FlatButton(
-                      onPressed: () {
-                        print('hello');
-                      },
-                      color: Color(0xfff2a407),
-                      highlightColor: Colors.green,
-                      child: Text(
-                        'View Seats',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ))
+                  BusSeatBottomSheet()
                 ],
               ),
             ),
@@ -425,16 +398,7 @@ class _FindBusState extends State<FindBus> {
                     ]),
                   ),
                   SizedBox(height: 10),
-                  FlatButton(
-                      onPressed: () {
-                        print('hello');
-                      },
-                      color: Color(0xfff2a407),
-                      highlightColor: Colors.green,
-                      child: Text(
-                        'View Seats',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ))
+                  BusSeatBottomSheet()
                 ],
               ),
             ),
