@@ -1,17 +1,18 @@
-import 'package:android_app/src/ui/menu_option.dart';
+import 'package:android_app/src/ui/appbar.dart';
 import 'package:flutter/material.dart';
 
-class TicketInfoPage extends StatelessWidget {
+class TicketInfoPage extends StatefulWidget {
   const TicketInfoPage({Key key}) : super(key: key);
 
   @override
+  _TicketInfoPageState createState() => _TicketInfoPageState();
+}
+
+class _TicketInfoPageState extends State<TicketInfoPage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-      ),
-      drawer: MenuOption(),
-       body: Center(child: Text('Ticket')),
+      appBar: MyAppBar(),
     );
   }
 }

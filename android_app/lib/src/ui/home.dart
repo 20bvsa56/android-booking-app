@@ -1,8 +1,10 @@
 import 'package:android_app/src/ui/find_bus.dart';
+import 'package:android_app/src/ui/from_route.dart';
 import 'package:android_app/src/ui/menu_option.dart';
-import 'package:flutter/material.dart';
+import 'package:android_app/src/ui/to_route.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -78,16 +80,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.directions_walk,
-                                  size: 26, color: Color(0xfff2a407)),
-                              hintText: 'Kathmandu',
-                              hintStyle: TextStyle(fontSize: 15),
-                              labelText: 'Enter initial place',
-                              labelStyle:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                            ),
+                          child: Column(
+                            children: [FromRouteTextField()],
                           ),
                         ),
                         SizedBox(height: 15),
@@ -97,16 +91,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.place,
-                                  size: 26, color: Color(0xfff2a407)),
-                              hintText: 'Pokhara',
-                              hintStyle: TextStyle(fontSize: 15),
-                              labelText: 'Enter final place',
-                              labelStyle:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                            ),
+                          child: Column(
+                            children: [ToRouteTextField()],
                           ),
                         ),
                       ],
