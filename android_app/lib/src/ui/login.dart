@@ -1,4 +1,5 @@
 import 'package:android_app/src/bloc/login_bloc.dart';
+import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/register.dart';
 import 'package:flutter/material.dart';
 
@@ -27,19 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     final data =
         MediaQuery.of(context); // variable to get the media screen size
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 25,
-          backgroundColor: Colors.blueGrey,
-          title: Text(
-            'Jhun Jhun Travels',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          ),
-          centerTitle: true,
-        ),
+        appBar: MyAppBar(),
         body: Container(
           decoration: BoxDecoration(
             color: Colors.grey[800],
@@ -154,9 +143,9 @@ class _LoginPageState extends State<LoginPage> {
                                     Row(
                                       children: [
                                         Checkbox(
-                                            hoverColor: Colors.orange,
+                                            hoverColor: Color(0xff28d6e2),
                                             activeColor: Colors.white,
-                                            checkColor: Colors.orange,
+                                            checkColor: Color(0xff28d6e2),
                                             value: checkBoxValue,
                                             onChanged: (bool value) {
                                               setState(() {
@@ -180,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                           builder: (context, snapshot) {
                                             return FlatButton(
                                               color: Colors.white,
-                                              textColor: Color(0xfff2a407),
+                                              textColor: Color(0xff28d6e2),
                                               disabledColor: Colors.white70,
                                               disabledTextColor: Colors.black,
                                               padding: EdgeInsets.symmetric(
@@ -205,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                       'Forgot Password?',
                                       style: TextStyle(
                                           color:
-                                              Color(0xfff2a407).withAlpha(255),
+                                              Color(0xff28d6e2).withAlpha(255),
                                           fontSize: 23),
                                     ),
                                     SizedBox(height: 8),
@@ -231,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
                                               TextSpan(
                                                   text: 'Register here',
                                                   style: TextStyle(
-                                                    color: Color(0xfff2a407)
+                                                    color: Color(0xff28d6e2)
                                                         .withAlpha(255),
                                                     decoration: TextDecoration
                                                         .underline,

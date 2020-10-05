@@ -28,7 +28,7 @@ class _NavigationBarPageState extends State<NavigationBarPage> {
 
   Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color(0xff4c6792),
         selectedFontSize: 22,
         unselectedFontSize: 19,
         onTap: (int index) => setState(() => _selectedIndex = index),

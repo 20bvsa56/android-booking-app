@@ -60,7 +60,9 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
       height: isCurrentPage ? 15 : 10,
       width: isCurrentPage ? 15 : 10,
       decoration: BoxDecoration(
-          color: isCurrentPage ? Colors.blueGrey[400] : Colors.grey[400],
+          color: isCurrentPage
+              ? Color(0xff4c6792)
+              : Color(0xff28d6e2).withAlpha(100),
           borderRadius: BorderRadius.circular(2)),
     );
   }
@@ -68,7 +70,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color(0xff4c6792),
       body: PageView.builder(
         controller: _pageController,
         itemCount: slides.length,
@@ -103,8 +105,8 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                       child: Text(
                         'SKIP',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.blueGrey,
+                            fontSize: 22,
+                            color: Color(0xff4c6792),
                             fontWeight: FontWeight.w900),
                       )),
                   Row(
@@ -124,8 +126,8 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                       child: Text(
                         'NEXT',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.blueGrey,
+                            fontSize: 22,
+                            color: Color(0xff4c6792),
                             fontWeight: FontWeight.w900),
                       )),
                 ],
@@ -146,7 +148,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                 child: Text('GET STARTED',
                     style: TextStyle(
                         fontSize: 30,
-                        color: Colors.teal,
+                        color: Color(0xff28d6e2),
                         fontWeight: FontWeight.w900)),
               ),
             ),
@@ -177,9 +179,9 @@ class SliderTile extends StatelessWidget {
                 style: TextStyle(
                     shadows: <Shadow>[
                       Shadow(
-                        offset: Offset(1, 5),
+                        offset: Offset(1, 3),
                         blurRadius: 3.0,
-                        color: Colors.brown,
+                        color: Color(0xff28d6e2),
                       ),
                     ],
                     fontSize: 40,
@@ -193,8 +195,8 @@ class SliderTile extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 22,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white70),
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
               ),
             )
           ],

@@ -1,3 +1,4 @@
+import 'package:android_app/src/ui/appbar.dart';
 import 'package:flutter/material.dart';
 import 'bus_seat_bottom_sheet.dart';
 
@@ -13,9 +14,7 @@ class _FindBusState extends State<FindBus> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-      ),
+      appBar:MyAppBar(),
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
           child: Column(children: [
@@ -53,7 +52,7 @@ class _FindBusState extends State<FindBus> {
                           text: '(BA 1 GHA 8978)',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -71,7 +70,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '5:30 AM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -85,7 +84,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '6 PM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -130,7 +129,7 @@ class _FindBusState extends State<FindBus> {
                           text: '(BA 1 GHA 8978)',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -148,7 +147,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '5:30 AM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -162,7 +161,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '6 PM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -207,7 +206,7 @@ class _FindBusState extends State<FindBus> {
                           text: '(BA 1 GHA 8978)',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -225,7 +224,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '5:30 AM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -239,7 +238,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '6 PM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -284,7 +283,7 @@ class _FindBusState extends State<FindBus> {
                           text: '(BA 1 GHA 8978)',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -302,7 +301,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '5:30 AM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -316,7 +315,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '6 PM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -361,7 +360,7 @@ class _FindBusState extends State<FindBus> {
                           text: '(BA 1 GHA 8978)',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -379,7 +378,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '5:30 AM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),
@@ -393,7 +392,7 @@ class _FindBusState extends State<FindBus> {
                       TextSpan(
                           text: '6 PM',
                           style: TextStyle(
-                            color: Color(0xfff2a407),
+                            color: Color(0xff28d6e2),
                           ))
                     ]),
                   ),

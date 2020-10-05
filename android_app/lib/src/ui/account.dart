@@ -1,4 +1,5 @@
-import 'package:android_app/src/ui/menu_option.dart';
+import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/drawer.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatelessWidget {
@@ -7,9 +8,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-      ),
+      appBar: MyAppBar(),
       drawer: MenuOption(),
       body: Column(
         children: <Widget>[
@@ -34,7 +33,7 @@ class AccountPage extends StatelessWidget {
                   Center(
                     child: Text(
                       'Customer',
-                      style: TextStyle(fontSize: 18, color: Colors.orange),
+                      style: TextStyle(fontSize: 18, color: Color(0xff28d6e2)),
                     ),
                   ),
                 ],
@@ -74,7 +73,7 @@ class AccountPage extends StatelessWidget {
                     },
                     child: Text(
                       'Edit',
-                      style: TextStyle(fontSize: 15, color: Colors.orange),
+                      style: TextStyle(fontSize: 15, color: Color(0xff28d6e2)),
                     ),
                   ),
                 ],
@@ -93,13 +92,10 @@ class AccountPage extends StatelessWidget {
                   text: new TextSpan(style: TextStyle(fontSize: 22), children: [
                     TextSpan(
                         text: 'Name:  ',
-                        style:
-                            TextStyle(color: Color(0xfff2a407).withAlpha(255))),
+                        style: TextStyle(color: Color(0xff4c6792))),
                     TextSpan(
                         text: 'Matthew Perry',
-                        style: TextStyle(
-                            color: Colors.blueGrey.withAlpha(255),
-                            fontSize: 20))
+                        style: TextStyle(color: Colors.black54, fontSize: 20))
                   ]),
                 ),
                 SizedBox(height: 10),
@@ -109,12 +105,11 @@ class AccountPage extends StatelessWidget {
                   text: new TextSpan(style: TextStyle(fontSize: 22), children: [
                     TextSpan(
                         text: 'Email:  ',
-                        style:
-                            TextStyle(color: Color(0xfff2a407).withAlpha(255))),
+                        style: TextStyle(color: Color(0xff4c6792))),
                     TextSpan(
                         text: 'matthewperry@gmail.com',
                         style: TextStyle(
-                          color: Colors.blueGrey.withAlpha(255),
+                          color: Colors.black54,
                         ))
                   ]),
                 ),
@@ -125,12 +120,11 @@ class AccountPage extends StatelessWidget {
                   text: new TextSpan(style: TextStyle(fontSize: 22), children: [
                     TextSpan(
                         text: 'Phone Number:  ',
-                        style:
-                            TextStyle(color: Color(0xfff2a407).withAlpha(255))),
+                        style: TextStyle(color: Color(0xff4c6792))),
                     TextSpan(
                         text: '9999999999',
                         style: TextStyle(
-                          color: Colors.blueGrey.withAlpha(255),
+                          color: Colors.black54,
                         ))
                   ]),
                 ),
@@ -144,16 +138,16 @@ class AccountPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FlatButton(
-                color: Color(0xfff2a407),
+                color: Color(0xff4c6792),
                 textColor: Colors.white,
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(12.0),
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/login', (_) => false);
                 },
                 child: Text(
                   "Logout",
-                  style: TextStyle(fontSize: 22.0),
+                  style: TextStyle(fontSize: 24.0),
                 ),
               ),
             ],
@@ -182,12 +176,12 @@ void _userEditBottomSheet(BuildContext context) {
                     children: [
                       Text('Edit Details',
                           style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0xfff2a407),
+                              fontSize: 22,
+                              color: Color(0xff4c6792),
                               fontWeight: FontWeight.bold)),
                       Spacer(),
                       IconButton(
-                          icon: Icon(Icons.cancel, color: Color(0xfff2a407)),
+                          icon: Icon(Icons.cancel, color: Color(0xff28d6e2)),
                           onPressed: () {
                             Navigator.of(context).pop();
                           })
@@ -242,15 +236,15 @@ void _userEditBottomSheet(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FlatButton(
-                        color: Color(0xfff2a407),
+                        color: Color(0xff4c6792),
                         textColor: Colors.white,
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(12.0),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                         child: Text(
                           "Save",
-                          style: TextStyle(fontSize: 20.0),
+                          style: TextStyle(fontSize: 24.0),
                         ),
                       )
                     ],

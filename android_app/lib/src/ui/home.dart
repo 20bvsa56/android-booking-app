@@ -1,6 +1,7 @@
+import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/drawer.dart';
 import 'package:android_app/src/ui/find_bus.dart';
 import 'package:android_app/src/ui/from_route.dart';
-import 'package:android_app/src/ui/menu_option.dart';
 import 'package:android_app/src/ui/to_route.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
@@ -21,21 +22,21 @@ class _HomePageState extends State<HomePage> {
     DateTime _today = DateTime.now();
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-      ),
+      appBar: MyAppBar(),
       drawer: MenuOption(),
       backgroundColor: Colors.white,
       body: Stack(children: [
         Opacity(
-          opacity: 0.1,
+          opacity: 0.5,
           child: Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      'lib/src/images/nature.jpg',
-                    ),
-                    fit: BoxFit.fill)),
+              color: Color(0xff4c6792).withAlpha(100),
+              // image: DecorationImage(
+              //     image: AssetImage(
+              //       'lib/src/images/nature.jpg',
+              //     ),
+              //     fit: BoxFit.fill)
+            ),
           ),
         ),
         SingleChildScrollView(
@@ -48,15 +49,16 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Icon(
                       Icons.location_on,
-                      color: Colors.orangeAccent,
+                      color: Color(0xff28d6e2),
+                      size: 25,
                     ),
                     SizedBox(width: 5),
                     Text(
                       'Location',
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.teal,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 22,
+                          color: Color(0xff4c6792),
+                          fontWeight: FontWeight.w800),
                     ),
                   ],
                 ),
@@ -67,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
-                  height: data.size.height / 4,
+                  height: data.size.height / 3.8,
                   width: data.size.width / 1.3,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8),
@@ -76,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'From',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Color(0xff28d6e2)),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -87,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(height: 15),
                         Text(
                           'To',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Color(0xff28d6e2)),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -100,33 +104,34 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
                 child: Row(
                   children: [
                     Icon(
-                      Icons.time_to_leave,
-                      color: Colors.orangeAccent,
+                      Icons.calendar_today,
+                      color: Color(0xff28d6e2),
+                      size: 25,
                     ),
                     SizedBox(width: 5),
                     Text(
                       'Departure Date',
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.teal,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 22,
+                          color: Color(0xff4c6792),
+                          fontWeight: FontWeight.w800),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
-                  height: data.size.height / 5.5,
+                  height: data.size.height / 5.1,
                   width: data.size.width / 1.3,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +140,8 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
                             'Select departure date',
-                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0xff28d6e2)),
                           ),
                         ),
                         Column(
@@ -145,11 +151,10 @@ class _HomePageState extends State<HomePage> {
                                   const EdgeInsets.symmetric(horizontal: 20.0),
                               child: DateTimeField(
                                 initialValue: _today,
+                                style: TextStyle(fontSize: 19),
                                 decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.calendar_today,
-                                      size: 25, color: Color(0xfff2a407)),
-                                  labelStyle: TextStyle(
-                                      fontSize: 18, color: Colors.grey),
+                                  prefixIcon: Icon(Icons.time_to_leave,
+                                      size: 23, color: Color(0xff28d6e2)),
                                 ),
                                 format: format,
                                 onShowPicker: (context, currentValue) {
@@ -175,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 70.0, vertical: 5),
+                                  horizontal: 60.0, vertical: 10),
                               child: Row(
                                 children: [
                                   FlatButton(
@@ -187,8 +192,9 @@ class _HomePageState extends State<HomePage> {
                                       });
                                     },
                                     child: Text('Tomorrow',
-                                        style: TextStyle(color: Colors.white)),
-                                    color: Color(0xfff2a407),
+                                        style: TextStyle(
+                                            color: Colors.black87, fontSize: 16)),
+                                    color: Color(0xffd2d6d6),
                                   ),
                                   Spacer(),
                                   FlatButton(
@@ -200,8 +206,9 @@ class _HomePageState extends State<HomePage> {
                                       });
                                     },
                                     child: Text('Day After',
-                                        style: TextStyle(color: Colors.white)),
-                                    color: Color(0xfff2a407),
+                                        style: TextStyle(
+                                            color: Colors.black87, fontSize: 16)),
+                                    color: Color(0xffd2d6d6),
                                   )
                                 ],
                               ),
@@ -211,12 +218,12 @@ class _HomePageState extends State<HomePage> {
                       ]),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 40),
               Center(
                 child: FlatButton(
-                  color: Color(0xfff2a407),
+                  color: Color(0xff4c6792),
                   textColor: Colors.white,
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(12.0),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -225,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Text(
                     "Find Bus",
-                    style: TextStyle(fontSize: 22.0),
+                    style: TextStyle(fontSize: 24.0),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/drawer.dart';
 import 'package:flutter/material.dart';
 
 class TicketInfoPage extends StatefulWidget {
@@ -13,6 +14,15 @@ class _TicketInfoPageState extends State<TicketInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
+      drawer: MenuOption(),
+      body: Center(
+        child:
+        Icon(
+                Icons.directions_bus,
+                size: 300,
+                color: Color(0xff4c6792),
+              ),
+      ),
     );
   }
 }

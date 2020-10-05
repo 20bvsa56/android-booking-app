@@ -1,4 +1,5 @@
 import 'package:android_app/src/bloc/register_bloc.dart';
+import 'package:android_app/src/ui/appbar.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -30,18 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
         MediaQuery.of(context); // variable to get the media screen size
     return Scaffold(
         key: scaffoldkey,
-        appBar: AppBar(
-          elevation: 25,
-          backgroundColor: Colors.blueGrey,
-          title: Text(
-            'Jhun Jhun Travels',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          ),
-          centerTitle: true,
-        ),
+        appBar: MyAppBar(),
         body: Container(
           decoration: BoxDecoration(
             color: Colors.grey[800],

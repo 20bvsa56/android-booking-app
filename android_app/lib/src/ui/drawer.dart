@@ -14,30 +14,34 @@ class _MenuOptionState extends State<MenuOption> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        elevation: 16.0,
+        elevation: 10.0,
         child: Container(
-          color: Colors.blueGrey,
+          color: Color(0xff4c6792).withOpacity(0.8),
           child: ListView(padding: EdgeInsets.zero, children: [
             DrawerHeader(
-              child: Image(image: AssetImage('lib/src/images/logo.png')),
+              child: Icon(
+                Icons.directions_bus,
+                size: 150,
+                color: Color(0xff4c6792),
+              ),
               curve: Curves.fastOutSlowIn,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xff4c6792).withOpacity(0.1),
               ),
             ),
             Divider(
               height: 20,
               thickness: 2,
-              color: Color(0xfff2a407),
+              color: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: ListTile(
                 title: Text(
                   'Home',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
-                leading: Icon(Icons.home, size: 26, color: Color(0xfff2a407)),
+                leading: Icon(Icons.home, size: 26, color: Colors.white),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -49,17 +53,17 @@ class _MenuOptionState extends State<MenuOption> {
             Divider(
               height: 5,
               thickness: 0.5,
-              color: Colors.grey,
+              color: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: ListTile(
                 title: Text(
                   'Tickets',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
-                leading: Icon(Icons.import_contacts,
-                    size: 26, color: Color(0xfff2a407)),
+                leading:
+                    Icon(Icons.import_contacts, size: 26, color: Colors.white),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -71,17 +75,17 @@ class _MenuOptionState extends State<MenuOption> {
             Divider(
               height: 5,
               thickness: 0.5,
-              color: Colors.grey,
+              color: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: ListTile(
                 title: Text(
                   'Account',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
-                leading: Icon(Icons.account_circle,
-                    size: 26, color: Color(0xfff2a407)),
+                leading:
+                    Icon(Icons.account_circle, size: 26, color: Colors.white),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -93,17 +97,17 @@ class _MenuOptionState extends State<MenuOption> {
             Divider(
               height: 5,
               thickness: 0.5,
-              color: Colors.grey,
+              color: Colors.white,
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: ListTile(
                 title: Text(
                   'Change Password',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
-                leading: Icon(Icons.account_circle,
-                    size: 26, color: Color(0xfff2a407)),
+                leading:
+                    Icon(Icons.account_circle, size: 26, color: Colors.white),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -115,24 +119,24 @@ class _MenuOptionState extends State<MenuOption> {
             Divider(
               height: 5,
               thickness: 0.5,
-              color: Colors.grey,
+              color: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: ListTile(
                 title: Text('Logout',
-                    style: TextStyle(fontSize: 20, color: Colors.white)),
-                leading:
-                    Icon(Icons.exit_to_app, size: 26, color: Color(0xfff2a407)),
+                    style: TextStyle(fontSize: 24, color: Colors.white)),
+                leading: Icon(Icons.exit_to_app, size: 26, color: Colors.white),
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(context, '/login', (_) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/login', (_) => false);
                 },
               ),
             ),
             Divider(
               height: 20,
               thickness: 2,
-              color: Color(0xfff2a407),
+              color: Colors.white,
             ),
           ]),
         ));

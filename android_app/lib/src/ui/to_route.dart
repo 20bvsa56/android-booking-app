@@ -23,7 +23,7 @@ class _ToRouteTextFieldState extends State<ToRouteTextField> {
     if (response.statusCode == 200) {
       toRoutes =
           loadToRoutes(response.body); //get from routes list from function
-      print('Routes: ${toRoutes.length}');
+      print('To Routes: ${toRoutes.length}');
 
       setState(() {
         loading = false;
@@ -44,12 +44,15 @@ class _ToRouteTextFieldState extends State<ToRouteTextField> {
     super.initState();
   }
 
-  Widget row(ToRoute toRoute) {
+ Widget row(ToRoute toRoute) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(toRoute.end_point,
-            style: TextStyle(fontSize: 22, color: Colors.black))
+        Text(
+          toRoute.end_point,
+          style: TextStyle(fontSize: 20, color: Colors.black54),
+        ),
+        SizedBox(height: 35),
       ],
     );
   }
@@ -59,7 +62,7 @@ class _ToRouteTextFieldState extends State<ToRouteTextField> {
     return Container(
       child: loading
           ? CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue))
+              valueColor: new AlwaysStoppedAnimation<Color>(Color(0xff28d6e2)))
           : searchTextField = AutoCompleteTextField<ToRoute>(
               key: key,
               clearOnSubmit: false,
@@ -68,7 +71,7 @@ class _ToRouteTextFieldState extends State<ToRouteTextField> {
               style: TextStyle(fontSize: 18, color: Colors.black),
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.directions_walk,
-                    size: 26, color: Color(0xfff2a407)),
+                    size: 26, color: Color(0xff28d6e2)),
                 hintText: 'Kathmandu',
                 hintStyle: TextStyle(fontSize: 15),
                 labelText: 'Enter final place',

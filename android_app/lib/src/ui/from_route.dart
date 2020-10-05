@@ -22,8 +22,7 @@ class _FromRouteTextFieldState extends State<FromRouteTextField> {
     if (response.statusCode == 200) {
       fromRoutes =
           loadFromRoutes(response.body); //get from routes list from function
-      print('Routes: ${fromRoutes.length}');
-      print(fromRoutes[1]);
+      print('From Routes: ${fromRoutes.length}');
 
       setState(() {
         loading = false;
@@ -50,10 +49,9 @@ class _FromRouteTextFieldState extends State<FromRouteTextField> {
       children: [
         Text(
           fromRoute.start_point,
-          style: TextStyle(fontSize: 20, color: Colors.black),
+          style: TextStyle(fontSize: 20, color: Colors.black54),
         ),
         SizedBox(height: 35),
-       
       ],
     );
   }
@@ -63,8 +61,7 @@ class _FromRouteTextFieldState extends State<FromRouteTextField> {
     return Container(
       child: loading
           ? CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue)
-          )
+              valueColor: new AlwaysStoppedAnimation<Color>(Color(0xff28d6e2)))
           : searchTextField = AutoCompleteTextField<FromRoute>(
               key: key,
               clearOnSubmit: false,
@@ -72,7 +69,7 @@ class _FromRouteTextFieldState extends State<FromRouteTextField> {
               style: TextStyle(fontSize: 18, color: Colors.black),
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.directions_walk,
-                    size: 26, color: Color(0xfff2a407)),
+                    size: 26, color: Color(0xff28d6e2)),
                 hintText: 'Kathmandu',
                 hintStyle: TextStyle(fontSize: 15),
                 labelText: 'Enter initial place',

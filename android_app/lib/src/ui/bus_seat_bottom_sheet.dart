@@ -14,7 +14,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
           _showBusSeatsBottomSheet(context);
           print('hello');
         },
-        color: Color(0xfff2a407),
+        color: Color(0xff4c6792),
         highlightColor: Colors.green,
         child: Text(
           'View Seats',
@@ -30,7 +30,7 @@ void _showBusSeatsBottomSheet(BuildContext context) {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-            color: Color(0xfff2a407),
+            color: Color(0xff4c6792),
             height: MediaQuery.of(context).size.height * 0.92,
             child: Stack(children: [
               Padding(
@@ -183,16 +183,16 @@ void _showBusSeatsBottomSheet(BuildContext context) {
                                           MainAxisAlignment.start,
                                       children: [
                                         Icon(Icons.crop_din,
-                                            color: Colors.red, size: 35),
+                                            color: Color(0xff28d6e2), size: 35),
                                         Text(
                                           ' Entry',
                                           style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.black),
+                                              fontSize: 18,
+                                              color: Colors.black87),
                                         ),
                                         Spacer(),
                                         Icon(Icons.data_usage,
-                                            color: Colors.red, size: 35)
+                                            color: Color(0xff28d6e2), size: 35)
                                       ]),
                                 )),
                             Padding(
@@ -269,9 +269,9 @@ void _showBusSeatsBottomSheet(BuildContext context) {
                             ),
                             SizedBox(height: 20),
                             FlatButton(
-                              color: Color(0xfff2a407),
+                              color: Color(0xff4c6792),
                               textColor: Colors.white,
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(12.0),
                               splashColor: Colors.blueAccent,
                               onPressed: () {
                                 showDialog(
@@ -281,7 +281,7 @@ void _showBusSeatsBottomSheet(BuildContext context) {
                               },
                               child: Text(
                                 "Book Ticket",
-                                style: TextStyle(fontSize: 20.0),
+                                style: TextStyle(fontSize: 24.0),
                               ),
                             ),
                             SizedBox(height: 10)

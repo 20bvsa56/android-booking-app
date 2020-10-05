@@ -22,13 +22,13 @@ class _SignUpAlertBoxState extends State<SignUpAlertBox> {
               );
             },
             child: Text('Yes',
-                style: TextStyle(color: Color(0xfff2a407), fontSize: 20))),
+                style: TextStyle(color: Color(0xff28d6e2), fontSize: 20))),
         FlatButton(
             onPressed: () {
               Navigator.pop(context);
             },
             child: Text('No',
-                style: TextStyle(color: Color(0xfff2a407), fontSize: 20)))
+                style: TextStyle(color: Color(0xff28d6e2), fontSize: 20)))
       ],
       elevation: 24,
       contentPadding: EdgeInsets.all(20),
