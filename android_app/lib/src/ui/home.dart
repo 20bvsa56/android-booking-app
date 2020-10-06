@@ -8,13 +8,15 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  final ValueChanged<int> onPush;
+  const HomePage({Key key,this.onPush}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  
   @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
@@ -225,6 +227,7 @@ class _HomePageState extends State<HomePage> {
                   textColor: Colors.white,
                   padding: EdgeInsets.all(12.0),
                   onPressed: () {
+                    // onPressed: _push,
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => FindBus()),

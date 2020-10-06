@@ -1,6 +1,9 @@
 import 'package:android_app/src/model/slider.dart';
+import 'package:android_app/src/ui/app.dart';
 import 'package:android_app/src/ui/bottom_nav_bar.dart';
+import 'package:android_app/src/ui/home.dart';
 import 'package:android_app/src/ui/login.dart';
+import 'package:android_app/src/ui/multi_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,6 +38,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 class OnBoardingScreens extends StatefulWidget {
   OnBoardingScreens({Key key}) : super(key: key);
@@ -137,7 +141,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NavigationBarPage()),
+                  MaterialPageRoute(builder: (context) => App()),
                 );
               },
               child: Container(

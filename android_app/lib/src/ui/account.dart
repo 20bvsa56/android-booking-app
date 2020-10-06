@@ -3,7 +3,8 @@ import 'package:android_app/src/ui/drawer.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatelessWidget {
-  const AccountPage({Key key}) : super(key: key);
+  final ValueChanged<int> onPush;
+  const AccountPage({Key key,this.onPush}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
