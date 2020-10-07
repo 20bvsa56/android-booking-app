@@ -18,8 +18,8 @@ class _FromRouteTextFieldState extends State<FromRouteTextField> {
   bool loading = true;
 
   void getFromRoutes() async {
-    final response = await http.get("http://192.168.1.101:8000/api/fromRoute");
-    // final response = await http.get("http://192.168.254.2:8000/api/fromRoute");
+    // final response = await http.get("http://192.168.1.101:8000/api/fromRoute");
+    final response = await http.get("http://192.168.254.78:8000/api/fromRoute");
     if (response.statusCode == 200) {
       fromRoutes =
           loadFromRoutes(response.body); //get from routes list from function

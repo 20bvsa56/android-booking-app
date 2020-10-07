@@ -1,8 +1,12 @@
 import 'package:android_app/src/bloc/register_bloc.dart';
+import 'package:android_app/src/model/register.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
+  static final url = 'http://192.168.254.78:8000/api/register/';
   const RegisterPage({Key key}) : super(key: key);
 
   @override
@@ -13,13 +17,44 @@ class _RegisterPageState extends State<RegisterPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   bool checkBoxValue = false;
 
+  bool visible = false;
+
+  Future<RegisterModel> userRegistration(String url, {Map body}) async {
+    // Showing CircularProgressIndicator using state.
+    setState(() {
+      visible = true;
+    });
+
+    return http.post(url, body: body).then((http.Response response) {
+      final int statusCode = response.statusCode;
+
+      if (statusCode == 201) {
+        setState(() {
+          visible = false;
+        });
+        // throw new Exception("Error while fetching data");
+      }
+
+      return RegisterModel.fromJson(json.decode(response.body));
+    });
+  }
+
+  final TextEditingController firstNameController = new TextEditingController();
+  final TextEditingController lastNameController = new TextEditingController();
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController confirmPasswordController =
+      new TextEditingController();
+  final TextEditingController phoneNumberController =
+      new TextEditingController();
+
   registeredMessage(BuildContext context) {
     scaffoldkey.currentState.showSnackBar(SnackBar(
       content: Text(
         'Registration Suuccessful. You can login now.',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
       ),
-      backgroundColor: Color(0xfff2a407),
+      backgroundColor: Color(0xff28d6e2),
       duration: Duration(seconds: 12),
     ));
   }
@@ -76,6 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         stream: registerBloc.fnameStream,
                                         builder: (context, snapshot) {
                                           return TextField(
+                                              controller: firstNameController,
                                               style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.white),
@@ -110,6 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         stream: registerBloc.lnameStream,
                                         builder: (context, snapshot) {
                                           return TextField(
+                                              controller: lastNameController,
                                               style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.white),
@@ -144,6 +181,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         stream: registerBloc.emailStream,
                                         builder: (context, snapshot) {
                                           return TextField(
+                                              controller: emailController,
                                               style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.white),
@@ -179,6 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         stream: registerBloc.passwordStream,
                                         builder: (context, snapshot) {
                                           return TextField(
+                                              controller: passwordController,
                                               style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.white),
@@ -215,6 +254,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                             registerBloc.confirmPasswordStream,
                                         builder: (context, snapshot) {
                                           return TextField(
+                                              controller:
+                                                  confirmPasswordController,
                                               style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.white),
@@ -250,6 +291,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         stream: registerBloc.phoneNumberStream,
                                         builder: (context, snapshot) {
                                           return TextField(
+                                              controller: phoneNumberController,
                                               style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.white),
@@ -286,7 +328,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           builder: (context, snapshot) {
                                             return FlatButton(
                                               color: Colors.white,
-                                              textColor: Color(0xfff2a407),
+                                              textColor: Color(0xff28d6e2),
                                               disabledColor: Colors.white70,
                                               disabledTextColor: Colors.black,
                                               padding: EdgeInsets.symmetric(
@@ -294,8 +336,49 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   vertical: 15),
                                               splashColor: Colors.blueAccent,
                                               onPressed: snapshot.hasData
-                                                  ? () =>
-                                                      registeredMessage(context)
+                                                  ? () async {
+                                                      RegisterModel registerModel = new RegisterModel(
+                                                          firstName:
+                                                              firstNameController
+                                                                  .text,
+                                                          lastName:
+                                                              lastNameController
+                                                                  .text,
+                                                          email: emailController
+                                                              .text,
+                                                          password:
+                                                              passwordController
+                                                                  .text,
+                                                          confirmPassword:
+                                                              confirmPasswordController
+                                                                  .text,
+                                                          phoneNumber:
+                                                              phoneNumberController
+                                                                  .text);
+
+                                                      RegisterModel check =
+                                                          await userRegistration(
+                                                              RegisterPage.url,
+                                                              body:
+                                                                  registerModel
+                                                                      .toMap());
+
+                                                      print(check.firstName);
+                                                      registeredMessage(
+                                                          context);
+
+                                                      firstNameController
+                                                          .clear();
+                                                      lastNameController
+                                                          .clear();
+                                                      emailController.clear();
+                                                      passwordController
+                                                          .clear();
+                                                      confirmPasswordController
+                                                          .clear();
+                                                      phoneNumberController
+                                                          .clear();
+                                                    }
                                                   : null,
                                               child: Text(
                                                 "Register Account",
