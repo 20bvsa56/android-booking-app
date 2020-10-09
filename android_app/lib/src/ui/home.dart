@@ -3,15 +3,12 @@ import 'package:android_app/src/model/to_route.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/bus_details_ui_builder.dart';
 import 'package:android_app/src/ui/drawer.dart';
-import 'package:android_app/src/ui/find_bus.dart';
-import 'package:android_app/src/ui/from_route.dart';
-import 'package:android_app/src/ui/to_route.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   final ValueChanged<int> onPush;
@@ -23,56 +20,97 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //From route part
+  List<FromRoute> fromRoutes = new List<FromRoute>();
+  AutoCompleteTextField fromSearchTextField;
+  GlobalKey<AutoCompleteTextFieldState<FromRoute>> fromKey = new GlobalKey();
+  TextEditingController fromSearchController = new TextEditingController();
+  // bool loading = true;
+
+  void getFromRoutes() async {
+    // final response = await http.get("http://192.168.1.101:8000/api/fromRoute");
+    final response = await http.get("http://192.168.254.78:8000/api/fromRoute");
+    if (response.statusCode == 200) {
+      fromRoutes =
+          loadFromRoutes(response.body); //get from routes list from function
+      print('From Routes: ${fromRoutes.length}');
+
+      setState(() {
+        loading = false;
+      });
+    } else {
+      print('Error! Cannot get the from routes');
+    }
+  }
+
+  List<FromRoute> loadFromRoutes(String jsonString) {
+    final parsed = json.decode(jsonString).cast<Map<String, dynamic>>();
+    return (parsed.map<FromRoute>((json) => FromRoute.fromJson(json))).toList();
+  }
+
+  Widget fromRow(FromRoute fromRoute) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          fromRoute.start_point,
+          style: TextStyle(fontSize: 20, color: Colors.black54),
+        ),
+        SizedBox(height: 35),
+      ],
+    );
+  }
+
+//To Rotues Part
+  List<ToRoute> toRoutes = new List<ToRoute>();
+  AutoCompleteTextField toSearchTextField;
+  GlobalKey<AutoCompleteTextFieldState<ToRoute>> toKey = new GlobalKey();
+  TextEditingController toSearchController = new TextEditingController();
+  bool loading = true;
+
+  void getToRoutes() async {
+    // final response = await http.get("http://192.168.1.101:8000/api/toRoute");
+    final response = await http.get("http://192.168.254.78:8000/api/toRoute");
+    if (response.statusCode == 200) {
+      toRoutes =
+          loadToRoutes(response.body); //get from routes list from function
+      print('To Routes: ${toRoutes.length}');
+
+      setState(() {
+        loading = false;
+      });
+    } else {
+      print('Error! Cannot get the to routes');
+    }
+  }
+
+  List<ToRoute> loadToRoutes(String jsonString) {
+    final parsed = json.decode(jsonString).cast<Map<String, dynamic>>();
+    return (parsed.map<ToRoute>((json) => ToRoute.fromJson(json))).toList();
+  }
+
+  Widget toRow(ToRoute toRoute) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          toRoute.end_point,
+          style: TextStyle(fontSize: 20, color: Colors.black54),
+        ),
+        SizedBox(height: 35),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFromRoutes();
+    getToRoutes();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<FromRoute> fromRoutes = new List<FromRoute>();
-    AutoCompleteTextField searchTextField;
-    GlobalKey<AutoCompleteTextFieldState<FromRoute>> key = new GlobalKey();
-    bool loading = true;
-    TextEditingController fromSearchController = new TextEditingController();
-
-    List<FromRoute> loadFromRoutes(String jsonString) {
-      final parsed = json.decode(jsonString).cast<Map<String, dynamic>>();
-      return (parsed.map<FromRoute>((json) => FromRoute.fromJson(json)))
-          .toList();
-    }
-
-    void getFromRoutes() async {
-      // final response = await http.get("http://192.168.1.101:8000/api/fromRoute");
-      final response =
-          await http.get("http://192.168.254.78:8000/api/fromRoute");
-      if (response.statusCode == 200) {
-        fromRoutes =
-            loadFromRoutes(response.body); //get from routes list from function
-        print('From Routes: ${fromRoutes.length}');
-
-        setState(() {
-          loading = false;
-        });
-      } else {
-        print('Error! Cannot get the from routes');
-      }
-    }
-
-    @override
-    void initState() {
-      getFromRoutes();
-      super.initState();
-    }
-
-    Widget row(FromRoute fromRoute) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            fromRoute.start_point,
-            style: TextStyle(fontSize: 20, color: Colors.black54),
-          ),
-          SizedBox(height: 35),
-        ],
-      );
-    }
-
     final data = MediaQuery.of(context);
     final format = DateFormat("yyyy-MM-dd");
     DateTime _today = DateTime.now();
@@ -82,7 +120,6 @@ class _HomePageState extends State<HomePage> {
       drawer: MenuOption(),
       backgroundColor: Colors.white,
       body: Stack(children: [
-        
         Opacity(
           opacity: 0.5,
           child: Container(
@@ -95,62 +132,14 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-               Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                child: loading
-                                    ? CircularProgressIndicator(
-                                        valueColor:
-                                            new AlwaysStoppedAnimation<Color>(
-                                                Color(0xff28d6e2)))
-                                    : searchTextField =
-                                        AutoCompleteTextField<FromRoute>(
-                                        controller: fromSearchController,
-                                        key: key,
-                                        clearOnSubmit: false,
-                                        suggestions: fromRoutes,
-                                        style: TextStyle(
-                                            fontSize: 18, color: Colors.black),
-                                        decoration: InputDecoration(
-                                          prefixIcon: Icon(
-                                              Icons.directions_walk,
-                                              size: 26,
-                                              color: Color(0xff28d6e2)),
-                                          hintText: 'Kathmandu',
-                                          hintStyle: TextStyle(fontSize: 15),
-                                          labelText: 'Enter initial place',
-                                          labelStyle: TextStyle(
-                                              fontSize: 18, color: Colors.grey),
-                                        ),
-                                        //query is what the user types and item is a list of items passed
-                                        itemFilter: (item, query) {
-                                          return item.start_point
-                                              .toLowerCase()
-                                              .startsWith(query.toLowerCase());
-                                        },
-                                        //compares two names and sorts according to that
-                                        itemSorter: (a, b) {
-                                          return a.start_point
-                                              .compareTo(b.start_point);
-                                        },
-                                        itemSubmitted: (item) {
-                                          setState(() {
-                                            searchTextField.textField.controller
-                                                .text = item.start_point;
-                                          });
-                                        },
-                                        itemBuilder: (context, item) {
-                                          //ui for autocomplete
-                                          return row(item);
-                                        },
-                                      ),
-                              ),
-                            ],
-                          ),
-                        ),
-              
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: [
+                    Container(child: Text('j')),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
                 child: Row(
@@ -189,9 +178,60 @@ class _HomePageState extends State<HomePage> {
                           style:
                               TextStyle(fontSize: 20, color: Color(0xff28d6e2)),
                         ),
-                        
-                       
-                        SizedBox(height: 15),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            children: [
+                              loading
+                                  ? CircularProgressIndicator(
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              Color(0xff28d6e2)))
+                                  : fromSearchTextField =
+                                      AutoCompleteTextField<FromRoute>(
+                                      controller: fromSearchController,
+                                      key: fromKey,
+                                      clearOnSubmit: false,
+                                      suggestions: fromRoutes,
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.black),
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.directions_walk,
+                                            size: 26, color: Color(0xff28d6e2)),
+                                        hintText: 'Kathmandu',
+                                        hintStyle: TextStyle(fontSize: 15),
+                                        labelText: 'Enter initial place',
+                                        labelStyle: TextStyle(
+                                            fontSize: 18, color: Colors.grey),
+                                      ),
+                                      //query is what the user types and item is a list of items passed
+                                      itemFilter: (item, query) {
+                                        return item.start_point
+                                            .toLowerCase()
+                                            .startsWith(query.toLowerCase());
+                                      },
+                                      //compares two names and sorts according to that
+                                      itemSorter: (a, b) {
+                                        return a.start_point
+                                            .compareTo(b.start_point);
+                                      },
+                                      itemSubmitted: (item) {
+                                        setState(() {
+                                          fromSearchTextField
+                                              .textField
+                                              .controller
+                                              .text = item.start_point;
+                                        });
+                                      },
+                                      itemBuilder: (context, item) {
+                                        //ui for autocomplete
+                                        return fromRow(item);
+                                      },
+                                    ),
+                              SizedBox(height: 15),
+                            ],
+                          ),
+                        ),
                         Text(
                           'To',
                           style:
@@ -200,7 +240,53 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
-                            children: [ToRouteTextField()],
+                            children: [
+                              loading
+                                  ? CircularProgressIndicator(
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              Color(0xff28d6e2)))
+                                  : toSearchTextField =
+                                      AutoCompleteTextField<ToRoute>(
+                                      controller: toSearchController,
+                                      key: toKey,
+                                      clearOnSubmit: false,
+                                      suggestions: toRoutes,
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.black),
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.directions_walk,
+                                            size: 26, color: Color(0xff28d6e2)),
+                                        hintText: 'Kathmandu',
+                                        hintStyle: TextStyle(fontSize: 15),
+                                        labelText: 'Enter initial place',
+                                        labelStyle: TextStyle(
+                                            fontSize: 18, color: Colors.grey),
+                                      ),
+                                      //query is what the user types and item is a list of items passed
+                                      itemFilter: (item, query) {
+                                        return item.end_point
+                                            .toLowerCase()
+                                            .startsWith(query.toLowerCase());
+                                      },
+                                      //compares two names and sorts according to that
+                                      itemSorter: (a, b) {
+                                        return a.end_point
+                                            .compareTo(b.end_point);
+                                      },
+                                      itemSubmitted: (item) {
+                                        setState(() {
+                                          toSearchTextField.textField.controller
+                                              .text = item.end_point;
+                                        });
+                                      },
+                                      itemBuilder: (context, item) {
+                                        //ui for autocomplete
+                                        return toRow(item);
+                                      },
+                                    ),
+                              SizedBox(height: 15),
+                            ],
                           ),
                         ),
                       ],
@@ -250,7 +336,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Column(
                           children: [
-                            
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20.0),
@@ -326,8 +411,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 40),
-
-              
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 140.0),
@@ -346,7 +429,7 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => BusDetailsUIBuilder(
                                     start_point: fromSearchController.text,
-                                    //  end_point: toValue.toSearchController.text,
+                                    end_point: toSearchController.text,
                                   )),
                         );
                       },
@@ -358,7 +441,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              
             ],
           ),
         ),
@@ -366,5 +448,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
