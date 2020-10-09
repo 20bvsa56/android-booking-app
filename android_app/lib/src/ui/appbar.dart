@@ -2,7 +2,7 @@ import 'package:android_app/src/ui/drawer.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {
-  MyAppBar({Key key, Widget title})
+  MyAppBar({Key key, Widget title, bool automaticallyImplyLeading})
       : super(
             key: key,
             title: title,
@@ -11,6 +11,7 @@ class MyAppBar extends AppBar {
             centerTitle: true,
             actions: <Widget>[]);
 }
+
 class TopNav extends StatefulWidget {
   @override
   _TopNavState createState() => _TopNavState();
@@ -21,13 +22,12 @@ class _TopNavState extends State<TopNav> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         backgroundColor: Color(0xff28d6e2),
-            elevation: 10,
-            centerTitle: true,
-            automaticallyImplyLeading: false,
+        backgroundColor: Color(0xff28d6e2),
+        elevation: 10,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       drawer: MenuOption(),
-      
     );
   }
 }

@@ -1,0 +1,88 @@
+import 'package:android_app/src/model/bus_details_model.dart';
+import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/bus_details_ui.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
+
+class BusDetailsUIBuilder extends StatefulWidget {
+  final String start_point;
+  final String end_point;
+
+  BusDetailsUIBuilder({Key key, this.start_point, this.end_point})
+      : super(key: key);
+
+  @override
+  _BusDetailsUIBuilderState createState() => _BusDetailsUIBuilderState();
+}
+
+class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
+  List<BusDetailsModel> busDetailsList = [];
+
+  Future<List<BusDetailsModel>> busDetails(
+      String start_point, String end_point) async {
+    var data = await http.get(
+        "http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point");
+    var jsonData = json.decode(data.body);
+
+    // print(start_point);
+
+    for (var i = 0; i < jsonData.length; i++) {
+      final detail = BusDetailsModel.fromJson(jsonData[i]);
+      busDetailsList.add(detail);
+    }
+    return busDetailsList;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final data = MediaQuery.of(context);
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            appBar: MyAppBar(),
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    FutureBuilder(
+                      future: busDetails(widget.start_point, widget.end_point),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.data != null) {
+                          return Container(
+                            height: data.size.height,
+                            width: data.size.width,
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  BusDetailsModel busDetailsModel =
+                                      snapshot.data[index];
+
+                                  return BusDetailsUI(
+                                    busDetailsModel: busDetailsModel,
+                                  );
+                                }),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 300, horizontal: 30),
+                            child: Text(
+                              'No bus available.',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  color: Color(0xff4c6792),
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )));
+  }
+}

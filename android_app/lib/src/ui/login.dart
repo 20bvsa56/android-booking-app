@@ -1,11 +1,14 @@
 import 'package:android_app/src/bloc/login_bloc.dart';
+import 'package:android_app/src/model/login.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/register.dart';
 import 'package:flutter/material.dart';
-
 import 'bottom_nav_bar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
+  static final url = 'http://192.168.254.78:8000/api/login/';
   const LoginPage({Key key}) : super(key: key);
 
   @override
@@ -13,7 +16,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var scaffoldkey = GlobalKey<ScaffoldState>();
   bool checkBoxValue = false;
+  bool visible = false;
+
+  errorMessage(BuildContext context) {
+    scaffoldkey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        'Invalid Credentials! Try again.',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+      ),
+      backgroundColor: Color(0xff28d6e2),
+      duration: Duration(seconds: 12),
+    ));
+  }
 
   goToHomePage(BuildContext context) {
     Navigator.push(
@@ -22,12 +38,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Future<LoginModel> userLogin(String url, {Map body}) async {
+    setState(() {
+      visible = true;
+    });
+
+    return http.post(url, body: body).then((http.Response response) {
+      final int statusCode = response.statusCode;
+
+      print(statusCode);
+      print(response.body);
+      if (statusCode == 201) {
+        setState(() {
+          visible = false;
+        });
+
+        errorMessage(context);
+      }
+
+      return LoginModel.fromJson(json.decode(response.body));
+    });
+  }
+
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final loginBloc = LoginBloc();
     final data =
         MediaQuery.of(context); // variable to get the media screen size
     return Scaffold(
+        key: scaffoldkey,
         appBar: MyAppBar(),
         body: Container(
           decoration: BoxDecoration(
@@ -39,11 +81,13 @@ class _LoginPageState extends State<LoginPage> {
                 opacity: 0.5,
                 child: Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            'lib/src/images/nature.jpg',
-                          ),
-                          fit: BoxFit.fill)),
+                    color: Color(0xff4c6792).withAlpha(100),
+                      // image: DecorationImage(
+                      //     image: AssetImage(
+                      //       'lib/src/images/nature.jpg',
+                      //     ),
+                      //     fit: BoxFit.fill)
+                      ),
                 ),
               ),
               SingleChildScrollView(
@@ -177,7 +221,25 @@ class _LoginPageState extends State<LoginPage> {
                                                   vertical: 15),
                                               splashColor: Colors.blueAccent,
                                               onPressed: snapshot.hasData
-                                                  ? () => goToHomePage(context)
+                                                  ? () async {
+                                                      LoginModel loginModel =
+                                                          new LoginModel(
+                                                        email: emailController
+                                                            .text,
+                                                        password:
+                                                            passwordController
+                                                                .text,
+                                                      );
+
+                                                      LoginModel getBody =
+                                                          await userLogin(
+                                                              LoginPage.url,
+                                                              body: loginModel
+                                                                  .toMap());
+
+                                                      goToHomePage(context);
+                                                      print(getBody.email);
+                                                    }
                                                   : null,
                                               child: Text(
                                                 "Login",
@@ -228,6 +290,14 @@ class _LoginPageState extends State<LoginPage> {
                                             ]),
                                       ),
                                     ),
+                                    Visibility(
+                                        visible: visible,
+                                        child: Container(
+                                            child: Center(
+                                          child: CircularProgressIndicator(
+                                              backgroundColor:
+                                                  Color(0xff28d6e2)),
+                                        ))),
                                   ],
                                 ),
                               )),

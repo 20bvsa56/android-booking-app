@@ -5,7 +5,8 @@ import 'dart:convert';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 
 class ToRouteTextField extends StatefulWidget {
-  const ToRouteTextField({Key key}) : super(key: key);
+  TextEditingController toSearchController = new TextEditingController();
+  ToRouteTextField({Key key, this.toSearchController}) : super(key: key);
 
   @override
   _ToRouteTextFieldState createState() => _ToRouteTextFieldState();
@@ -45,7 +46,7 @@ class _ToRouteTextFieldState extends State<ToRouteTextField> {
     super.initState();
   }
 
- Widget row(ToRoute toRoute) {
+  Widget row(ToRoute toRoute) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -65,6 +66,7 @@ class _ToRouteTextFieldState extends State<ToRouteTextField> {
           ? CircularProgressIndicator(
               valueColor: new AlwaysStoppedAnimation<Color>(Color(0xff28d6e2)))
           : searchTextField = AutoCompleteTextField<ToRoute>(
+              controller: widget.toSearchController,
               key: key,
               clearOnSubmit: false,
 

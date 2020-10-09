@@ -378,6 +378,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           .clear();
                                                       phoneNumberController
                                                           .clear();
+
+                                                      setState(() {
+                                                        visible = false;
+                                                      });
                                                     }
                                                   : null,
                                               child: Text(
@@ -390,6 +394,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                             );
                                           }),
                                     ),
+                                    Visibility(
+                                        visible: visible,
+                                        child: Container(
+                                            child: Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                      backgroundColor: Color(0xff28d6e2),
+                                                    )))),
                                   ],
                                 ),
                               )),
