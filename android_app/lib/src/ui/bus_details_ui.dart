@@ -134,6 +134,7 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                               row: widget.busDetailsModel.seatRow.toString(),
                               column: widget.busDetailsModel.seatRow.toString(),
                               layout: widget.busDetailsModel.seatLayout.toString(),
+                              price: widget.busDetailsModel.price,
                               )),
                     );
                   },

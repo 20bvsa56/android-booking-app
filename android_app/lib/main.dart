@@ -1,9 +1,6 @@
 import 'package:android_app/src/model/slider.dart';
-import 'package:android_app/src/ui/app.dart';
 import 'package:android_app/src/ui/bottom_nav_bar.dart';
-import 'package:android_app/src/ui/home.dart';
 import 'package:android_app/src/ui/login.dart';
-import 'package:android_app/src/ui/multi_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -183,7 +180,7 @@ class SliderTile extends StatelessWidget {
                 style: TextStyle(
                     shadows: <Shadow>[
                       Shadow(
-                        offset: Offset(1, 3),
+                        offset: Offset(1, 1),
                         blurRadius: 3.0,
                         color: Color(0xff28d6e2),
                       ),

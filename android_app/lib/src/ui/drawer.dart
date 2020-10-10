@@ -1,5 +1,6 @@
 import 'package:android_app/src/ui/account.dart';
 import 'package:android_app/src/ui/home.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:android_app/src/ui/ticket.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class _MenuOptionState extends State<MenuOption> {
               child: ListTile(
                 title: Text(
                   'Home',
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+                  style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6, color: Colors.white),
                 ),
                 leading: Icon(Icons.home, size: 26, color: Colors.white),
                 onTap: () {

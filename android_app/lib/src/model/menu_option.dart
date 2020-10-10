@@ -37,37 +37,3 @@ List<MenuOptionMOdel> getMenuOptions() {
 }
 
 
-// class MenuOptionView extends StatelessWidget {
-//   final String options;
-//   const MenuOptionView({Key key, this.options}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//       child: ListTile(
-//         title: Text(
-//           options,
-//           style: TextStyle(fontSize: 20, color: Colors.black),
-//         ),
-//         leading: Icon(Icons.home, size: 26, color: Color(0xfff2a407)),
-//         onTap: () {
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(builder: (context) => HomePage()),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
-
-
-//   ListView.builder(
-//           itemCount: optionsModel.length,
-//           itemBuilder: (context, index) {
-//             return MenuOptionView(
-//               options: optionsModel[index].getOption(),
-//             );
-//           }),

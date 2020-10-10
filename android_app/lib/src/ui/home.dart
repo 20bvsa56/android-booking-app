@@ -1,5 +1,4 @@
-import 'package:android_app/src/model/from_route.dart';
-import 'package:android_app/src/model/to_route.dart';
+import 'package:android_app/src/model/destinations_model.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/bus_details_ui_builder.dart';
 import 'package:android_app/src/ui/drawer.dart';
@@ -21,83 +20,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   TextEditingController dateController = new TextEditingController();
+  TextEditingController dateController = new TextEditingController();
 
   //From route part
-  List<FromRoute> fromRoutes = new List<FromRoute>();
-  AutoCompleteTextField fromSearchTextField;
-  GlobalKey<AutoCompleteTextFieldState<FromRoute>> fromKey = new GlobalKey();
-  TextEditingController fromSearchController = new TextEditingController();
-  // bool loading = true;
-
-  void getFromRoutes() async {
-    // final response = await http.get("http://192.168.1.101:8000/api/fromRoute");
-    final response = await http.get("http://192.168.254.78:8000/api/fromRoute");
-    if (response.statusCode == 200) {
-      fromRoutes =
-          loadFromRoutes(response.body); //get from routes list from function
-      print('From Routes: ${fromRoutes.length}');
-
-      setState(() {
-        loading = false;
-      });
-    } else {
-      print('Error! Cannot get the from routes');
-    }
-  }
-
-  List<FromRoute> loadFromRoutes(String jsonString) {
-    final parsed = json.decode(jsonString).cast<Map<String, dynamic>>();
-    return (parsed.map<FromRoute>((json) => FromRoute.fromJson(json))).toList();
-  }
-
-  Widget fromRow(FromRoute fromRoute) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          fromRoute.start_point,
-          style: TextStyle(fontSize: 20, color: Colors.black54),
-        ),
-        SizedBox(height: 35),
-      ],
-    );
-  }
-
-//To Rotues Part
-  List<ToRoute> toRoutes = new List<ToRoute>();
-  AutoCompleteTextField toSearchTextField;
-  GlobalKey<AutoCompleteTextFieldState<ToRoute>> toKey = new GlobalKey();
-  TextEditingController toSearchController = new TextEditingController();
+  List<DestinationsModel> destinations = new List<DestinationsModel>();
+  AutoCompleteTextField destinationsSearchTextField;
+  AutoCompleteTextField destinationsSearchTextField2;
+  GlobalKey<AutoCompleteTextFieldState<DestinationsModel>> key =
+      new GlobalKey();
+  GlobalKey<AutoCompleteTextFieldState<DestinationsModel>> key2 =
+      new GlobalKey();
+  TextEditingController destinationsController = new TextEditingController();
+  TextEditingController destinationsController2 = new TextEditingController();
   bool loading = true;
 
-  void getToRoutes() async {
-    // final response = await http.get("http://192.168.1.101:8000/api/toRoute");
-    final response = await http.get("http://192.168.254.78:8000/api/toRoute");
+  void getDestinations() async {
+    // final response = await http.get("http://192.168.1.101:8000/api/getDestinations");
+    final response =
+        await http.get("http://192.168.254.78:8000/api/getDestinations");
     if (response.statusCode == 200) {
-      toRoutes =
-          loadToRoutes(response.body); //get from routes list from function
-      print('To Routes: ${toRoutes.length}');
+      destinations =
+          loadDestinations(response.body); //get from routes list from function
+      print('From Routes: ${destinations.length}');
 
       setState(() {
         loading = false;
       });
     } else {
-      print('Error! Cannot get the to routes');
+      print('Error! Cannot get the destinations.');
     }
   }
 
-  List<ToRoute> loadToRoutes(String jsonString) {
+  List<DestinationsModel> loadDestinations(String jsonString) {
     final parsed = json.decode(jsonString).cast<Map<String, dynamic>>();
-    return (parsed.map<ToRoute>((json) => ToRoute.fromJson(json))).toList();
+    return (parsed.map<DestinationsModel>(
+        (json) => DestinationsModel.fromJson(json))).toList();
   }
 
-  Widget toRow(ToRoute toRoute) {
+  Widget showDestinations(DestinationsModel destinations) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          toRoute.end_point,
+          destinations.name,
           style: TextStyle(fontSize: 20, color: Colors.black54),
         ),
         SizedBox(height: 35),
@@ -108,8 +73,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getFromRoutes();
-    getToRoutes();
+    getDestinations();
   }
 
   @override
@@ -136,7 +100,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-            
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
                 child: Row(
@@ -144,8 +107,7 @@ class _HomePageState extends State<HomePage> {
                     Icon(
                       Icons.location_on,
                       color: Color(0xff28d6e2),
-size: SizeConfig.safeBlockHorizontal * 6,
-                      
+                      size: SizeConfig.safeBlockHorizontal * 6,
                     ),
                     SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
                     Text(
@@ -164,7 +126,7 @@ size: SizeConfig.safeBlockHorizontal * 6,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
-                 height: SizeConfig.safeBlockVertical * 30,
+                  height: SizeConfig.safeBlockVertical * 30,
                   width: SizeConfig.safeBlockHorizontal * 80,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8),
@@ -173,8 +135,9 @@ size: SizeConfig.safeBlockHorizontal * 6,
                       children: [
                         Text(
                           'From',
-                          style:
-                             TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff28d6e2)),
+                          style: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              color: Color(0xff28d6e2)),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -185,12 +148,12 @@ size: SizeConfig.safeBlockHorizontal * 6,
                                       valueColor:
                                           new AlwaysStoppedAnimation<Color>(
                                               Color(0xff28d6e2)))
-                                  : fromSearchTextField =
-                                      AutoCompleteTextField<FromRoute>(
-                                      controller: fromSearchController,
-                                      key: fromKey,
+                                  : destinationsSearchTextField =
+                                      AutoCompleteTextField<DestinationsModel>(
+                                      controller: destinationsController,
+                                      key: key,
                                       clearOnSubmit: false,
-                                      suggestions: fromRoutes,
+                                      suggestions: destinations,
                                       style: TextStyle(
                                           fontSize: 18, color: Colors.black),
                                       decoration: InputDecoration(
@@ -204,37 +167,34 @@ size: SizeConfig.safeBlockHorizontal * 6,
                                       ),
                                       //query is what the user types and item is a list of items passed
                                       itemFilter: (item, query) {
-                                        return item.start_point
+                                        return item.name
                                             .toLowerCase()
                                             .startsWith(query.toLowerCase());
                                       },
                                       //compares two names and sorts according to that
                                       itemSorter: (a, b) {
-                                        return a.start_point
-                                            .compareTo(b.start_point);
+                                        return a.name.compareTo(b.name);
                                       },
                                       itemSubmitted: (item) {
                                         setState(() {
-                                          fromSearchTextField
-                                              .textField
-                                              .controller
-                                              .text = item.start_point;
+                                          destinationsSearchTextField.textField
+                                              .controller.text = item.name;
                                         });
                                       },
                                       itemBuilder: (context, item) {
                                         //ui for autocomplete
-                                        return fromRow(item);
+                                        return showDestinations(item);
                                       },
                                     ),
-                              
                             ],
                           ),
                         ),
                         SizedBox(height: SizeConfig.safeBlockHorizontal * 10),
                         Text(
                           'To',
-                          style:
-                              TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff28d6e2)),
+                          style: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              color: Color(0xff28d6e2)),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -245,12 +205,12 @@ size: SizeConfig.safeBlockHorizontal * 6,
                                       valueColor:
                                           new AlwaysStoppedAnimation<Color>(
                                               Color(0xff28d6e2)))
-                                  : toSearchTextField =
-                                      AutoCompleteTextField<ToRoute>(
-                                      controller: toSearchController,
-                                      key: toKey,
+                                  : destinationsSearchTextField2 =
+                                      AutoCompleteTextField<DestinationsModel>(
+                                      controller: destinationsController2,
+                                      key: key2,
                                       clearOnSubmit: false,
-                                      suggestions: toRoutes,
+                                      suggestions: destinations,
                                       style: TextStyle(
                                           fontSize: 18, color: Colors.black),
                                       decoration: InputDecoration(
@@ -264,24 +224,23 @@ size: SizeConfig.safeBlockHorizontal * 6,
                                       ),
                                       //query is what the user types and item is a list of items passed
                                       itemFilter: (item, query) {
-                                        return item.end_point
+                                        return item.name
                                             .toLowerCase()
                                             .startsWith(query.toLowerCase());
                                       },
                                       //compares two names and sorts according to that
                                       itemSorter: (a, b) {
-                                        return a.end_point
-                                            .compareTo(b.end_point);
+                                        return a.name.compareTo(b.name);
                                       },
                                       itemSubmitted: (item) {
                                         setState(() {
-                                          toSearchTextField.textField.controller
-                                              .text = item.end_point;
+                                          destinationsSearchTextField2.textField
+                                              .controller.text = item.name;
                                         });
                                       },
                                       itemBuilder: (context, item) {
                                         //ui for autocomplete
-                                        return toRow(item);
+                                        return showDestinations(item);
                                       },
                                     ),
                               SizedBox(height: 15),
@@ -330,7 +289,8 @@ size: SizeConfig.safeBlockHorizontal * 6,
                           child: Text(
                             'Departure date',
                             style: TextStyle(
-                               fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff28d6e2)),
+                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                color: Color(0xff28d6e2)),
                           ),
                         ),
                         Column(
@@ -341,14 +301,16 @@ size: SizeConfig.safeBlockHorizontal * 6,
                               child: DateTimeField(
                                 controller: dateController,
                                 initialValue: _today,
-                                
-                                 style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 2),
+                                style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 2),
                                 decoration: InputDecoration(
                                   labelText: 'Select departure date',
-                                   labelStyle: TextStyle(
-                                            fontSize: 18, color: Colors.grey),
+                                  labelStyle: TextStyle(
+                                      fontSize: 18, color: Colors.grey),
                                   prefixIcon: Icon(Icons.time_to_leave,
-                                      size: SizeConfig.safeBlockHorizontal * 6, color: Color(0xff28d6e2)),
+                                      size: SizeConfig.safeBlockHorizontal * 6,
+                                      color: Color(0xff28d6e2)),
                                 ),
                                 format: format,
                                 onShowPicker: (context, currentValue) {
@@ -387,7 +349,10 @@ size: SizeConfig.safeBlockHorizontal * 6,
                                     },
                                     child: Text('Tomorrow',
                                         style: TextStyle(
-                                          color: Colors.black87, fontSize: SizeConfig.safeBlockHorizontal * 3)),
+                                            color: Colors.black87,
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    3)),
                                     color: Color(0xffd2d6d6),
                                   ),
                                   Spacer(),
@@ -401,7 +366,10 @@ size: SizeConfig.safeBlockHorizontal * 6,
                                     },
                                     child: Text('Day After',
                                         style: TextStyle(
-                                              color: Colors.black87, fontSize: SizeConfig.safeBlockHorizontal * 3)),
+                                            color: Colors.black87,
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    3)),
                                     color: Color(0xffd2d6d6),
                                   )
                                 ],
@@ -430,21 +398,20 @@ size: SizeConfig.safeBlockHorizontal * 6,
                           context,
                           MaterialPageRoute(
                               builder: (context) => BusDetailsUIBuilder(
-                                    start_point: fromSearchController.text,
-                                    end_point: toSearchController.text,
-                                    departure_date: dateController.text
-                                  )),
+                                  start_point: destinationsController.text,
+                                  end_point: destinationsController2.text,
+                                  departure_date: dateController.text)),
                         );
                       },
                       child: Text(
                         "Find Bus",
-                        style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4),
-                  ),
+                        style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4),
                       ),
                     ),
                   ),
                 ),
-              
+              ),
             ],
           ),
         ),

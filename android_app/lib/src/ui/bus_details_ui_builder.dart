@@ -1,6 +1,7 @@
 import 'package:android_app/src/model/bus_details_model.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/bus_details_ui.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -71,16 +72,20 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
                         } else {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 300, horizontal: 0),
+                                vertical: 300, horizontal: 10),
                             child: Center(
                               child: Text(
                                 'No bus available for the route ' +
                                     widget.start_point +
                                     ' to ' +
                                     widget.end_point +
-                                    '.',
+                                    ' for ' +
+                                    widget.departure_date +
+                                    '  . ',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 30,
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 5,
                                     color: Color(0xff4c6792),
                                     fontWeight: FontWeight.w600),
                               ),
