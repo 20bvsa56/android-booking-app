@@ -10,6 +10,13 @@ class _SignUpAlertBoxState extends State<SignUpAlertBox> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        side: BorderSide(
+          width: 1.5,
+          color: Color(0xff4c6792),
+        ),
+      ),
       title: Text('You can book ticket only after sign up.'),
       content: Text('Would you like to continue?',
           style: TextStyle(color: Colors.black, fontSize: 18)),
@@ -22,13 +29,13 @@ class _SignUpAlertBoxState extends State<SignUpAlertBox> {
               );
             },
             child: Text('Yes',
-                style: TextStyle(color: Color(0xff28d6e2), fontSize: 20))),
+                style: TextStyle(color: Color(0xff4c6792), fontSize: 20))),
         FlatButton(
             onPressed: () {
               Navigator.pop(context);
             },
             child: Text('No',
-                style: TextStyle(color: Color(0xff28d6e2), fontSize: 20)))
+                style: TextStyle(color: Color(0xff4c6792), fontSize: 20)))
       ],
       elevation: 24,
       contentPadding: EdgeInsets.all(20),

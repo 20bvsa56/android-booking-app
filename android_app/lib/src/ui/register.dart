@@ -1,6 +1,7 @@
 import 'package:android_app/src/bloc/register_bloc.dart';
 import 'package:android_app/src/model/register.dart';
 import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -16,8 +17,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   bool checkBoxValue = false;
-
   bool visible = false;
+   bool _showPassword = false;
 
   Future<RegisterModel> userRegistration(String url, {Map body}) async {
     // Showing CircularProgressIndicator using state.
@@ -77,13 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 opacity: 0.5,
                 child: Container(
                   decoration: BoxDecoration(
-                     color: Color(0xff4c6792),
-                      // image: DecorationImage(
-                      //     image: AssetImage(
-                      //       'lib/src/images/nature.jpg',
-                      //     ),
-                      //     fit: BoxFit.fill)
-                      ),
+                    color: Color(0xff4c6792),
+                  ),
                 ),
               ),
               SingleChildScrollView(
@@ -97,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Container(
                               width: data.size.width,
                               child: Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -109,226 +105,360 @@ class _RegisterPageState extends State<RegisterPage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(height: 20),
-                                    StreamBuilder<String>(
-                                        stream: registerBloc.fnameStream,
-                                        builder: (context, snapshot) {
-                                          return TextField(
-                                              controller: firstNameController,
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.white),
-                                              onChanged:
-                                                  registerBloc.fnameChanged,
-                                              decoration: InputDecoration(
-                                                hintText: 'Matthew',
-                                                hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                errorText: snapshot.error,
-                                                errorStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                labelText: 'First Name',
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.white70),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white70,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              ));
-                                        }),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff4c6792),
+                                              spreadRadius: 2,
+                                              blurRadius: 2,
+                                              offset: Offset(0,
+                                                  1), // changes position of shadow
+                                            ),
+                                          ],
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15))),
+                                      height: SizeConfig.safeBlockVertical * 71,
+                                      width:
+                                          SizeConfig.safeBlockHorizontal * 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 40),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              StreamBuilder<String>(
+                                                  stream:
+                                                      registerBloc.fnameStream,
+                                                  builder: (context, snapshot) {
+                                                    return TextField(
+                                                        controller:
+                                                            firstNameController,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xff4c6792)),
+                                                        onChanged: registerBloc
+                                                            .fnameChanged,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText: 'Matthew',
+                                                          hintStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          errorText:
+                                                              snapshot.error,
+                                                          errorStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          labelText:
+                                                              'First Name',
+                                                          labelStyle: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Color(
+                                                                        0xff4c6792),
+                                                                    width: 1.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ));
+                                                  }),
+                                              SizedBox(height: 20),
+                                              StreamBuilder<String>(
+                                                  stream:
+                                                      registerBloc.lnameStream,
+                                                  builder: (context, snapshot) {
+                                                    return TextField(
+                                                        controller:
+                                                            lastNameController,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xff4c6792)),
+                                                        onChanged: registerBloc
+                                                            .lnameChanged,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText: 'Perry',
+                                                          hintStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          errorText:
+                                                              snapshot.error,
+                                                          errorStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          labelText:
+                                                              'Last Name',
+                                                          labelStyle: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Color(
+                                                                        0xff4c6792),
+                                                                    width: 1.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ));
+                                                  }),
+                                              SizedBox(height: 20),
+                                              StreamBuilder<String>(
+                                                  stream:
+                                                      registerBloc.emailStream,
+                                                  builder: (context, snapshot) {
+                                                    return TextField(
+                                                        controller:
+                                                            emailController,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xff4c6792)),
+                                                        onChanged: registerBloc
+                                                            .emailChanged,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText:
+                                                              'matthewperry@gmail.com',
+                                                          hintStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          errorText:
+                                                              snapshot.error,
+                                                          errorStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          labelText:
+                                                              'Email address',
+                                                          labelStyle: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Color(
+                                                                        0xff4c6792),
+                                                                    width: 1.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ));
+                                                  }),
+                                              SizedBox(height: 20),
+                                              StreamBuilder<String>(
+                                                  stream: registerBloc
+                                                      .passwordStream,
+                                                  builder: (context, snapshot) {
+                                                    return TextField(
+                                                        controller:
+                                                            passwordController,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color:
+                                                                
+Color(0xff4c6792)),
+                                                        obscureText: !this._showPassword,
+                                                        onChanged: registerBloc
+                                                            .passwordChanged,
+                                                        decoration:
+                                                            InputDecoration(
+                                                               suffixIcon: IconButton(
+                                                        icon: Icon(
+                                                          Icons.remove_red_eye,
+                                                          color: this
+                                                                  ._showPassword
+                                                              ? Color(
+                                                                  0xff4c6792)
+                                                              : Colors.grey,
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() => this
+                                                                  ._showPassword =
+                                                              !this
+                                                                  ._showPassword);
+                                                        }),
+                                                          hintText:
+                                                              '**********',
+                                                          hintStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          errorText:
+                                                              snapshot.error,
+                                                          errorStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          labelText: 'Password',
+                                                          labelStyle: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Color(
+                                                                        0xff4c6792),
+                                                                    width: 1.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ));
+                                                  }),
+                                              SizedBox(height: 20),
+                                              StreamBuilder<String>(
+                                                  stream: registerBloc
+                                                      .confirmPasswordStream,
+                                                  builder: (context, snapshot) {
+                                                    return TextField(
+                                                        controller:
+                                                            confirmPasswordController,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xff4c6792)),
+                                                        obscureText: !this._showPassword,
+                                                        onChanged: registerBloc
+                                                            .confirmPasswordChanged,
+                                                        decoration:
+                                                            InputDecoration(
+                                                               suffixIcon: IconButton(
+                                                        icon: Icon(
+                                                          Icons.remove_red_eye,
+                                                          color: this
+                                                                  ._showPassword
+                                                              ? Color(
+                                                                  0xff4c6792)
+                                                              : Colors.grey,
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() => this
+                                                                  ._showPassword =
+                                                              !this
+                                                                  ._showPassword);
+                                                        }),
+                                                          hintText:
+                                                              '**********',
+                                                          hintStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          errorText:
+                                                              snapshot.error,
+                                                          errorStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          labelText:
+                                                              'Confirm Password',
+                                                          labelStyle: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Color(
+                                                                        0xff4c6792),
+                                                                    width: 1.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ));
+                                                  }),
+                                              SizedBox(height: 20),
+                                              StreamBuilder<String>(
+                                                  stream: registerBloc
+                                                      .phoneNumberStream,
+                                                  builder: (context, snapshot) {
+                                                    return TextField(
+                                                        controller:
+                                                            phoneNumberController,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xff4c6792)),
+                                                        onChanged: registerBloc
+                                                            .phoneNumberChanged,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText:
+                                                              '9999999999',
+                                                          hintStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          errorText:
+                                                              snapshot.error,
+                                                          errorStyle: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          labelText:
+                                                              'Phone Number',
+                                                          labelStyle: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff4c6792)),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Color(
+                                                                        0xff4c6792),
+                                                                    width: 1.5),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ));
+                                                  }),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     SizedBox(height: 20),
-                                    StreamBuilder<String>(
-                                        stream: registerBloc.lnameStream,
-                                        builder: (context, snapshot) {
-                                          return TextField(
-                                              controller: lastNameController,
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.white),
-                                              onChanged:
-                                                  registerBloc.lnameChanged,
-                                              decoration: InputDecoration(
-                                                hintText: 'Perry',
-                                                hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                errorText: snapshot.error,
-                                                errorStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                labelText: 'Last Name',
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.white70),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white70,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              ));
-                                        }),
-                                    SizedBox(height: 20),
-                                    StreamBuilder<String>(
-                                        stream: registerBloc.emailStream,
-                                        builder: (context, snapshot) {
-                                          return TextField(
-                                              controller: emailController,
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.white),
-                                              onChanged:
-                                                  registerBloc.emailChanged,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    'matthewperry@gmail.com',
-                                                hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                errorText: snapshot.error,
-                                                errorStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                labelText: 'Email address',
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.white70),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white70,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              ));
-                                        }),
-                                    SizedBox(height: 20),
-                                    StreamBuilder<String>(
-                                        stream: registerBloc.passwordStream,
-                                        builder: (context, snapshot) {
-                                          return TextField(
-                                              controller: passwordController,
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.white),
-                                              obscureText: true,
-                                              onChanged:
-                                                  registerBloc.passwordChanged,
-                                              decoration: InputDecoration(
-                                                hintText: '**********',
-                                                hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                errorText: snapshot.error,
-                                                errorStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                labelText: 'Password',
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.white70),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white70,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              ));
-                                        }),
-                                    SizedBox(height: 20),
-                                    StreamBuilder<String>(
-                                        stream:
-                                            registerBloc.confirmPasswordStream,
-                                        builder: (context, snapshot) {
-                                          return TextField(
-                                              controller:
-                                                  confirmPasswordController,
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.white),
-                                              obscureText: true,
-                                              onChanged: registerBloc
-                                                  .confirmPasswordChanged,
-                                              decoration: InputDecoration(
-                                                hintText: '**********',
-                                                hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                errorText: snapshot.error,
-                                                errorStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                labelText: 'Confirm Password',
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.white70),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white70,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              ));
-                                        }),
-                                    SizedBox(height: 20),
-                                    StreamBuilder<String>(
-                                        stream: registerBloc.phoneNumberStream,
-                                        builder: (context, snapshot) {
-                                          return TextField(
-                                              controller: phoneNumberController,
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.white),
-                                              onChanged: registerBloc
-                                                  .phoneNumberChanged,
-                                              decoration: InputDecoration(
-                                                hintText: '9999999999',
-                                                hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                errorText: snapshot.error,
-                                                errorStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                                labelText: 'Phone Number',
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.white70),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white70,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                              ));
-                                        }),
-                                    SizedBox(height: 25),
                                     Center(
                                       child: StreamBuilder<bool>(
                                           stream: registerBloc.registerCheck,
                                           builder: (context, snapshot) {
                                             return FlatButton(
+                                               shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
                                               color: Colors.white,
                                               textColor: Color(0xff28d6e2),
                                               disabledColor: Colors.white70,
@@ -402,8 +532,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                             child: Center(
                                                 child:
                                                     CircularProgressIndicator(
-                                                      backgroundColor: Color(0xff28d6e2),
-                                                    )))),
+                                          backgroundColor: Color(0xff28d6e2),
+                                        )))),
                                   ],
                                 ),
                               )),

@@ -16,7 +16,8 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0, left: 20, right: 20),
+      padding:
+          const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
       child: Container(
         width: data.size.width,
         decoration: BoxDecoration(
@@ -118,7 +119,7 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                           ))
                     ]),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               FlatButton(
                   onPressed: () {
                     // _showBusSeatsBottomSheet(context);
@@ -126,15 +127,18 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => BusSeatBottomSheet(
-                              id: widget.busDetailsModel.vehicleId,
-                              name: widget.busDetailsModel.vehicleName,
-                              start_point: widget.busDetailsModel.startPoint,
-                              end_point: widget.busDetailsModel.endPoint,
-                              departure_date: widget.busDetailsModel.departureDate,
-                              row: widget.busDetailsModel.seatRow.toString(),
-                              column: widget.busDetailsModel.seatRow.toString(),
-                              layout: widget.busDetailsModel.seatLayout.toString(),
-                              price: widget.busDetailsModel.price,
+                                id: widget.busDetailsModel.vehicleId,
+                                name: widget.busDetailsModel.vehicleName,
+                                start_point: widget.busDetailsModel.startPoint,
+                                end_point: widget.busDetailsModel.endPoint,
+                                departure_date:
+                                    widget.busDetailsModel.departureDate,
+                                row: widget.busDetailsModel.seatRow.toString(),
+                                column:
+                                    widget.busDetailsModel.seatRow.toString(),
+                                layout: widget.busDetailsModel.seatLayout
+                                    .toString(),
+                                price: widget.busDetailsModel.price,
                               )),
                     );
                   },

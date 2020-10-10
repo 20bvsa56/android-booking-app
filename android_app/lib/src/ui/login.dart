@@ -2,6 +2,7 @@ import 'package:android_app/src/bloc/login_bloc.dart';
 import 'package:android_app/src/model/login.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/register.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'bottom_nav_bar.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   bool checkBoxValue = false;
   bool visible = false;
+  bool _showPassword = false;
 
   errorMessage(BuildContext context) {
     scaffoldkey.currentState.showSnackBar(SnackBar(
@@ -81,11 +83,6 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               decoration: BoxDecoration(
                 color: Color(0xff4c6792),
-                // image: DecorationImage(
-                //     image: AssetImage(
-                //       'lib/src/images/nature.jpg',
-                //     ),
-                //     fit: BoxFit.fill)
               ),
             ),
           ),
@@ -95,12 +92,12 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 120.0, horizontal: 20),
+                        vertical: 120.0, horizontal: 10),
                     child: Center(
                       child: Container(
                           width: data.size.width,
                           child: Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -112,70 +109,136 @@ class _LoginPageState extends State<LoginPage> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(height: 20),
-                                StreamBuilder<String>(
-                                    stream: loginBloc.emailStream,
-                                    builder: (context, snapshot) {
-                                      return TextField(
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color: Colors.white),
-                                          keyboardType:
-                                              TextInputType.emailAddress,
-                                          onChanged: loginBloc.emailChanged,
-                                          decoration: InputDecoration(
-                                            hintText: 'matthewperry@gmail.com',
-                                            hintStyle: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                            errorText: snapshot.error,
-                                            errorStyle: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                            labelText: 'Email address',
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.white70),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                  color: Colors.white70,
-                                                  width: 2.5),
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                          ));
-                                    }),
-                                SizedBox(height: 20),
-                                StreamBuilder<String>(
-                                    stream: loginBloc.passwordStream,
-                                    builder: (context, snapshot) {
-                                      return TextField(
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color: Colors.white),
-                                          onChanged: loginBloc.passwordChanged,
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            hintText: '**********',
-                                            hintStyle: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                            errorText: snapshot.error,
-                                            errorStyle: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                            labelText: 'Password',
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.white70),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                  color: Colors.white70,
-                                                  width: 2.5),
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                          ));
-                                    }),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0xff4c6792),
+                                          spreadRadius: 2,
+                                          blurRadius: 2,
+                                          offset: Offset(0,
+                                              1), // changes position of shadow
+                                        ),
+                                      ],
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  height: SizeConfig.safeBlockVertical * 30,
+                                  width: SizeConfig.safeBlockHorizontal * 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 45),
+                                    child: SingleChildScrollView(
+                                      child: Column(children: [
+                                        StreamBuilder<String>(
+                                            stream: loginBloc.emailStream,
+                                            builder: (context, snapshot) {
+                                              return TextField(
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Color(0xff4c6792)),
+                                                  keyboardType: TextInputType
+                                                      .emailAddress,
+                                                  onChanged:
+                                                      loginBloc.emailChanged,
+                                                  decoration: InputDecoration(
+                                                    prefixIcon: Icon(
+                                                        Icons.email,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    hintText:
+                                                        'matthewperry@gmail.com',
+                                                    hintStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    errorText: snapshot.error,
+                                                    errorStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    labelText: 'Email address',
+                                                    labelStyle: TextStyle(
+                                                        fontSize: 20,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Color(
+                                                                  0xff4c6792),
+                                                              width: 1.5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                    ),
+                                                  ));
+                                            }),
+                                        SizedBox(height: 20),
+                                        StreamBuilder<String>(
+                                            stream: loginBloc.passwordStream,
+                                            builder: (context, snapshot) {
+                                              return TextField(
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Color(0xff4c6792)),
+                                                  onChanged:
+                                                      loginBloc.passwordChanged,
+                                                  obscureText:
+                                                      !this._showPassword,
+                                                  decoration: InputDecoration(
+                                                    prefixIcon: Icon(
+                                                        Icons.https,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    suffixIcon: IconButton(
+                                                        icon: Icon(
+                                                          Icons.remove_red_eye,
+                                                          color: this
+                                                                  ._showPassword
+                                                              ? Color(
+                                                                  0xff4c6792)
+                                                              : Colors.grey,
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() => this
+                                                                  ._showPassword =
+                                                              !this
+                                                                  ._showPassword);
+                                                        }),
+                                                    hintText: '**********',
+                                                    hintStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    errorText: snapshot.error,
+                                                    errorStyle: TextStyle(
+                                                        fontSize: 18,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    labelText: 'Password',
+                                                    labelStyle: TextStyle(
+                                                        fontSize: 20,
+                                                        color:
+                                                            Color(0xff4c6792)),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Color(
+                                                                  0xff4c6792),
+                                                              width: 1.5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                    ),
+                                                  ));
+                                            }),
+                                      ]),
+                                    ),
+                                  ),
+                                ),
                                 SizedBox(height: 15),
                                 Row(
                                   children: [
@@ -193,18 +256,21 @@ class _LoginPageState extends State<LoginPage> {
                                     Text(
                                       'Remember Me',
                                       style: TextStyle(
-                                        fontSize: 22,
+                                        fontSize: 23,
                                         color: Colors.white,
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 15),
+                                SizedBox(height: 5),
                                 Center(
                                   child: StreamBuilder<bool>(
                                       stream: loginBloc.loginCheck,
                                       builder: (context, snapshot) {
                                         return FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
                                           color: Colors.white,
                                           textColor: Color(0xff28d6e2),
                                           disabledColor: Colors.white70,
@@ -243,6 +309,7 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(height: 20),
                                 Text(
                                   'Forgot Password?',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Color(0xff28d6e2).withAlpha(255),
                                       fontSize: 23),
@@ -257,6 +324,7 @@ class _LoginPageState extends State<LoginPage> {
                                     );
                                   },
                                   child: RichText(
+                                    textAlign: TextAlign.center,
                                     text: new TextSpan(
                                         style: TextStyle(fontSize: 22),
                                         children: [
