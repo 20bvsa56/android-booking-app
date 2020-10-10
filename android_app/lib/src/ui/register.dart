@@ -77,11 +77,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 opacity: 0.5,
                 child: Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            'lib/src/images/nature.jpg',
-                          ),
-                          fit: BoxFit.fill)),
+                     color: Color(0xff4c6792),
+                      // image: DecorationImage(
+                      //     image: AssetImage(
+                      //       'lib/src/images/nature.jpg',
+                      //     ),
+                      //     fit: BoxFit.fill)
+                      ),
                 ),
               ),
               SingleChildScrollView(

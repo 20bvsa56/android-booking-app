@@ -9,8 +9,10 @@ import 'dart:async';
 class BusDetailsUIBuilder extends StatefulWidget {
   final String start_point;
   final String end_point;
+  final String departure_date;
 
-  BusDetailsUIBuilder({Key key, this.start_point, this.end_point})
+  BusDetailsUIBuilder(
+      {Key key, this.start_point, this.end_point, this.departure_date})
       : super(key: key);
 
   @override
@@ -21,9 +23,9 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
   List<BusDetailsModel> busDetailsList = [];
 
   Future<List<BusDetailsModel>> busDetails(
-      String start_point, String end_point) async {
+      String start_point, String end_point, String departure_date) async {
     var data = await http.get(
-        "http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point");
+        "http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
     var jsonData = json.decode(data.body);
 
     // print(start_point);
@@ -47,7 +49,8 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
                 child: Column(
                   children: <Widget>[
                     FutureBuilder(
-                      future: busDetails(widget.start_point, widget.end_point),
+                      future: busDetails(widget.start_point, widget.end_point,
+                          widget.departure_date),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.data != null) {
                           return Container(
@@ -68,13 +71,19 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
                         } else {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 300, horizontal: 30),
-                            child: Text(
-                              'No bus available.',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  color: Color(0xff4c6792),
-                                  fontWeight: FontWeight.w600),
+                                vertical: 300, horizontal: 0),
+                            child: Center(
+                              child: Text(
+                                'No bus available for the route ' +
+                                    widget.start_point +
+                                    ' to ' +
+                                    widget.end_point +
+                                    '.',
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Color(0xff4c6792),
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           );
                         }

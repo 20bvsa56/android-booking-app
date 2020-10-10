@@ -1,5 +1,6 @@
 import 'package:android_app/src/model/bus_details_model.dart';
 import 'package:android_app/src/ui/bus_seat_bottom_sheet.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 
 class BusDetailsUI extends StatefulWidget {
@@ -118,7 +119,32 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                     ]),
               ),
               SizedBox(height: 10),
-              BusSeatBottomSheet()
+              FlatButton(
+                  onPressed: () {
+                    // _showBusSeatsBottomSheet(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BusSeatBottomSheet(
+                              id: widget.busDetailsModel.vehicleId,
+                              name: widget.busDetailsModel.vehicleName,
+                              start_point: widget.busDetailsModel.startPoint,
+                              end_point: widget.busDetailsModel.endPoint,
+                              departure_date: widget.busDetailsModel.departureDate,
+                              row: widget.busDetailsModel.seatRow.toString(),
+                              column: widget.busDetailsModel.seatRow.toString(),
+                              layout: widget.busDetailsModel.seatLayout.toString(),
+                              )),
+                    );
+                  },
+                  color: Color(0xff4c6792),
+                  highlightColor: Colors.green,
+                  child: Text(
+                    'View Seats',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: SizeConfig.safeBlockHorizontal * 5),
+                  )),
             ],
           ),
         ),
