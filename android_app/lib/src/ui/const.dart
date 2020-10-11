@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
-const kPimaryColor = Color(0xffF7BB0E);
+const kPimaryColor = Colors.greenAccent;
 // const kPimaryColor = Color(0xffF7BB0E);
 
 const kActionColor = Color(0xffF00000);
 
 const kBackgroundColor = Color(0xff29282C);
-const kMovieNameStyle =
-    TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white , );
+// const kMovieNameStyle = TextStyle(
+//   fontSize: 20.0,
+//   fontWeight: FontWeight.bold,
+//   color: Colors.white,
+// );
 // final kMainTextStyle = GoogleFonts.barlow(
 //     textStyle: TextStyle(
 //         color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));

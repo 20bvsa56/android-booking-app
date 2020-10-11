@@ -16,8 +16,7 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Padding(
-      padding:
-          const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
+      padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
       child: Container(
         width: data.size.width,
         decoration: BoxDecoration(
@@ -119,37 +118,45 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                           ))
                     ]),
               ),
-              SizedBox(height: 15),
-              FlatButton(
-                  onPressed: () {
-                    // _showBusSeatsBottomSheet(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BusSeatBottomSheet(
-                                id: widget.busDetailsModel.vehicleId,
-                                name: widget.busDetailsModel.vehicleName,
-                                start_point: widget.busDetailsModel.startPoint,
-                                end_point: widget.busDetailsModel.endPoint,
-                                departure_date:
-                                    widget.busDetailsModel.departureDate,
-                                row: widget.busDetailsModel.seatRow.toString(),
-                                column:
-                                    widget.busDetailsModel.seatRow.toString(),
-                                layout: widget.busDetailsModel.seatLayout
-                                    .toString(),
-                                price: widget.busDetailsModel.price,
-                              )),
-                    );
-                  },
-                  color: Color(0xff4c6792),
-                  highlightColor: Colors.green,
-                  child: Text(
-                    'View Seats',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: SizeConfig.safeBlockHorizontal * 5),
-                  )),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 105.0),
+                child: SizedBox(
+                  height: 50,
+                  width: double.infinity / 2,
+                  child: FlatButton(
+                    color: Color(0xff4c6792),
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BusSeatBottomSheet(
+                                  id: widget.busDetailsModel.vehicleId,
+                                  name: widget.busDetailsModel.vehicleName,
+                                  start_point:
+                                      widget.busDetailsModel.startPoint,
+                                  end_point: widget.busDetailsModel.endPoint,
+                                  departure_date:
+                                      widget.busDetailsModel.departureDate,
+                                  row: widget.busDetailsModel.seatRow,
+                                  column: widget.busDetailsModel.seatColumn,
+                                  // layout: widget.busDetailsModel.seatLayout,
+                                  price: widget.busDetailsModel.price,
+                                )),
+                      );
+                    },
+                    child: Text(
+                      "View Seats",
+                      style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 6),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
             ],
           ),
         ),

@@ -1,7 +1,6 @@
 import 'package:android_app/src/model/bus_details_model.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/bus_details_ui.dart';
-import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -26,7 +25,8 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
   Future<List<BusDetailsModel>> busDetails(
       String start_point, String end_point, String departure_date) async {
     var data = await http.get(
-        "http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
+        // "http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
+        "http://192.168.1.101:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
     var jsonData = json.decode(data.body);
 
     // print(start_point);
@@ -34,6 +34,7 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
     for (var i = 0; i < jsonData.length; i++) {
       final detail = BusDetailsModel.fromJson(jsonData[i]);
       busDetailsList.add(detail);
+      print(busDetailsList.length.toString());
     }
     return busDetailsList;
   }
@@ -49,6 +50,8 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
               child: Center(
                 child: Column(
                   children: <Widget>[
+                    // Text(busDetailsList.length.toString() + ' buses found.',
+                    // style: TextStyle(fontSize:20,color: Color(0xff4c6792)),),
                     FutureBuilder(
                       future: busDetails(widget.start_point, widget.end_point,
                           widget.departure_date),
@@ -70,27 +73,9 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
                                 }),
                           );
                         } else {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 300, horizontal: 10),
-                            child: Center(
-                              child: Text(
-                                'No bus available for the route ' +
-                                    widget.start_point +
-                                    ' to ' +
-                                    widget.end_point +
-                                    ' for ' +
-                                    widget.departure_date +
-                                    '  . ',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 5,
-                                    color: Color(0xff4c6792),
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          );
+                          return CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Color(0xff4c6792)));
                         }
                       },
                     ),

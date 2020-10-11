@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
-  static final url = 'http://192.168.254.78:8000/api/register/';
+  // static final url = 'http://192.168.254.78:8000/api/register/';
+  static final url = 'http://192.168.1.101:8000/api/register/';
   const RegisterPage({Key key}) : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   bool checkBoxValue = false;
   bool visible = false;
-   bool _showPassword = false;
+  bool _showPassword = false;
 
   Future<RegisterModel> userRegistration(String url, {Map body}) async {
     // Showing CircularProgressIndicator using state.
@@ -279,29 +280,32 @@ class _RegisterPageState extends State<RegisterPage> {
                                                             passwordController,
                                                         style: TextStyle(
                                                             fontSize: 20,
-                                                            color:
-                                                                
-Color(0xff4c6792)),
-                                                        obscureText: !this._showPassword,
+                                                            color: Color(
+                                                                0xff4c6792)),
+                                                        obscureText:
+                                                            !this._showPassword,
                                                         onChanged: registerBloc
                                                             .passwordChanged,
                                                         decoration:
                                                             InputDecoration(
-                                                               suffixIcon: IconButton(
-                                                        icon: Icon(
-                                                          Icons.remove_red_eye,
-                                                          color: this
-                                                                  ._showPassword
-                                                              ? Color(
-                                                                  0xff4c6792)
-                                                              : Colors.grey,
-                                                        ),
-                                                        onPressed: () {
-                                                          setState(() => this
-                                                                  ._showPassword =
-                                                              !this
-                                                                  ._showPassword);
-                                                        }),
+                                                          suffixIcon:
+                                                              IconButton(
+                                                                  icon: Icon(
+                                                                    Icons
+                                                                        .remove_red_eye,
+                                                                    color: this
+                                                                            ._showPassword
+                                                                        ? Color(
+                                                                            0xff4c6792)
+                                                                        : Colors
+                                                                            .grey,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(() =>
+                                                                        this._showPassword =
+                                                                            !this._showPassword);
+                                                                  }),
                                                           hintText:
                                                               '**********',
                                                           hintStyle: TextStyle(
@@ -345,26 +349,30 @@ Color(0xff4c6792)),
                                                             fontSize: 20,
                                                             color: Color(
                                                                 0xff4c6792)),
-                                                        obscureText: !this._showPassword,
+                                                        obscureText:
+                                                            !this._showPassword,
                                                         onChanged: registerBloc
                                                             .confirmPasswordChanged,
                                                         decoration:
                                                             InputDecoration(
-                                                               suffixIcon: IconButton(
-                                                        icon: Icon(
-                                                          Icons.remove_red_eye,
-                                                          color: this
-                                                                  ._showPassword
-                                                              ? Color(
-                                                                  0xff4c6792)
-                                                              : Colors.grey,
-                                                        ),
-                                                        onPressed: () {
-                                                          setState(() => this
-                                                                  ._showPassword =
-                                                              !this
-                                                                  ._showPassword);
-                                                        }),
+                                                          suffixIcon:
+                                                              IconButton(
+                                                                  icon: Icon(
+                                                                    Icons
+                                                                        .remove_red_eye,
+                                                                    color: this
+                                                                            ._showPassword
+                                                                        ? Color(
+                                                                            0xff4c6792)
+                                                                        : Colors
+                                                                            .grey,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(() =>
+                                                                        this._showPassword =
+                                                                            !this._showPassword);
+                                                                  }),
                                                           hintText:
                                                               '**********',
                                                           hintStyle: TextStyle(
@@ -456,9 +464,10 @@ Color(0xff4c6792)),
                                           stream: registerBloc.registerCheck,
                                           builder: (context, snapshot) {
                                             return FlatButton(
-                                               shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
                                               color: Colors.white,
                                               textColor: Color(0xff28d6e2),
                                               disabledColor: Colors.white70,
@@ -510,6 +519,9 @@ Color(0xff4c6792)),
                                                           .clear();
                                                       phoneNumberController
                                                           .clear();
+
+
+                                                          
 
                                                       setState(() {
                                                         visible = false;

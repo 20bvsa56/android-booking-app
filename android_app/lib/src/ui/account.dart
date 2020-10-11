@@ -1,10 +1,11 @@
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/drawer.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatelessWidget {
   final ValueChanged<int> onPush;
-  const AccountPage({Key key,this.onPush}) : super(key: key);
+  const AccountPage({Key key, this.onPush}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,23 +136,28 @@ class AccountPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FlatButton(
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 140.0, vertical: 30),
+            child: SizedBox(
+              height: 60,
+              width: double.infinity / 2,
+              child: FlatButton(
                 color: Color(0xff4c6792),
                 textColor: Colors.white,
-                padding: EdgeInsets.all(12.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/login', (_) => false);
                 },
                 child: Text(
                   "Logout",
-                  style: TextStyle(fontSize: 24.0),
+                  style:
+                      TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),
                 ),
               ),
-            ],
+            ),
           ),
         ],
       ),

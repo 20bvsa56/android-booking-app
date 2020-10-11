@@ -22,7 +22,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController dateController = new TextEditingController();
 
-  //From route part
   List<DestinationsModel> destinations = new List<DestinationsModel>();
   AutoCompleteTextField destinationsSearchTextField;
   AutoCompleteTextField destinationsSearchTextField2;
@@ -35,9 +34,10 @@ class _HomePageState extends State<HomePage> {
   bool loading = true;
 
   void getDestinations() async {
-    // final response = await http.get("http://192.168.1.101:8000/api/getDestinations");
     final response =
-        await http.get("http://192.168.254.78:8000/api/getDestinations");
+        await http.get("http://192.168.1.101:8000/api/getDestinations");
+    // final response =
+    //     await http.get("http://192.168.254.78:8000/api/getDestinations");
     if (response.statusCode == 200) {
       destinations =
           loadDestinations(response.body); //get from routes list from function
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                                   ? CircularProgressIndicator(
                                       valueColor:
                                           new AlwaysStoppedAnimation<Color>(
-                                              Color(0xff28d6e2)))
+                                              Colors.white))
                                   : destinationsSearchTextField =
                                       AutoCompleteTextField<DestinationsModel>(
                                       controller: destinationsController,
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                                   ? CircularProgressIndicator(
                                       valueColor:
                                           new AlwaysStoppedAnimation<Color>(
-                                              Color(0xff28d6e2)))
+                                              Colors.white))
                                   : destinationsSearchTextField2 =
                                       AutoCompleteTextField<DestinationsModel>(
                                       controller: destinationsController2,
@@ -406,7 +406,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Find Bus",
                         style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4),
+                            fontSize: SizeConfig.safeBlockHorizontal * 6),
                       ),
                     ),
                   ),

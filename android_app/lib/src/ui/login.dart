@@ -9,7 +9,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
-  static final url = 'http://192.168.254.78:8000/api/login/';
+  // static final url = 'http://192.168.254.78:8000/api/login/';
+  static final url = 'http://192.168.1.101:8000/api/login/';
   const LoginPage({Key key}) : super(key: key);
 
   @override
@@ -127,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                                   width: SizeConfig.safeBlockHorizontal * 100,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 45),
+                                        horizontal: 15, vertical: 35),
                                     child: SingleChildScrollView(
                                       child: Column(children: [
                                         StreamBuilder<String>(
