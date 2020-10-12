@@ -1,5 +1,6 @@
 import 'package:android_app/src/bloc/register_bloc.dart';
 import 'package:android_app/src/model/register.dart';
+import 'package:android_app/src/ui/account.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,23 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: Color(0xff28d6e2),
       duration: Duration(seconds: 12),
     ));
+  }
+
+  List<RegisterModel> userDetailsList = [];
+
+  Future<List<RegisterModel>> userDetails(int id) async {
+    var data =
+        await http.get('http://192.168.1.101:8000/api/getUsersData?id=$id');
+    var jsonData = json.decode(data.body);
+
+    // print(start_point);
+
+    for (var i = 0; i < jsonData.length; i++) {
+      final detail = RegisterModel.fromJson(jsonData[i]);
+      userDetailsList.add(detail);
+      print(userDetailsList.length.toString());
+    }
+    return userDetailsList;
   }
 
   @override
@@ -508,20 +526,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                                       registeredMessage(
                                                           context);
 
-                                                      firstNameController
-                                                          .clear();
-                                                      lastNameController
-                                                          .clear();
-                                                      emailController.clear();
-                                                      passwordController
-                                                          .clear();
-                                                      confirmPasswordController
-                                                          .clear();
-                                                      phoneNumberController
-                                                          .clear();
-
-
-                                                          
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => AccountPage(
+                                                                firstName:
+                                                                    firstNameController
+                                                                        .text,
+                                                                lastName:
+                                                                    lastNameController
+                                                                        .text,
+                                                                email:
+                                                                    emailController
+                                                                        .text,
+                                                                phoneNumber:
+                                                                    phoneNumberController
+                                                                        .text)),
+                                                      );
 
                                                       setState(() {
                                                         visible = false;

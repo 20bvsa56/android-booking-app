@@ -1,17 +1,33 @@
+import 'package:android_app/src/model/register.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/drawer.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
+  String firstName, lastName, email, phoneNumber;
   final ValueChanged<int> onPush;
-  const AccountPage({Key key, this.onPush}) : super(key: key);
+  AccountPage(
+      {Key key,
+      this.onPush,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.phoneNumber})
+      : super(key: key);
 
+  @override
+  _AccountPageState createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      drawer: MenuOption(),
       body: Column(
         children: <Widget>[
           Row(
@@ -96,7 +112,7 @@ class AccountPage extends StatelessWidget {
                         text: 'Name:  ',
                         style: TextStyle(color: Color(0xff4c6792))),
                     TextSpan(
-                        text: 'Matthew Perry',
+                        text: widget.firstName,
                         style: TextStyle(color: Colors.black54, fontSize: 20))
                   ]),
                 ),
@@ -109,7 +125,7 @@ class AccountPage extends StatelessWidget {
                         text: 'Email:  ',
                         style: TextStyle(color: Color(0xff4c6792))),
                     TextSpan(
-                        text: 'matthewperry@gmail.com',
+                        text: widget.email,
                         style: TextStyle(
                           color: Colors.black54,
                         ))
@@ -124,7 +140,7 @@ class AccountPage extends StatelessWidget {
                         text: 'Phone Number:  ',
                         style: TextStyle(color: Color(0xff4c6792))),
                     TextSpan(
-                        text: '9999999999',
+                        text: widget.phoneNumber,
                         style: TextStyle(
                           color: Colors.black54,
                         ))

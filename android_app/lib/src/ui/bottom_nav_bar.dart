@@ -1,6 +1,7 @@
 import 'package:android_app/src/ui/account.dart';
 import 'package:android_app/src/ui/home.dart';
 import 'package:android_app/src/ui/ticket.dart';
+import 'package:android_app/src/ui/tickets_ui_builder.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBarPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _NavigationBarPageState extends State<NavigationBarPage> {
     HomePage(
       key: PageStorageKey('Page1'),
     ),
-    TicketInfoPage(
+    TicketsUIBuilder(
       key: PageStorageKey('Page2'),
     ),
     AccountPage(

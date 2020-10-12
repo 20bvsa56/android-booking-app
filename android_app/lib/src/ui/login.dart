@@ -281,6 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                                           splashColor: Colors.blueAccent,
                                           onPressed: snapshot.hasData
                                               ? () async {
+                                                  print(snapshot);
                                                   LoginModel loginModel =
                                                       new LoginModel(
                                                     email: emailController.text,
@@ -293,9 +294,9 @@ class _LoginPageState extends State<LoginPage> {
                                                           LoginPage.url,
                                                           body: loginModel
                                                               .toMap());
+                                                  print(getBody.email);
 
                                                   goToHomePage(context);
-                                                  print(getBody.email);
                                                 }
                                               : null,
                                           child: Text(

@@ -1,7 +1,6 @@
 import 'package:android_app/src/model/destinations_model.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/bus_details_ui_builder.dart';
-import 'package:android_app/src/ui/drawer.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -85,7 +84,6 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: MyAppBar(),
-      drawer: MenuOption(),
       backgroundColor: Colors.white,
       body: Stack(children: [
         Opacity(
@@ -147,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                   ? CircularProgressIndicator(
                                       valueColor:
                                           new AlwaysStoppedAnimation<Color>(
-                                              Colors.white))
+                                              Color(0xff28d6e2)))
                                   : destinationsSearchTextField =
                                       AutoCompleteTextField<DestinationsModel>(
                                       controller: destinationsController,
@@ -204,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                                   ? CircularProgressIndicator(
                                       valueColor:
                                           new AlwaysStoppedAnimation<Color>(
-                                              Colors.white))
+                                              Color(0xff28d6e2)))
                                   : destinationsSearchTextField2 =
                                       AutoCompleteTextField<DestinationsModel>(
                                       controller: destinationsController2,

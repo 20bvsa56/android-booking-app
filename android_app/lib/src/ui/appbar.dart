@@ -2,10 +2,11 @@ import 'package:android_app/src/ui/drawer.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {
-  MyAppBar({Key key, Widget title, bool automaticallyImplyLeading})
+  MyAppBar({Key key, Widget title})
       : super(
             key: key,
             title: title,
+            automaticallyImplyLeading:false,
             backgroundColor: Color(0xff4c6792),
             elevation: 10,
             centerTitle: true,
@@ -27,7 +28,7 @@ class _TopNavState extends State<TopNav> {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      drawer: MenuOption(),
+      // drawer: MenuOption(),
     );
   }
 }
