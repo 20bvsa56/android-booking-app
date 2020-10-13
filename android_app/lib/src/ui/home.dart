@@ -392,14 +392,40 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(20)),
                       onPressed: () {
                         // onPressed: _push,
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BusDetailsUIBuilder(
-                                  start_point: destinationsController.text,
-                                  end_point: destinationsController2.text,
-                                  departure_date: dateController.text)),
-                        );
+
+                        if (destinationsController.text.isEmpty ||
+                            destinationsController2.text.isEmpty ||
+                            dateController.text.isEmpty) {
+                          //print('no data');
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Dialog(
+                                    backgroundColor: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    elevation: 20,
+                                    child: Text(
+                                      ' Please fill all the required field!  ',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 22),
+                                    ),
+                                  ),
+                                );
+                              });
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BusDetailsUIBuilder(
+                                    start_point: destinationsController.text,
+                                    end_point: destinationsController2.text,
+                                    departure_date: dateController.text)),
+                          );
+                        }
                       },
                       child: Text(
                         "Find Bus",

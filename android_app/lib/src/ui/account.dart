@@ -40,11 +40,9 @@ class _AccountPageState extends State<AccountPage> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 0.5),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Icon(Icons.person, size: 100, color: Colors.grey),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('lib/src/images/person.png'),
+                      radius: 65,
                     ),
                   ),
                   SizedBox(height: 5),

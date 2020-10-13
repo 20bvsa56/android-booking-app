@@ -42,31 +42,35 @@ class _TicketsUIBuilderState extends State<TicketsUIBuilder> {
                   children: <Widget>[
                     // Text(busDetailsList.length.toString() + ' buses found.',
                     // style: TextStyle(fontSize:20,color: Color(0xff4c6792)),),
-                    FutureBuilder(
-                      future: tickets(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.data != null) {
-                          return Container(
-                            height: data.size.height,
-                            width: data.size.width,
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  TicketsModel ticketsModel =
-                                      snapshot.data[index];
+                    SingleChildScrollView(
+                      child: FutureBuilder(
+                        future: tickets(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.data != null) {
+                            return Container(
+                              height: data.size.height,
+                              width: data.size.width,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    TicketsModel ticketsModel =
+                                        snapshot.data[index];
 
-                                  return TicketsUI(
-                                    ticketsModel: ticketsModel,
-                                  );
-                                }),
-                          );
-                        } else {
-                          return CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Color(0xff4c6792)));
-                        }
-                      },
+                                    return TicketsUI(
+                                      ticketsModel: ticketsModel,
+                                    );
+                                  }),
+                            );
+                          } else {
+                            return CircularProgressIndicator(
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Color(0xff4c6792)));
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

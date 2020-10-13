@@ -112,248 +112,259 @@ class _TicketsUIState extends State<TicketsUI> {
                               elevation: 20,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 10),
+                                    horizontal: 10.0, vertical: 20),
                                 child: Container(
-                                  height: data.size.height / 2,
+                                  height: data.size.height / 2.2,
                                   width: data.size.width,
-                                  child: Column(children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Bus Ticket',
-                                          style: TextStyle(
-                                              color: Color(0xff4c6792),
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.w800),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                          width: 120.0,
-                                          height: 30.0,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            border: Border.all(
-                                                width: 1.0,
-                                                color: Color(0xff28d6e2)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              widget.ticketsModel.vehicleType,
-                                              style: TextStyle(
-                                                  color: Color(0xff28d6e2),
-                                                  fontSize: 20),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            SizeConfig.safeBlockVertical * 1.5),
-                                    Divider(
-                                        thickness: 1, color: Color(0xff4c6792)),
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 40),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                widget.ticketsModel.startPoint +
-                                                    '  ',
-                                                style: TextStyle(
-                                                  color: Color(0xff4c6792),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 20,
-                                                ),
-                                              ),
-                                              Icon(Icons.bus_alert,
-                                                  color: Color(0xff28d6e2),
-                                                  size: 25),
-                                              Text(
-                                                '  ' +
-                                                    widget
-                                                        .ticketsModel.endPoint,
-                                                style: TextStyle(
-                                                    color: Color(0xff4c6792),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 20),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Divider(
-                                        thickness: 1, color: Color(0xff4c6792)),
-                                    SizedBox(
-                                        height:
-                                            SizeConfig.safeBlockVertical * 0.5),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15.0),
-                                      child: Row(
+                                  child: SingleChildScrollView(
+                                    child: Column(children: [
+                                      Row(
                                         children: [
-                                          Container(
-                                            width: data.size.width / 3.8,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Ticket No.',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      widget.ticketsModel.id
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      )),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          2),
-                                                  Text(
-                                                    'Date',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      widget.ticketsModel
-                                                          .departureDate,
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      )),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          2),
-                                                  Text(
-                                                    'Email',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      widget.ticketsModel.email,
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      )),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          1.5),
-                                                  Text(
-                                                    'Phone Number',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      widget.ticketsModel
-                                                          .phoneNumber,
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      )),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          2),
-                                                ],
-                                              ),
-                                            ),
+                                          Text(
+                                            'Bus Ticket',
+                                            style: TextStyle(
+                                                color: Color(0xff4c6792),
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w800),
                                           ),
                                           Spacer(),
                                           Container(
-                                            width: data.size.width / 3.8,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Vehicle Name',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      widget.ticketsModel
-                                                          .vehicleName,
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      )),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          2),
-                                                  Text(
-                                                    'Booked Seats',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      widget.ticketsModel
-                                                          .allocatedSeats,
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      )),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          2),
-                                                  Text(
-                                                    'Amount',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      'Rs. ' +
-                                                          widget.ticketsModel
-                                                              .amount
-                                                              .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 18)),
-                                                  SizedBox(
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          2),
-                                                  Text(
-                                                    'Total Amount',
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  Text(
-                                                      'Rs. ' +
-                                                          widget.ticketsModel
-                                                              .amount
-                                                              .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 18))
-                                                ],
+                                            width: 120.0,
+                                            height: 30.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
+                                              border: Border.all(
+                                                  width: 1.0,
+                                                  color: Color(0xff28d6e2)),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                widget.ticketsModel.vehicleType,
+                                                style: TextStyle(
+                                                    color: Color(0xff28d6e2),
+                                                    fontSize: 20),
                                               ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                          height: SizeConfig.safeBlockVertical *
+                                              1.5),
+                                      Divider(
+                                          thickness: 1,
+                                          color: Color(0xff4c6792)),
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 40),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  widget.ticketsModel
+                                                          .startPoint +
+                                                      '  ',
+                                                  style: TextStyle(
+                                                    color: Color(0xff4c6792),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 20,
+                                                  ),
+                                                ),
+                                                Icon(Icons.bus_alert,
+                                                    color: Color(0xff28d6e2),
+                                                    size: 25),
+                                                Text(
+                                                  '  ' +
+                                                      widget.ticketsModel
+                                                          .endPoint,
+                                                  style: TextStyle(
+                                                      color: Color(0xff4c6792),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 20),
+                                                ),
+                                              ],
                                             ),
                                           )
                                         ],
                                       ),
-                                    ),
-                                  ]),
+                                      Divider(
+                                          thickness: 1,
+                                          color: Color(0xff4c6792)),
+                                      SizedBox(
+                                          height: SizeConfig.safeBlockVertical *
+                                              0.5),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 0),
+                                        child: Container(
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                width: data.size.width / 3,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Ticket No.',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          widget.ticketsModel.id
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                          )),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              2),
+                                                      Text(
+                                                        'Date',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          widget.ticketsModel
+                                                              .departureDate,
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                          )),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              2),
+                                                      Text(
+                                                        'Email',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          widget.ticketsModel
+                                                              .email,
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                          )),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              1.5),
+                                                      Text(
+                                                        'Phone Number',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          widget.ticketsModel
+                                                              .phoneNumber,
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                          )),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              2),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Container(
+                                                width: data.size.width / 3.8,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Vehicle Name',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          widget.ticketsModel
+                                                              .vehicleName,
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                          )),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              2),
+                                                      Text(
+                                                        'Booked Seats',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          widget.ticketsModel
+                                                              .allocatedSeats,
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                          )),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              2),
+                                                      Text(
+                                                        'Amount',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          'Rs. ' +
+                                                              widget
+                                                                  .ticketsModel
+                                                                  .amount
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 18)),
+                                                      SizedBox(
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              2),
+                                                      Text(
+                                                        'Total Amount',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      Text(
+                                                          'Rs. ' +
+                                                              widget
+                                                                  .ticketsModel
+                                                                  .amount
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 18))
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
                                 ),
                               ),
                             );
