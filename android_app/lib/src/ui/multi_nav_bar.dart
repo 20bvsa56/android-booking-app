@@ -1,7 +1,6 @@
-import 'package:android_app/src/ui/app.dart';
 import 'package:flutter/material.dart';
 
-enum AppBarItem { home, tickets, account}
+enum AppBarItem { home, tickets, account }
 Map<AppBarItem, String> tabName = {
   AppBarItem.home: 'Home',
   AppBarItem.tickets: 'Tickets',
@@ -47,7 +46,7 @@ class BottomNavigation extends StatelessWidget {
 
   BottomNavigationBarItem _buildItem({AppBarItem tabItem}) {
     String text = tabName[tabItem];
-     IconData icon = Icons.home;
+    IconData icon = Icons.home;
     return BottomNavigationBarItem(
       icon: Icon(
         icon,

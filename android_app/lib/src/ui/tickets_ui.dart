@@ -13,13 +13,14 @@ class TicketsUI extends StatefulWidget {
 class _TicketsUIState extends State<TicketsUI> {
   @override
   Widget build(BuildContext context) {
-    final data = MediaQuery.of(context);
+    SizeConfig().init(context);
+
     return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
       child: InkWell(
         onTap: () {},
         child: Container(
-          width: data.size.width,
+          width: SizeConfig.safeBlockHorizontal * 40,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -35,10 +36,10 @@ class _TicketsUIState extends State<TicketsUI> {
           child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(children: [
-                SizedBox(height: 15),
+                SizedBox(height: SizeConfig.safeBlockVertical * 2),
                 Row(children: [
                   SizedBox(
-                    width: data.size.width / 7.8,
+                    width: SizeConfig.safeBlockHorizontal * 15,
                     child: Text('Ticket No.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -65,10 +66,10 @@ class _TicketsUIState extends State<TicketsUI> {
                             fontWeight: FontWeight.w500)),
                   ),
                 ]),
-                SizedBox(height: 15),
+                SizedBox(height: SizeConfig.safeBlockVertical * 2),
                 Row(children: [
                   SizedBox(
-                    width: data.size.width / 7.8,
+                    width: SizeConfig.safeBlockHorizontal * 10,
                     child: Text(widget.ticketsModel.id.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -95,7 +96,7 @@ class _TicketsUIState extends State<TicketsUI> {
                             fontWeight: FontWeight.w500)),
                   ),
                 ]),
-                SizedBox(height: SizeConfig.safeBlockVertical * 1.5),
+                SizedBox(height: SizeConfig.safeBlockVertical * 2),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Divider(thickness: 2),
@@ -114,8 +115,8 @@ class _TicketsUIState extends State<TicketsUI> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0, vertical: 20),
                                 child: Container(
-                                  height: data.size.height / 2.2,
-                                  width: data.size.width,
+                                  height: SizeConfig.safeBlockVertical * 45,
+                                  width: SizeConfig.screenWidth,
                                   child: SingleChildScrollView(
                                     child: Column(children: [
                                       Row(
@@ -129,13 +130,19 @@ class _TicketsUIState extends State<TicketsUI> {
                                           ),
                                           Spacer(),
                                           Container(
-                                            width: 120.0,
-                                            height: 30.0,
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    29,
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    4.5,
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(30.0),
                                               border: Border.all(
-                                                  width: 1.0,
+                                                  width: SizeConfig
+                                                          .safeBlockHorizontal /
+                                                      2,
                                                   color: Color(0xff28d6e2)),
                                             ),
                                             child: Center(
@@ -203,7 +210,9 @@ class _TicketsUIState extends State<TicketsUI> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                width: data.size.width / 3,
+                                                width: SizeConfig
+                                                        .safeBlockHorizontal *
+                                                    40,
                                                 child: Padding(
                                                   padding: const EdgeInsets
                                                       .symmetric(vertical: 10),
@@ -282,7 +291,9 @@ class _TicketsUIState extends State<TicketsUI> {
                                               ),
                                               Spacer(),
                                               Container(
-                                                width: data.size.width / 3.8,
+                                                width: SizeConfig
+                                                        .safeBlockHorizontal *
+                                                    30,
                                                 child: Padding(
                                                   padding: const EdgeInsets
                                                       .symmetric(vertical: 0),

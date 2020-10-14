@@ -1,7 +1,6 @@
 import 'package:android_app/src/ui/signup_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:android_app/src/ui/size_config.dart';
-import 'package:android_app/src/ui/bus_seat.dart';
 
 class BusSeatBottomSheet extends StatefulWidget {
   final int id, price, row, column, layout;
@@ -70,11 +69,12 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                     },
                     child: Container(
                         child: Icon(Icons.airline_seat_legroom_reduced_rounded,
-                            size: 30, color: Colors.white),
+                            size: SizeConfig.safeBlockHorizontal * 7,
+                            color: Colors.white),
                         margin: EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 5.0),
-                        width: MediaQuery.of(context).size.width / 10,
-                        height: MediaQuery.of(context).size.width / 10,
+                        width: SizeConfig.safeBlockHorizontal * 10,
+                        height: SizeConfig.safeBlockVertical * 6,
                         decoration: BoxDecoration(
                             color: widget.isReserved
                                 ? Colors.orangeAccent
@@ -84,7 +84,9 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                         ? Colors.grey
                                         : null,
                             border: widget.isAvailable
-                                ? Border.all(color: Colors.white, width: 3.0)
+                                ? Border.all(
+                                    color: Colors.white,
+                                    width: SizeConfig.safeBlockHorizontal)
                                 : null,
                             borderRadius: BorderRadius.circular(10.0))),
                   ),
@@ -116,14 +118,16 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                     horizontal: 10.0, vertical: 15),
                                 child: Text('View Seats',
                                     style: TextStyle(
-                                        fontSize: 22,
+                                        fontSize:
+                                            SizeConfig.safeBlockVertical * 3,
                                         color: Color(0xff4c6792),
                                         fontWeight: FontWeight.bold)),
                               ),
                               Spacer(),
                               IconButton(
                                   icon: Icon(Icons.cancel,
-                                      size: 30, color: Color(0xff28d6e2)),
+                                      size: SizeConfig.safeBlockVertical * 4,
+                                      color: Color(0xff28d6e2)),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   })
@@ -206,13 +210,20 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                     child: Column(
                                       children: [
                                         Container(
-                                            height: 25,
-                                            width: 25,
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    3.2,
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    6,
                                             decoration: BoxDecoration(
                                                 color: Colors.orangeAccent,
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(6)))),
-                                        SizedBox(height: 15),
+                                        SizedBox(
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    1.8),
                                         Text(' BOOKED SEAT',
                                             style: TextStyle(
                                                 fontSize: SizeConfig
@@ -228,13 +239,20 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                     child: Column(
                                       children: [
                                         Container(
-                                            height: 25,
-                                            width: 25,
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    3.2,
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    6,
                                             decoration: BoxDecoration(
                                                 color: Color(0xff28d6e2),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(6)))),
-                                        SizedBox(height: 15),
+                                        SizedBox(
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    1.8),
                                         Text('SELECTED SEAT',
                                             style: TextStyle(
                                                 fontSize: SizeConfig
@@ -250,14 +268,20 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 10),
                                         child: Container(
-                                            height: 25,
-                                            width: 25,
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    3.2,
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    6,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey,
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(6)))),
                                       ),
-                                      SizedBox(height: 15),
+                                      SizedBox(
+                                          height: SizeConfig.safeBlockVertical *
+                                              1.8),
                                       Text('AVAILABLE SEAT ',
                                           style: TextStyle(
                                               fontSize: SizeConfig
@@ -287,56 +311,59 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                   child: Column(children: [
                                     Padding(
                                         padding: const EdgeInsets.all(20.0),
-                                        child: Container(
-                                          width:
-                                              SizeConfig.safeBlockHorizontal *
-                                                  90,
-                                          height:
-                                              SizeConfig.safeBlockVertical * 60,
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey[200],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10))),
-                                          child: Column(children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 20,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: SizeConfig
-                                                            .safeBlockHorizontal *
-                                                        10,
-                                                    height: SizeConfig
-                                                            .safeBlockVertical *
-                                                        10,
-                                                    child: Image.asset(
-                                                      'lib/src/images/door.png',
+                                        child: SingleChildScrollView(
+                                          child: Container(
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    90,
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    60,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey[200],
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10))),
+                                            child: Column(children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      width: SizeConfig
+                                                              .safeBlockHorizontal *
+                                                          10,
+                                                      height: SizeConfig
+                                                              .safeBlockVertical *
+                                                          10,
+                                                      child: Image.asset(
+                                                        'lib/src/images/door.png',
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Spacer(),
-                                                  Container(
-                                                    width: SizeConfig
-                                                            .safeBlockHorizontal *
-                                                        9,
-                                                    height: SizeConfig
-                                                            .safeBlockVertical *
-                                                        9,
-                                                    child: Image.asset(
-                                                      'lib/src/images/steering.png',
+                                                    Spacer(),
+                                                    Container(
+                                                      width: SizeConfig
+                                                              .safeBlockHorizontal *
+                                                          10,
+                                                      height: SizeConfig
+                                                              .safeBlockVertical *
+                                                          9,
+                                                      child: Image.asset(
+                                                        'lib/src/images/steering.png',
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: myRowChildren),
-                                          ]),
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: myRowChildren),
+                                            ]),
+                                          ),
                                         )),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
@@ -380,7 +407,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                           style: TextStyle(
                                                               fontSize: SizeConfig
                                                                       .safeBlockHorizontal *
-                                                                  3,
+                                                                  3.3,
                                                               color:
                                                                   Colors.red))
                                                     ]),
@@ -408,7 +435,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                           style: TextStyle(
                                                               fontSize: SizeConfig
                                                                       .safeBlockHorizontal *
-                                                                  3,
+                                                                  3.3,
                                                               color:
                                                                   Colors.red))
                                                     ]),
@@ -439,7 +466,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                           style: TextStyle(
                                                               fontSize: SizeConfig
                                                                       .safeBlockHorizontal *
-                                                                  3,
+                                                                  3.3,
                                                               color:
                                                                   Colors.red))
                                                     ]),
@@ -454,8 +481,9 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 120.0),
                                       child: SizedBox(
-                                        height: 60,
-                                        width: double.infinity / 2,
+                                        height:
+                                            SizeConfig.safeBlockVertical * 7,
+                                        width: SizeConfig.screenWidth,
                                         child: FlatButton(
                                           color: Color(0xff4c6792),
                                           textColor: Colors.white,

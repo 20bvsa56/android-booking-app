@@ -1,5 +1,6 @@
 import 'package:android_app/src/model/tickets_model.dart';
 import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:android_app/src/ui/tickets_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +32,7 @@ class _TicketsUIBuilderState extends State<TicketsUIBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    final data = MediaQuery.of(context);
+    SizeConfig().init(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -49,8 +50,8 @@ class _TicketsUIBuilderState extends State<TicketsUIBuilder> {
                             (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.data != null) {
                             return Container(
-                              height: data.size.height,
-                              width: data.size.width,
+                              height: SizeConfig.screenHeight,
+                              width: SizeConfig.screenWidth,
                               child: ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   itemCount: snapshot.data.length,
