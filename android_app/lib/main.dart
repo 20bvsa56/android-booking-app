@@ -1,8 +1,6 @@
 import 'package:android_app/src/model/slider.dart';
-import 'package:android_app/src/ui/app.dart';
 import 'package:android_app/src/ui/bottom_nav_bar.dart';
 import 'package:android_app/src/ui/login.dart';
-import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,6 +36,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class OnBoardingScreens extends StatefulWidget {
   OnBoardingScreens({Key key}) : super(key: key);
 
@@ -58,9 +58,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
   Widget pageIndexIndicator(bool isCurrentPage) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2),
-      height: isCurrentPage
-          ? SizeConfig.safeBlockVertical * 2
-          : SizeConfig.safeBlockVertical * 1.5,
+      height: isCurrentPage ? 15 : 10,
       width: isCurrentPage ? 15 : 10,
       decoration: BoxDecoration(
           color: isCurrentPage
@@ -72,7 +70,6 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Color(0xff4c6792),
       body: PageView.builder(
@@ -95,8 +92,8 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
           ? Container(
               padding: EdgeInsets.all(15),
               color: Colors.white,
-              height: SizeConfig.safeBlockVertical * 9,
-              width: SizeConfig.screenWidth,
+              height: MediaQuery.of(context).size.height / 10,
+              width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -109,7 +106,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                       child: Text(
                         'SKIP',
                         style: TextStyle(
-                            fontSize: SizeConfig.safeBlockVertical * 3.2,
+                            fontSize: 22,
                             color: Color(0xff4c6792),
                             fontWeight: FontWeight.w900),
                       )),
@@ -130,7 +127,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                       child: Text(
                         'NEXT',
                         style: TextStyle(
-                            fontSize: SizeConfig.safeBlockVertical * 3.2,
+                            fontSize: 22,
                             color: Color(0xff4c6792),
                             fontWeight: FontWeight.w900),
                       )),
@@ -141,18 +138,17 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
               onTap: () {
                 Navigator.push(
                   context,
-                  // MaterialPageRoute(builder: (context) => App()),
                   MaterialPageRoute(builder: (context) => NavigationBarPage()),
                 );
               },
               child: Container(
                 alignment: Alignment.center,
-                height: SizeConfig.safeBlockVertical * 9,
-                width: SizeConfig.screenWidth,
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width,
                 color: Colors.white,
                 child: Text('GET STARTED',
                     style: TextStyle(
-                        fontSize: SizeConfig.safeBlockVertical * 4,
+                        fontSize: 30,
                         color: Color(0xff28d6e2),
                         fontWeight: FontWeight.w900)),
               ),
@@ -169,16 +165,17 @@ class SliderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = MediaQuery.of(context).size;
     return Container(
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                height: SizeConfig.safeBlockVertical * 30,
-                width: SizeConfig.safeBlockHorizontal * 50,
+                height: data.height / 2,
+                width: data.width / 2,
                 child: Image.asset(imagePath)),
-            SizedBox(height: SizeConfig.safeBlockVertical * 10),
+            SizedBox(height: 15),
             Text(title,
                 style: TextStyle(
                     shadows: <Shadow>[
@@ -188,17 +185,17 @@ class SliderTile extends StatelessWidget {
                         color: Color(0xff28d6e2),
                       ),
                     ],
-                    fontSize: SizeConfig.safeBlockVertical * 5.8,
+                    fontSize: 40,
                     fontWeight: FontWeight.w800,
                     color: Colors.white)),
-            SizedBox(height: SizeConfig.safeBlockVertical * 2),
+            SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: SizeConfig.safeBlockVertical * 2.8,
+                    fontSize: 22,
                     fontWeight: FontWeight.w500,
                     color: Colors.white),
               ),

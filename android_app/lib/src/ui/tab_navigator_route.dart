@@ -1,4 +1,3 @@
-import 'package:android_app/src/ui/account.dart';
 import 'package:android_app/src/ui/bus_details_ui_builder.dart';
 import 'package:android_app/src/ui/home.dart';
 import 'package:android_app/src/ui/multi_nav_bar.dart';
@@ -6,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class TabNavigatorRoutes {
   static const String home = '/';
-  static const String busDetails = '/busDetails';
+  static const String tickets = '/tickets';
   static const String account = '/account';
+  static const String buses = '/buses';
 }
 
 class TabNavigator extends StatefulWidget {
@@ -27,27 +27,27 @@ class _TabNavigatorState extends State<TabNavigator> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                routeBuilders[TabNavigatorRoutes.busDetails](context)));
+                routeBuilders[TabNavigatorRoutes.buses](context)));
   }
 
-  // void _pushTickets(BuildContext context) {
-  //   var routeBuilders = _routeBuilders(context);
+  void _pushTickets(BuildContext context) {
+    var routeBuilders = _routeBuilders(context);
 
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) =>
-  //               routeBuilders[TabNavigatorRoutes.tickets](context)));
-  // }
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                routeBuilders[TabNavigatorRoutes.tickets](context)));
+  }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
     return {
       TabNavigatorRoutes.home: (context) => HomePage(
             onPush: (materialIndex) => _push(context),
           ),
-      TabNavigatorRoutes.busDetails: (context) => BusDetailsUIBuilder(),
-      TabNavigatorRoutes.account: (context) => AccountPage(
-            onPush: (materialIndex) => _push(context),
+      TabNavigatorRoutes.buses: (context) => BusDetailsUIBuilder(),
+      TabNavigatorRoutes.tickets: (context) => HomePage(
+            onPush: (materialIndex) => _pushTickets(context),
           ),
     };
   }

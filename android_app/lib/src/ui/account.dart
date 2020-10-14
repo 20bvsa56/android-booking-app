@@ -1,6 +1,11 @@
+import 'package:android_app/src/model/register.dart';
 import 'package:android_app/src/ui/appbar.dart';
+import 'package:android_app/src/ui/drawer.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 
 class AccountPage extends StatefulWidget {
   String firstName, lastName, email, phoneNumber;
@@ -21,7 +26,6 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       appBar: MyAppBar(),
       body: Column(
@@ -30,32 +34,29 @@ class _AccountPageState extends State<AccountPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('lib/src/images/person.png'),
-                        radius: 65,
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.5),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Icon(Icons.person, size: 100, color: Colors.grey),
                     ),
-                    SizedBox(height: SizeConfig.safeBlockVertical),
-                    Center(
-                      child: Text(
-                        'Customer',
-                        style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                            color: Color(0xff28d6e2)),
-                      ),
+                  ),
+                  SizedBox(height: 5),
+                  Center(
+                    child: Text(
+                      'Customer',
+                      style: TextStyle(fontSize: 18, color: Color(0xff28d6e2)),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              SizedBox(width: 120),
               Column(
                 children: <Widget>[
                   InkWell(
@@ -70,11 +71,11 @@ class _AccountPageState extends State<AccountPage> {
                           border: Border(
                             bottom: BorderSide(
                               color: Colors.grey,
-                              width: SizeConfig.safeBlockHorizontal,
+                              width: 3.0,
                             ),
                             left: BorderSide(
                               color: Colors.grey,
-                              width: SizeConfig.safeBlockHorizontal,
+                              width: 3.0,
                             ),
                           ),
                         ),
@@ -83,95 +84,80 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: SizeConfig.safeBlockVertical),
+                  SizedBox(height: 3),
                   InkWell(
                     onTap: () {
                       _userEditBottomSheet(context);
                     },
                     child: Text(
                       'Edit',
-                      style: TextStyle(
-                          fontSize: SizeConfig.safeBlockVertical * 2.5,
-                          color: Color(0xff28d6e2)),
+                      style: TextStyle(fontSize: 15, color: Color(0xff28d6e2)),
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          SizedBox(height: SizeConfig.safeBlockVertical * 5),
+          SizedBox(height: 60),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Divider(thickness: 1, color: Colors.blueGrey),
-                SizedBox(height: SizeConfig.safeBlockVertical),
+                SizedBox(height: 10),
                 RichText(
-                  text: new TextSpan(
-                      style: TextStyle(
-                          fontSize: SizeConfig.safeBlockVertical * 2.8),
-                      children: [
-                        TextSpan(
-                            text: 'Name:  ',
-                            style: TextStyle(color: Color(0xff4c6792))),
-                        TextSpan(
-                            text: widget.firstName,
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: SizeConfig.safeBlockVertical * 3.1))
-                      ]),
+                  text: new TextSpan(style: TextStyle(fontSize: 22), children: [
+                    TextSpan(
+                        text: 'Name:  ',
+                        style: TextStyle(color: Color(0xff4c6792))),
+                    TextSpan(
+                        text: widget.firstName,
+                        style: TextStyle(color: Colors.black54, fontSize: 20))
+                  ]),
                 ),
-                SizedBox(height: SizeConfig.safeBlockVertical),
+                SizedBox(height: 10),
                 Divider(thickness: 1, color: Colors.blueGrey),
-                SizedBox(height: SizeConfig.safeBlockVertical),
+                SizedBox(height: 10),
                 RichText(
-                  text: new TextSpan(
-                      style: TextStyle(
-                          fontSize: SizeConfig.safeBlockVertical * 2.8),
-                      children: [
-                        TextSpan(
-                            text: 'Email:  ',
-                            style: TextStyle(color: Color(0xff4c6792))),
-                        TextSpan(
-                            text: widget.email,
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockVertical * 3.1,
-                              color: Colors.black54,
-                            ))
-                      ]),
+                  text: new TextSpan(style: TextStyle(fontSize: 22), children: [
+                    TextSpan(
+                        text: 'Email:  ',
+                        style: TextStyle(color: Color(0xff4c6792))),
+                    TextSpan(
+                        text: widget.email,
+                        style: TextStyle(
+                          color: Colors.black54,
+                        ))
+                  ]),
                 ),
-                SizedBox(height: SizeConfig.safeBlockVertical),
+                SizedBox(height: 10),
                 Divider(thickness: 1, color: Colors.blueGrey),
-                SizedBox(height: SizeConfig.safeBlockVertical),
+                SizedBox(height: 10),
                 RichText(
-                  text: new TextSpan(
-                      style: TextStyle(
-                          fontSize: SizeConfig.safeBlockVertical * 2.8),
-                      children: [
-                        TextSpan(
-                            text: 'Phone Number:  ',
-                            style: TextStyle(color: Color(0xff4c6792))),
-                        TextSpan(
-                            text: widget.phoneNumber,
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockVertical * 3.1,
-                              color: Colors.black54,
-                            ))
-                      ]),
+                  text: new TextSpan(style: TextStyle(fontSize: 22), children: [
+                    TextSpan(
+                        text: 'Phone Number:  ',
+                        style: TextStyle(color: Color(0xff4c6792))),
+                    TextSpan(
+                        text: widget.phoneNumber,
+                        style: TextStyle(
+                          color: Colors.black54,
+                        ))
+                  ]),
                 ),
-                SizedBox(height: SizeConfig.safeBlockVertical),
+                SizedBox(height: 10),
                 Divider(thickness: 1, color: Colors.blueGrey),
               ],
             ),
           ),
-          SizedBox(height: SizeConfig.safeBlockVertical),
+          SizedBox(height: 20),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 140.0, vertical: 30),
             child: SizedBox(
-              height: SizeConfig.safeBlockVertical * 7,
-              width: SizeConfig.screenWidth,
+              height: 60,
+              width: double.infinity / 2,
               child: FlatButton(
                 color: Color(0xff4c6792),
                 textColor: Colors.white,
@@ -204,7 +190,7 @@ void _userEditBottomSheet(BuildContext context) {
       builder: (BuildContext bc) {
         return SingleChildScrollView(
           child: Container(
-            height: SizeConfig.safeBlockVertical * 63,
+            height: MediaQuery.of(context).size.height * .60,
             child: Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
@@ -213,20 +199,17 @@ void _userEditBottomSheet(BuildContext context) {
                     children: [
                       Text('Edit Details',
                           style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                              fontSize: 22,
                               color: Color(0xff4c6792),
                               fontWeight: FontWeight.bold)),
                       Spacer(),
                       IconButton(
-                          icon: Icon(Icons.cancel,
-                              color: Color(0xff28d6e2),
-                              size: SizeConfig.safeBlockHorizontal * 8),
+                          icon: Icon(Icons.cancel, color: Color(0xff28d6e2)),
                           onPressed: () {
                             Navigator.of(context).pop();
                           })
                     ],
                   ),
-                  SizedBox(height: SizeConfig.safeBlockVertical * 2),
                   Row(
                     children: [
                       Expanded(
@@ -234,9 +217,7 @@ void _userEditBottomSheet(BuildContext context) {
                             decoration: InputDecoration(
                                 helperText: 'First Name',
                                 helperStyle: TextStyle(
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4.5,
-                                    color: Colors.black))),
+                                    fontSize: 15, color: Colors.black))),
                       ),
                     ],
                   ),
@@ -247,9 +228,7 @@ void _userEditBottomSheet(BuildContext context) {
                             decoration: InputDecoration(
                                 helperText: 'Last Name',
                                 helperStyle: TextStyle(
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4.5,
-                                    color: Colors.black))),
+                                    fontSize: 15, color: Colors.black))),
                       ),
                     ],
                   ),
@@ -260,9 +239,7 @@ void _userEditBottomSheet(BuildContext context) {
                             decoration: InputDecoration(
                                 helperText: 'Email Address',
                                 helperStyle: TextStyle(
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4.5,
-                                    color: Colors.black))),
+                                    fontSize: 15, color: Colors.black))),
                       ),
                     ],
                   ),
@@ -273,45 +250,26 @@ void _userEditBottomSheet(BuildContext context) {
                             decoration: InputDecoration(
                                 helperText: 'Phone Number',
                                 helperStyle: TextStyle(
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4.5,
-                                    color: Colors.black))),
+                                    fontSize: 15, color: Colors.black))),
                       ),
                     ],
                   ),
-                  SizedBox(height: SizeConfig.safeBlockVertical * 4),
+                  SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // FlatButton(
-                      //   color: Color(0xff4c6792),
-                      //   textColor: Colors.white,
-                      //   padding: EdgeInsets.all(12.0),
-                      //   onPressed: () {
-                      //     Navigator.of(context).pop();
-                      //   },
-                      //   child: Text(
-                      //     "Save",
-                      //     style: TextStyle(fontSize: 24.0),
-                      //   ),
-                      // ),
-
-                      SizedBox(
-                        height: SizeConfig.safeBlockVertical * 7,
-                        width: SizeConfig.safeBlockHorizontal * 25,
-                        child: FlatButton(
-                          color: Color(0xff4c6792),
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          onPressed: () {},
-                          child: Text(
-                            "Save",
-                            style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 7),
-                          ),
+                      FlatButton(
+                        color: Color(0xff4c6792),
+                        textColor: Colors.white,
+                        padding: EdgeInsets.all(12.0),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Save",
+                          style: TextStyle(fontSize: 24.0),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ],
