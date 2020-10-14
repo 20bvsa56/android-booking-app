@@ -35,62 +35,16 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
     SizeConfig().init(context);
 
     List<Widget> myRowChildren = [];
-    List<List<int>> numbers = [];
-    List<int> columnNumbers = [];
 
-    for (int i = 0; i < widget.row; i++) {
-      for (int j = 0; j < widget.column; j++) {
-        int currentNumber = j;
-        columnNumbers.add(currentNumber);
+    for (int i = 0; i < widget.column; i++) {
+      List<Widget> cols = [];
+
+      for (int j = 0; j < widget.row; j++) {
+        cols.add(BusSeat(rowNum: j, colNum: i));
       }
 
-      numbers.add(columnNumbers);
-      columnNumbers = [];
+      myRowChildren.add(new Column(children: cols));
     }
-
-    myRowChildren = numbers
-        .map((columns) => Column(
-            children: columns
-                .map(
-                  (nr) => InkWell(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () {
-                      setState(() {
-                        //if seat avaibale then let to select it. (change status of seat selection to true)
-                        //if seat reserved then don't let to select it. (change status of seat selection to false)
-                        widget.isAvailable
-                            ? widget.isSelected = !widget.isSelected
-                            // ignore: unnecessary_statements
-                            : null || widget.isReserved
-                                ? widget.isSelected = widget.isSelected
-                                // ignore: unnecessary_statements
-                                : null;
-                      });
-                    },
-                    child: Container(
-                        child: Icon(Icons.airline_seat_legroom_reduced_rounded,
-                            size: 30, color: Colors.white),
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 5.0),
-                        width: MediaQuery.of(context).size.width / 10,
-                        height: MediaQuery.of(context).size.width / 10,
-                        decoration: BoxDecoration(
-                            color: widget.isReserved
-                                ? Colors.orangeAccent
-                                : widget.isSelected
-                                    ? Color(0xff28d6e2)
-                                    : widget.isAvailable
-                                        ? Colors.grey
-                                        : null,
-                            border: widget.isAvailable
-                                ? Border.all(color: Colors.white, width: 3.0)
-                                : null,
-                            borderRadius: BorderRadius.circular(10.0))),
-                  ),
-                )
-                .toList()))
-        .toList();
 
     return Scaffold(
         body: BottomSheet(
@@ -280,7 +234,8 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(30),
                                     topRight: Radius.circular(30)),
-                                color: Colors.white,
+                                // color: Colors.white,
+                                color: Color(0xff4c6792)
                               ),
                               child: SingleChildScrollView(
                                 child: Container(
@@ -292,7 +247,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                               SizeConfig.safeBlockHorizontal *
                                                   90,
                                           height:
-                                              SizeConfig.safeBlockVertical * 60,
+                                              SizeConfig.safeBlockVertical * 10 * widget.row, // assuming one row takes 10 size
                                           decoration: BoxDecoration(
                                               color: Colors.grey[200],
                                               borderRadius: BorderRadius.all(
@@ -335,7 +290,19 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceEvenly,
-                                                children: myRowChildren),
+                                                // children: <Widget>[
+                                                //   Row(
+                                                //     children: numbers.map((i, element) => MapEntry(i, Stack(
+                                                //       GestureDetector(onTap: () {
+                                                //         setState() {
+                                                //           // print("element=${element.toString()}");
+                                                //           // print("element=${userBoard[i].toString()}");
+                                                //         }
+                                                //       })
+                                                //     )).values.toList()
+                                                //   ))
+                                                // ]),
+                                                children: myRowChildren)
                                           ]),
                                         )),
                                     Padding(

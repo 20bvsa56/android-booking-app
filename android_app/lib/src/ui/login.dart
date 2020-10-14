@@ -9,8 +9,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
-  // static final url = 'http://192.168.254.78:8000/api/login/';
-  static final url = 'http://192.168.1.101:8000/api/login/';
+  //static final url = 'http://192.168.1.68:8000/api/login/';
+  static final url = 'http://192.168.1.68:8000/api/login/';
+  
   const LoginPage({Key key}) : super(key: key);
 
   @override
@@ -48,13 +49,13 @@ class _LoginPageState extends State<LoginPage> {
 
     return http.post(url, body: body).then((http.Response response) {
       final int statusCode = response.statusCode;
-
       print(statusCode);
       print(response.body);
       if (statusCode == 201) {
         setState(() {
           visible = false;
         });
+        
 
         errorMessage(context);
       }
@@ -135,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                                             stream: loginBloc.emailStream,
                                             builder: (context, snapshot) {
                                               return TextField(
+                                                controller: emailController,
                                                   style: TextStyle(
                                                       fontSize: 20,
                                                       color: Color(0xff4c6792)),
@@ -181,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                                             stream: loginBloc.passwordStream,
                                             builder: (context, snapshot) {
                                               return TextField(
+                                                  controller: passwordController,
                                                   style: TextStyle(
                                                       fontSize: 20,
                                                       color: Color(0xff4c6792)),
@@ -282,12 +285,9 @@ class _LoginPageState extends State<LoginPage> {
                                           onPressed: snapshot.hasData
                                               ? () async {
                                                   print(snapshot);
-                                                  LoginModel loginModel =
-                                                      new LoginModel(
-                                                    email: emailController.text,
-                                                    password:
-                                                        passwordController.text,
-                                                  );
+                                                  LoginModel loginModel = new LoginModel(email: emailController.text, password: passwordController.text);
+                                  
+                                                  print(loginModel.toMap());
 
                                                   LoginModel getBody =
                                                       await userLogin(

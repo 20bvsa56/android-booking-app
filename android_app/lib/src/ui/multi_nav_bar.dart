@@ -1,5 +1,6 @@
 import 'package:android_app/src/ui/app.dart';
 import 'package:flutter/material.dart';
+import 'package:android_app/src/ui/size_config.dart';
 
 enum AppBarItem { home, tickets, account}
 Map<AppBarItem, String> tabName = {
@@ -27,6 +28,8 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return BottomNavigationBar(
       // backgroundColor: Color(0xff4c6792),
       type: BottomNavigationBarType.fixed,
@@ -52,12 +55,12 @@ class BottomNavigation extends StatelessWidget {
       icon: Icon(
         icon,
         color: _colorTabMatching(item: tabItem),
-        size: 27,
+        size: SizeConfig.safeBlockHorizontal * 2,
       ),
       title: Text(
         text,
         style: TextStyle(
-          fontSize: 25,
+          fontSize: SizeConfig.safeBlockHorizontal * 2,
           fontWeight: FontWeight.w800,
           color: _colorTabMatching(item: tabItem),
         ),
@@ -72,12 +75,12 @@ class BottomNavigation extends StatelessWidget {
       icon: Icon(
         icon,
         color: _colorTabMatching(item: tabItem),
-        size: 27,
+        size: SizeConfig.safeBlockHorizontal * 27,
       ),
       title: Text(
         text,
         style: TextStyle(
-          fontSize: 25,
+          fontSize: SizeConfig.safeBlockHorizontal * 2,
           fontWeight: FontWeight.w800,
           color: _colorTabMatching(item: tabItem),
         ),
@@ -91,13 +94,13 @@ class BottomNavigation extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Icon(
         icon,
-        size: 27,
+        size: SizeConfig.safeBlockHorizontal * 2,
         color: _colorTabMatching(item: tabItem),
       ),
       title: Text(
         text,
         style: TextStyle(
-          fontSize: 25,
+          fontSize: SizeConfig.safeBlockHorizontal * 2,
           fontWeight: FontWeight.w800,
           color: _colorTabMatching(item: tabItem),
         ),

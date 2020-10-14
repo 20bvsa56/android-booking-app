@@ -168,7 +168,7 @@ class _AccountPageState extends State<AccountPage> {
                       context, '/login', (_) => false);
                 },
                 child: Text(
-                  "Logout",
+                  "Log out",
                   style:
                       TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),
                 ),
