@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:android_app/src/ui/bus_seat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 
 class BusSeatBottomSheet extends StatefulWidget {
   final int id, price, row, column, layout;
@@ -34,7 +36,6 @@ class BusSeatBottomSheet extends StatefulWidget {
 class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    // Bloc.observer = CounterObserver();
     SizeConfig().init(context);
 
     List<Widget> myRowChildren = [];
@@ -47,6 +48,36 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
       }
 
       myRowChildren.add(new Column(children: cols));
+    }
+
+    Future sendMail() async {
+      //Email will be sent from this email.
+      String username = 'essentialstation.np@gmail.com';
+      String password = 'GM19st@tion43';
+
+      final smtpServer = gmail(username, password);
+      // Use the SmtpServer class to configure an SMTP server:
+      // final smtpServer = SmtpServer('smtp.domain.com');
+      // See the named arguments of SmtpServer for further configuration
+      // options.
+
+      // Create our message.
+      final message = Message()
+        ..from = Address(username, 'Auto Bus Sewa')
+        ..recipients.add('mauntarani88@gmail.com')
+        ..subject = 'Thankyou for booking bus ticket with Auto Bus Sewa.'
+        ..html =
+            "<h2>Dear Maunta,</h2><h3>Your booking has been confirmed for ${widget.name} for the date ${widget.departure_date}.</h3><h3>Please collect your ticket details.</h3><p>Ticket Id: ${widget.id}</p><p>Start Point: ${widget.start_point}</p><p>End Point: ${widget.end_point}</p><p>Departure Date: ${widget.departure_date}</p><p>Price: Rs.${widget.price}</p><p>Booking Date and Time: ${DateTime.now()}</p>";
+
+      try {
+        final sendReport = await send(message, smtpServer);
+        print('Message sent: ' + sendReport.toString());
+      } on MailerException catch (e) {
+        print('Message not sent.');
+        for (var p in e.problems) {
+          print('Problem: ${p.code}: ${p.msg}');
+        }
+      }
     }
 
     return BlocProvider(
@@ -476,14 +507,15 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(20)),
-                                          onPressed: () {
+                                          onPressed: () async {
+                                            await sendMail();
                                             // print(totalAmount.toString());
 
-                                            showDialog(
-                                                context: context,
-                                                builder: (_) =>
-                                                    SignUpAlertBox(),
-                                                barrierDismissible: false);
+                                            // showDialog(
+                                            //     context: context,
+                                            //     builder: (_) =>
+                                            //         SignUpAlertBox(),
+                                            //     barrierDismissible: false);
                                           },
                                           child: Text(
                                             "Book Ticket",

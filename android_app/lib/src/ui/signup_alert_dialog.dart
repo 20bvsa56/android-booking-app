@@ -15,13 +15,13 @@ class _SignUpAlertBoxState extends State<SignUpAlertBox> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         side: BorderSide(
-          width: SizeConfig.safeBlockHorizontal * 3,
-          color: Color(0xff4c6792),
+          width: SizeConfig.safeBlockHorizontal ,
+          color: Colors.white,
         ),
       ),
       title: Text(
         'You can book ticket only after sign up.',
-        style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),
+        style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5.5),
       ),
       content: Text('Would you like to continue?',
           style: TextStyle(
@@ -38,7 +38,7 @@ class _SignUpAlertBoxState extends State<SignUpAlertBox> {
             child: Text('Yes',
                 style: TextStyle(
                     color: Color(0xff4c6792),
-                    fontSize: SizeConfig.safeBlockHorizontal * 7))),
+                    fontSize: SizeConfig.safeBlockHorizontal * 5))),
         FlatButton(
             onPressed: () {
               Navigator.pop(context);
@@ -46,7 +46,7 @@ class _SignUpAlertBoxState extends State<SignUpAlertBox> {
             child: Text('No',
                 style: TextStyle(
                     color: Color(0xff4c6792),
-                    fontSize: SizeConfig.safeBlockHorizontal * 7)))
+                    fontSize: SizeConfig.safeBlockHorizontal * 5)))
       ],
       elevation: 24,
       contentPadding: EdgeInsets.all(20),
