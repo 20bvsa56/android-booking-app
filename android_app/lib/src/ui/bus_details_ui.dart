@@ -14,11 +14,10 @@ class BusDetailsUI extends StatefulWidget {
 class _BusDetailsUIState extends State<BusDetailsUI> {
   @override
   Widget build(BuildContext context) {
-    final data = MediaQuery.of(context);
+    SizeConfig().init(context);
     return Padding(
       padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
       child: Container(
-        width: data.size.width,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -41,89 +40,92 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                   TextSpan(
                       text: widget.busDetailsModel.vehicleName + '  ',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: SizeConfig.safeBlockHorizontal * 6,
                           color: Colors.black,
                           fontWeight: FontWeight.w500)),
                   TextSpan(
-                      text: widget.busDetailsModel.vehicleType,
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Color(0xff28d6e2),
-                      ))
+                    text: widget.busDetailsModel.vehicleType,
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                      color: Color(0xff28d6e2),
+                    ),
+                  )
                 ]),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: SizeConfig.safeBlockVertical * 1.8),
               RichText(
                 text: new TextSpan(children: [
                   TextSpan(
                       text: 'Services- ',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: SizeConfig.safeBlockHorizontal * 4.8,
                           color: Colors.black,
                           fontWeight: FontWeight.w500)),
                   TextSpan(
                       text: widget.busDetailsModel.services,
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: SizeConfig.safeBlockHorizontal * 4.5,
                         color: Color(0xff28d6e2),
                       ))
                 ]),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: SizeConfig.safeBlockVertical * 1.6),
               RichText(
                 text: new TextSpan(children: [
                   TextSpan(
                       text: 'Stoppage Points- ',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: SizeConfig.safeBlockHorizontal * 4.8,
                           color: Colors.black,
                           fontWeight: FontWeight.w500)),
                   TextSpan(
                       text: widget.busDetailsModel.stoppagePoints,
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: SizeConfig.safeBlockHorizontal * 4.5,
                         color: Color(0xff28d6e2),
                       ))
                 ]),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: SizeConfig.safeBlockHorizontal * 1.6),
               RichText(
                 text: new TextSpan(
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
                           text: 'Pick Up Time- ',
-                          style: TextStyle(color: Colors.black)),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: SizeConfig.safeBlockHorizontal * 4.8)),
                       TextSpan(
                           text: '5:30 AM',
                           style: TextStyle(
-                            color: Color(
-                              0xff28d6e2,
-                            ),
-                          ))
+                              color: Colors.black,
+                              fontSize: SizeConfig.safeBlockHorizontal * 4.5)),
                     ]),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: SizeConfig.safeBlockVertical * 1.6),
               RichText(
                 text: new TextSpan(
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
                           text: 'Drop Off Time- ',
-                          style: TextStyle(color: Colors.black)),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: SizeConfig.safeBlockHorizontal * 4.8)),
                       TextSpan(
                           text: '6 PM',
                           style: TextStyle(
-                            color: Color(0xff28d6e2),
-                          ))
+                              color: Colors.black,
+                              fontSize: SizeConfig.safeBlockHorizontal * 4.5))
                     ]),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: SizeConfig.safeBlockVertical * 1.5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 105.0),
                 child: SizedBox(
-                  height: 50,
-                  width: double.infinity / 2,
+                  height: SizeConfig.safeBlockVertical * 5,
+                  width: SizeConfig.screenWidth,
                   child: FlatButton(
                     color: Color(0xff4c6792),
                     textColor: Colors.white,
@@ -156,7 +158,7 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                   ),
                 ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: SizeConfig.safeBlockVertical),
             ],
           ),
         ),

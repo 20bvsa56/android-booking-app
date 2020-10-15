@@ -1,4 +1,3 @@
-import 'package:android_app/src/ui/drawer.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {

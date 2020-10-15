@@ -1,6 +1,6 @@
 import 'package:android_app/src/ui/account.dart';
 import 'package:android_app/src/ui/home.dart';
-import 'package:android_app/src/ui/ticket.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:android_app/src/ui/tickets_ui_builder.dart';
 import 'package:flutter/material.dart';
 
@@ -30,16 +30,43 @@ class _NavigationBarPageState extends State<NavigationBarPage> {
   Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color(0xff4c6792),
-        selectedFontSize: 22,
-        unselectedFontSize: 19,
+       selectedFontSize: SizeConfig.safeBlockHorizontal * 4.5,
+        unselectedFontSize: SizeConfig.safeBlockHorizontal * 4.3,
         onTap: (int index) => setState(() => _selectedIndex = index),
         currentIndex: selectedIndex,
         selectedItemColor: Colors.red,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,size: 30,), title: Text('Home',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
-          BottomNavigationBarItem(icon: Icon(Icons.import_contacts,color: Colors.white,size: 30,), title: Text('Tickets',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle,color: Colors.white,size: 30,), title: Text('Account',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))),
-        ],
+        items:  <BottomNavigationBarItem>[
+           BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+                size: SizeConfig.safeBlockHorizontal * 7,
+              ),
+              // ignore: deprecated_member_use
+              title: Text('Home',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold))),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.import_contacts,
+                color: Colors.white,
+                size: SizeConfig.safeBlockHorizontal * 7,
+              ),
+              // ignore: deprecated_member_use
+              title: Text('Tickets',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold))),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle,
+                color: Colors.white,
+                size: SizeConfig.safeBlockHorizontal * 7,
+              ),
+              // ignore: deprecated_member_use
+              title: Text('Account',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)))
+                ],
       );
 
   @override

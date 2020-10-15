@@ -55,7 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
     scaffoldkey.currentState.showSnackBar(SnackBar(
       content: Text(
         'Registration Suuccessful. You can login now.',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+        style: TextStyle(
+            fontSize: SizeConfig.safeBlockHorizontal * 5,
+            fontWeight: FontWeight.w300),
       ),
       backgroundColor: Color(0xff28d6e2),
       duration: Duration(seconds: 12),
@@ -82,8 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final registerBloc = RegisterBloc();
-    final data =
-        MediaQuery.of(context); // variable to get the media screen size
+
     return Scaffold(
         key: scaffoldkey,
         appBar: MyAppBar(),
@@ -107,10 +108,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 20.0, horizontal: 20),
+                            vertical: 7.0, horizontal: 20),
                         child: Center(
                           child: Container(
-                              width: data.size.width,
+                              width: SizeConfig.screenWidth,
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Column(
@@ -120,10 +121,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                       'Sign Up',
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 40,
+                                          fontSize:
+                                              SizeConfig.safeBlockHorizontal *
+                                                  10,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.safeBlockVertical * 3),
                                     Container(
                                       decoration: BoxDecoration(
                                           boxShadow: [
@@ -155,7 +160,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         controller:
                                                             firstNameController,
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: SizeConfig
+                                                                    .safeBlockHorizontal *
+                                                                5,
                                                             color: Color(
                                                                 0xff4c6792)),
                                                         onChanged: registerBloc
@@ -164,19 +171,25 @@ class _RegisterPageState extends State<RegisterPage> {
                                                             InputDecoration(
                                                           hintText: 'Matthew',
                                                           hintStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           errorText:
                                                               snapshot.error,
                                                           errorStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           labelText:
                                                               'First Name',
                                                           labelStyle: TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           enabledBorder:
@@ -193,7 +206,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           ),
                                                         ));
                                                   }),
-                                              SizedBox(height: 20),
+                                              SizedBox(
+                                                  height: SizeConfig
+                                                          .safeBlockVertical *
+                                                      2.8),
                                               StreamBuilder<String>(
                                                   stream:
                                                       registerBloc.lnameStream,
@@ -202,7 +218,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         controller:
                                                             lastNameController,
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: SizeConfig
+                                                                    .safeBlockHorizontal *
+                                                                5,
                                                             color: Color(
                                                                 0xff4c6792)),
                                                         onChanged: registerBloc
@@ -211,19 +229,25 @@ class _RegisterPageState extends State<RegisterPage> {
                                                             InputDecoration(
                                                           hintText: 'Perry',
                                                           hintStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           errorText:
                                                               snapshot.error,
                                                           errorStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           labelText:
                                                               'Last Name',
                                                           labelStyle: TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           enabledBorder:
@@ -240,7 +264,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           ),
                                                         ));
                                                   }),
-                                              SizedBox(height: 20),
+                                              SizedBox(
+                                                  height: SizeConfig
+                                                          .safeBlockVertical *
+                                                      2.8),
                                               StreamBuilder<String>(
                                                   stream:
                                                       registerBloc.emailStream,
@@ -249,7 +276,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         controller:
                                                             emailController,
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: SizeConfig
+                                                                    .safeBlockHorizontal *
+                                                                5,
                                                             color: Color(
                                                                 0xff4c6792)),
                                                         onChanged: registerBloc
@@ -259,19 +288,25 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           hintText:
                                                               'matthewperry@gmail.com',
                                                           hintStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           errorText:
                                                               snapshot.error,
                                                           errorStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           labelText:
                                                               'Email address',
                                                           labelStyle: TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           enabledBorder:
@@ -288,7 +323,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           ),
                                                         ));
                                                   }),
-                                              SizedBox(height: 20),
+                                              SizedBox(
+                                                  height: SizeConfig
+                                                          .safeBlockVertical *
+                                                      2.8),
                                               StreamBuilder<String>(
                                                   stream: registerBloc
                                                       .passwordStream,
@@ -297,7 +335,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         controller:
                                                             passwordController,
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: SizeConfig
+                                                                    .safeBlockHorizontal *
+                                                                5,
                                                             color: Color(
                                                                 0xff4c6792)),
                                                         obscureText:
@@ -327,18 +367,24 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           hintText:
                                                               '**********',
                                                           hintStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           errorText:
                                                               snapshot.error,
                                                           errorStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           labelText: 'Password',
                                                           labelStyle: TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           enabledBorder:
@@ -355,7 +401,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           ),
                                                         ));
                                                   }),
-                                              SizedBox(height: 20),
+                                              SizedBox(
+                                                  height: SizeConfig
+                                                          .safeBlockVertical *
+                                                      2.8),
                                               StreamBuilder<String>(
                                                   stream: registerBloc
                                                       .confirmPasswordStream,
@@ -364,7 +413,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         controller:
                                                             confirmPasswordController,
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: SizeConfig
+                                                                    .safeBlockHorizontal *
+                                                                5,
                                                             color: Color(
                                                                 0xff4c6792)),
                                                         obscureText:
@@ -394,19 +445,25 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           hintText:
                                                               '**********',
                                                           hintStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           errorText:
                                                               snapshot.error,
                                                           errorStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           labelText:
                                                               'Confirm Password',
                                                           labelStyle: TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           enabledBorder:
@@ -423,7 +480,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           ),
                                                         ));
                                                   }),
-                                              SizedBox(height: 20),
+                                              SizedBox(
+                                                  height: SizeConfig
+                                                          .safeBlockVertical *
+                                                      2.8),
                                               StreamBuilder<String>(
                                                   stream: registerBloc
                                                       .phoneNumberStream,
@@ -432,7 +492,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                         controller:
                                                             phoneNumberController,
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: SizeConfig
+                                                                    .safeBlockHorizontal *
+                                                                5,
                                                             color: Color(
                                                                 0xff4c6792)),
                                                         onChanged: registerBloc
@@ -442,19 +504,25 @@ class _RegisterPageState extends State<RegisterPage> {
                                                           hintText:
                                                               '9999999999',
                                                           hintStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           errorText:
                                                               snapshot.error,
                                                           errorStyle: TextStyle(
-                                                              fontSize: 15,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           labelText:
                                                               'Phone Number',
                                                           labelStyle: TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
                                                               color: Color(
                                                                   0xff4c6792)),
                                                           enabledBorder:
@@ -476,7 +544,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.safeBlockVertical * 2.8),
                                     Center(
                                       child: StreamBuilder<bool>(
                                           stream: registerBloc.registerCheck,
@@ -552,7 +622,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                               child: Text(
                                                 "Register Account",
                                                 style: TextStyle(
-                                                    fontSize: 25.0,
+                                                    fontSize: SizeConfig
+                                                            .safeBlockHorizontal *
+                                                        6,
                                                     fontWeight:
                                                         FontWeight.w400),
                                               ),

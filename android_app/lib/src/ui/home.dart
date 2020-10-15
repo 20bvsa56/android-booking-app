@@ -62,9 +62,11 @@ class _HomePageState extends State<HomePage> {
       children: [
         Text(
           destinations.name,
-          style: TextStyle(fontSize: 20, color: Colors.black54),
+          style: TextStyle(
+              fontSize: SizeConfig.safeBlockHorizontal * 5,
+              color: Colors.black54),
         ),
-        SizedBox(height: 35),
+        SizedBox(height: SizeConfig.safeBlockVertical * 4),
       ],
     );
   }
@@ -78,7 +80,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // final data = MediaQuery.of(context);
+
     final format = DateFormat("yyyy-MM-dd");
     DateTime _today = DateTime.now();
 
@@ -107,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                       color: Color(0xff28d6e2),
                       size: SizeConfig.safeBlockHorizontal * 6,
                     ),
-                    SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
+                    SizedBox(width: SizeConfig.safeBlockHorizontal * 3),
                     Text(
                       'Location',
                       style: TextStyle(
@@ -124,8 +126,8 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
-                  height: SizeConfig.safeBlockVertical * 30,
-                  width: SizeConfig.safeBlockHorizontal * 80,
+                  height: SizeConfig.safeBlockVertical * 31,
+                  width: SizeConfig.safeBlockHorizontal * 90,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8),
                     child: Column(
@@ -134,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           'From',
                           style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              fontSize: SizeConfig.safeBlockHorizontal * 4.5,
                               color: Color(0xff28d6e2)),
                         ),
                         Padding(
@@ -153,15 +155,27 @@ class _HomePageState extends State<HomePage> {
                                       clearOnSubmit: false,
                                       suggestions: destinations,
                                       style: TextStyle(
-                                          fontSize: 18, color: Colors.black),
+                                          fontSize:
+                                              SizeConfig.safeBlockHorizontal *
+                                                  5,
+                                          color: Colors.black),
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.directions_walk,
-                                            size: 26, color: Color(0xff28d6e2)),
+                                            size:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    5,
+                                            color: Color(0xff28d6e2)),
                                         hintText: 'Kathmandu',
-                                        hintStyle: TextStyle(fontSize: 15),
+                                        hintStyle: TextStyle(
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    4),
                                         labelText: 'Enter initial place',
                                         labelStyle: TextStyle(
-                                            fontSize: 18, color: Colors.grey),
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    4,
+                                            color: Colors.grey),
                                       ),
                                       //query is what the user types and item is a list of items passed
                                       itemFilter: (item, query) {
@@ -187,11 +201,11 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: SizeConfig.safeBlockHorizontal * 10),
+                        SizedBox(height: SizeConfig.safeBlockHorizontal * 9),
                         Text(
                           'To',
                           style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              fontSize: SizeConfig.safeBlockHorizontal * 4.5,
                               color: Color(0xff28d6e2)),
                         ),
                         Padding(
@@ -210,15 +224,27 @@ class _HomePageState extends State<HomePage> {
                                       clearOnSubmit: false,
                                       suggestions: destinations,
                                       style: TextStyle(
-                                          fontSize: 18, color: Colors.black),
+                                          fontSize:
+                                              SizeConfig.safeBlockHorizontal *
+                                                  5,
+                                          color: Colors.black),
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.directions_walk,
-                                            size: 26, color: Color(0xff28d6e2)),
+                                            size:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    5,
+                                            color: Color(0xff28d6e2)),
                                         hintText: 'Kathmandu',
-                                        hintStyle: TextStyle(fontSize: 15),
+                                        hintStyle: TextStyle(
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    4),
                                         labelText: 'Enter final place',
                                         labelStyle: TextStyle(
-                                            fontSize: 18, color: Colors.grey),
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    4,
+                                            color: Colors.grey),
                                       ),
                                       //query is what the user types and item is a list of items passed
                                       itemFilter: (item, query) {
@@ -241,7 +267,6 @@ class _HomePageState extends State<HomePage> {
                                         return showDestinations(item);
                                       },
                                     ),
-                              SizedBox(height: 15),
                             ],
                           ),
                         ),
@@ -250,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: SizeConfig.safeBlockVertical * 1),
+              SizedBox(height: SizeConfig.safeBlockVertical),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
                 child: Row(
@@ -260,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                       color: Color(0xff28d6e2),
                       size: SizeConfig.safeBlockHorizontal * 6,
                     ),
-                    SizedBox(width: 5),
+                    SizedBox(width: SizeConfig.safeBlockHorizontal * 3),
                     Text(
                       'Departure Date',
                       style: TextStyle(
@@ -277,8 +302,8 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(5))),
-                  height: SizeConfig.safeBlockVertical * 24,
-                  width: SizeConfig.safeBlockHorizontal * 80,
+                  height: SizeConfig.safeBlockVertical * 23,
+                  width: SizeConfig.safeBlockHorizontal * 90,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -287,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             'Departure date',
                             style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontSize: SizeConfig.safeBlockHorizontal * 4.5,
                                 color: Color(0xff28d6e2)),
                           ),
                         ),
@@ -301,13 +326,15 @@ class _HomePageState extends State<HomePage> {
                                 initialValue: _today,
                                 style: TextStyle(
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 2),
+                                        SizeConfig.safeBlockHorizontal * 5),
                                 decoration: InputDecoration(
                                   labelText: 'Select departure date',
                                   labelStyle: TextStyle(
-                                      fontSize: 18, color: Colors.grey),
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 4,
+                                      color: Colors.grey),
                                   prefixIcon: Icon(Icons.time_to_leave,
-                                      size: SizeConfig.safeBlockHorizontal * 6,
+                                      size: SizeConfig.safeBlockHorizontal * 5,
                                       color: Color(0xff28d6e2)),
                                 ),
                                 format: format,
@@ -350,7 +377,7 @@ class _HomePageState extends State<HomePage> {
                                             color: Colors.black87,
                                             fontSize:
                                                 SizeConfig.safeBlockHorizontal *
-                                                    3)),
+                                                    3.5)),
                                     color: Color(0xffd2d6d6),
                                   ),
                                   Spacer(),
@@ -367,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                                             color: Colors.black87,
                                             fontSize:
                                                 SizeConfig.safeBlockHorizontal *
-                                                    3)),
+                                                    3.5)),
                                     color: Color(0xffd2d6d6),
                                   )
                                 ],
@@ -378,13 +405,13 @@ class _HomePageState extends State<HomePage> {
                       ]),
                 ),
               ),
-              SizedBox(height: SizeConfig.safeBlockVertical * 2),
+              SizedBox(height: SizeConfig.safeBlockVertical * 3),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 140.0),
                   child: SizedBox(
-                    height: 60,
-                    width: double.infinity / 2,
+                    height: SizeConfig.safeBlockVertical * 7,
+                    width: SizeConfig.screenWidth,
                     child: FlatButton(
                       color: Color(0xff4c6792),
                       textColor: Colors.white,
@@ -392,14 +419,41 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(20)),
                       onPressed: () {
                         // onPressed: _push,
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BusDetailsUIBuilder(
-                                  start_point: destinationsController.text,
-                                  end_point: destinationsController2.text,
-                                  departure_date: dateController.text)),
-                        );
+                        if (destinationsController.text.isEmpty ||
+                            destinationsController2.text.isEmpty ||
+                            dateController.text.isEmpty) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Dialog(
+                                      backgroundColor: Color(0xff4c6792),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      elevation: 20,
+                                      child: Text(
+                                        'Please fill all the required fields.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    5),
+                                      )),
+                                );
+                              });
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BusDetailsUIBuilder(
+                                    start_point: destinationsController.text,
+                                    end_point: destinationsController2.text,
+                                    departure_date: dateController.text)),
+                          );
+                        }
                       },
                       child: Text(
                         "Find Bus",

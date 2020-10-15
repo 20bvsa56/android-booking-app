@@ -1,6 +1,7 @@
 import 'package:android_app/src/model/slider.dart';
 import 'package:android_app/src/ui/bottom_nav_bar.dart';
 import 'package:android_app/src/ui/login.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -58,8 +59,12 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
   Widget pageIndexIndicator(bool isCurrentPage) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2),
-      height: isCurrentPage ? 15 : 10,
-      width: isCurrentPage ? 15 : 10,
+      height: isCurrentPage
+          ? SizeConfig.safeBlockVertical * 2
+          : SizeConfig.safeBlockVertical * 1.5,
+      width: isCurrentPage
+          ? SizeConfig.safeBlockVertical * 2
+          : SizeConfig.safeBlockVertical * 1.5,
       decoration: BoxDecoration(
           color: isCurrentPage
               ? Color(0xff4c6792)
@@ -70,6 +75,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Color(0xff4c6792),
       body: PageView.builder(
@@ -92,8 +98,8 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
           ? Container(
               padding: EdgeInsets.all(15),
               color: Colors.white,
-              height: MediaQuery.of(context).size.height / 10,
-              width: MediaQuery.of(context).size.width,
+              height: SizeConfig.safeBlockVertical * 9,
+              width: SizeConfig.screenWidth,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -106,7 +112,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                       child: Text(
                         'SKIP',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: SizeConfig.safeBlockVertical * 3.2,
                             color: Color(0xff4c6792),
                             fontWeight: FontWeight.w900),
                       )),
@@ -127,7 +133,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                       child: Text(
                         'NEXT',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: SizeConfig.safeBlockVertical * 3.2,
                             color: Color(0xff4c6792),
                             fontWeight: FontWeight.w900),
                       )),
@@ -143,12 +149,12 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
               },
               child: Container(
                 alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height / 10,
-                width: MediaQuery.of(context).size.width,
+                height: SizeConfig.safeBlockVertical * 9,
+                width: SizeConfig.screenWidth,
                 color: Colors.white,
                 child: Text('GET STARTED',
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: SizeConfig.safeBlockVertical * 4,
                         color: Color(0xff28d6e2),
                         fontWeight: FontWeight.w900)),
               ),
@@ -165,17 +171,17 @@ class SliderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = MediaQuery.of(context).size;
+
     return Container(
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                height: data.height / 2,
-                width: data.width / 2,
+                height: SizeConfig.safeBlockVertical * 30,
+                width: SizeConfig.safeBlockHorizontal * 50,
                 child: Image.asset(imagePath)),
-            SizedBox(height: 15),
+            SizedBox(height: SizeConfig.safeBlockVertical * 10),
             Text(title,
                 style: TextStyle(
                     shadows: <Shadow>[
@@ -185,17 +191,17 @@ class SliderTile extends StatelessWidget {
                         color: Color(0xff28d6e2),
                       ),
                     ],
-                    fontSize: 40,
+                    fontSize: SizeConfig.safeBlockVertical * 5.8,
                     fontWeight: FontWeight.w800,
                     color: Colors.white)),
-            SizedBox(height: 15),
+            SizedBox(height: SizeConfig.safeBlockVertical * 2),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 22,
+                    fontSize: SizeConfig.safeBlockVertical * 2.8,
                     fontWeight: FontWeight.w500,
                     color: Colors.white),
               ),

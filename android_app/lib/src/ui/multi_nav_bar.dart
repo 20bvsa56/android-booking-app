@@ -1,4 +1,3 @@
-import 'package:android_app/src/ui/app.dart';
 import 'package:flutter/material.dart';
 import 'package:android_app/src/ui/size_config.dart';
 

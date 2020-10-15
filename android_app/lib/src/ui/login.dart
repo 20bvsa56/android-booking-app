@@ -11,7 +11,7 @@ import 'dart:convert';
 class LoginPage extends StatefulWidget {
   //static final url = 'http://192.168.1.68:8000/api/login/';
   static final url = 'http://192.168.1.68:8000/api/login/';
-  
+
   const LoginPage({Key key}) : super(key: key);
 
   @override
@@ -28,7 +28,9 @@ class _LoginPageState extends State<LoginPage> {
     scaffoldkey.currentState.showSnackBar(SnackBar(
       content: Text(
         'Invalid Credentials! Try again.',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+        style: TextStyle(
+            fontSize: SizeConfig.safeBlockHorizontal * 5,
+            fontWeight: FontWeight.w300),
       ),
       backgroundColor: Color(0xff28d6e2),
       duration: Duration(seconds: 12),
@@ -55,7 +57,6 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           visible = false;
         });
-        
 
         errorMessage(context);
       }
@@ -70,8 +71,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final loginBloc = LoginBloc();
-    final data =
-        MediaQuery.of(context); // variable to get the media screen size
+    // variable to get the media screen size
     return Scaffold(
       key: scaffoldkey,
       appBar: MyAppBar(),
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         vertical: 120.0, horizontal: 10),
                     child: Center(
                       child: Container(
-                          width: data.size.width,
+                          width: SizeConfig.screenWidth,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
@@ -107,10 +107,12 @@ class _LoginPageState extends State<LoginPage> {
                                   'Sign In',
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 40,
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 10,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(
+                                    height: SizeConfig.safeBlockVertical * 3),
                                 Container(
                                   decoration: BoxDecoration(
                                       boxShadow: [
@@ -136,9 +138,11 @@ class _LoginPageState extends State<LoginPage> {
                                             stream: loginBloc.emailStream,
                                             builder: (context, snapshot) {
                                               return TextField(
-                                                controller: emailController,
+                                                  controller: emailController,
                                                   style: TextStyle(
-                                                      fontSize: 20,
+                                                      fontSize: SizeConfig
+                                                              .safeBlockHorizontal *
+                                                          5,
                                                       color: Color(0xff4c6792)),
                                                   keyboardType: TextInputType
                                                       .emailAddress,
@@ -152,40 +156,53 @@ class _LoginPageState extends State<LoginPage> {
                                                     hintText:
                                                         'matthewperry@gmail.com',
                                                     hintStyle: TextStyle(
-                                                        fontSize: 15,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal *
+                                                            4,
                                                         color:
                                                             Color(0xff4c6792)),
                                                     errorText: snapshot.error,
                                                     errorStyle: TextStyle(
-                                                        fontSize: 15,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal *
+                                                            4,
                                                         color:
                                                             Color(0xff4c6792)),
                                                     labelText: 'Email address',
                                                     labelStyle: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal *
+                                                            4,
                                                         color:
                                                             Color(0xff4c6792)),
                                                     enabledBorder:
                                                         OutlineInputBorder(
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Color(
-                                                                  0xff4c6792),
-                                                              width: 1.5),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Color(0xff4c6792),
+                                                          width: SizeConfig
+                                                                  .safeBlockHorizontal /
+                                                              2.8),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
                                                     ),
                                                   ));
                                             }),
-                                        SizedBox(height: 20),
+                                        SizedBox(
+                                            height:
+                                                SizeConfig.safeBlockVertical *
+                                                    2.8),
                                         StreamBuilder<String>(
                                             stream: loginBloc.passwordStream,
                                             builder: (context, snapshot) {
                                               return TextField(
-                                                  controller: passwordController,
+                                                  controller:
+                                                      passwordController,
                                                   style: TextStyle(
-                                                      fontSize: 20,
+                                                      fontSize: SizeConfig
+                                                              .safeBlockHorizontal *
+                                                          5,
                                                       color: Color(0xff4c6792)),
                                                   onChanged:
                                                       loginBloc.passwordChanged,
@@ -213,12 +230,16 @@ class _LoginPageState extends State<LoginPage> {
                                                         }),
                                                     hintText: '**********',
                                                     hintStyle: TextStyle(
-                                                        fontSize: 15,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal *
+                                                            4,
                                                         color:
                                                             Color(0xff4c6792)),
                                                     errorText: snapshot.error,
                                                     errorStyle: TextStyle(
-                                                        fontSize: 18,
+                                                        fontSize: SizeConfig
+                                                                .safeBlockHorizontal *
+                                                            4,
                                                         color:
                                                             Color(0xff4c6792)),
                                                     labelText: 'Password',
@@ -228,11 +249,12 @@ class _LoginPageState extends State<LoginPage> {
                                                             Color(0xff4c6792)),
                                                     enabledBorder:
                                                         OutlineInputBorder(
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color: Color(
-                                                                  0xff4c6792),
-                                                              width: 1.5),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Color(0xff4c6792),
+                                                          width: SizeConfig
+                                                                  .safeBlockHorizontal /
+                                                              2.8),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
@@ -243,7 +265,8 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 15),
+                                SizedBox(
+                                    height: SizeConfig.safeBlockVertical * 2.8),
                                 Row(
                                   children: [
                                     Checkbox(
@@ -260,13 +283,15 @@ class _LoginPageState extends State<LoginPage> {
                                     Text(
                                       'Remember Me',
                                       style: TextStyle(
-                                        fontSize: 23,
+                                        fontSize:
+                                            SizeConfig.safeBlockHorizontal *
+                                                5.2,
                                         color: Colors.white,
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: SizeConfig.safeBlockVertical),
                                 Center(
                                   child: StreamBuilder<bool>(
                                       stream: loginBloc.loginCheck,
@@ -285,8 +310,14 @@ class _LoginPageState extends State<LoginPage> {
                                           onPressed: snapshot.hasData
                                               ? () async {
                                                   print(snapshot);
-                                                  LoginModel loginModel = new LoginModel(email: emailController.text, password: passwordController.text);
-                                  
+                                                  LoginModel loginModel =
+                                                      new LoginModel(
+                                                          email: emailController
+                                                              .text,
+                                                          password:
+                                                              passwordController
+                                                                  .text);
+
                                                   print(loginModel.toMap());
 
                                                   LoginModel getBody =
@@ -302,21 +333,25 @@ class _LoginPageState extends State<LoginPage> {
                                           child: Text(
                                             "Login",
                                             style: TextStyle(
-                                                fontSize: 25.0,
+                                                fontSize: SizeConfig
+                                                        .safeBlockHorizontal *
+                                                    6,
                                                 fontWeight: FontWeight.w400),
                                           ),
                                         );
                                       }),
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(
+                                    height: SizeConfig.safeBlockVertical * 3),
                                 Text(
                                   'Forgot Password?',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Color(0xff28d6e2).withAlpha(255),
-                                      fontSize: 23),
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 5),
                                 ),
-                                SizedBox(height: 8),
+                                SizedBox(height: SizeConfig.safeBlockVertical),
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -328,7 +363,10 @@ class _LoginPageState extends State<LoginPage> {
                                   child: RichText(
                                     textAlign: TextAlign.center,
                                     text: new TextSpan(
-                                        style: TextStyle(fontSize: 22),
+                                        style: TextStyle(
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    5),
                                         children: [
                                           TextSpan(
                                               text: 'Don\'t have an account.  ',

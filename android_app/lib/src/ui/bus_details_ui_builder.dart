@@ -1,10 +1,10 @@
 import 'package:android_app/src/model/bus_details_model.dart';
 import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/bus_details_ui.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:async';
 
 class BusDetailsUIBuilder extends StatefulWidget {
   final String start_point;
@@ -41,11 +41,11 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    final data = MediaQuery.of(context);
+    SizeConfig().init(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            appBar:MyAppBar(),
+            appBar: MyAppBar(),
             body: SingleChildScrollView(
               child: Center(
                 child: Column(
@@ -58,8 +58,7 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.data != null) {
                           return Container(
-                            height: data.size.height,
-                            width: data.size.width,
+                            height: SizeConfig.screenHeight,
                             child: ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 itemCount: snapshot.data.length,
