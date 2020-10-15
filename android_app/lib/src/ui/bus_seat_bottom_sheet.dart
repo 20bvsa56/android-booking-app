@@ -1,7 +1,9 @@
+import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
 import 'package:android_app/src/ui/signup_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:android_app/src/ui/bus_seat.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BusSeatBottomSheet extends StatefulWidget {
   final int id, price, row, column, layout;
@@ -32,6 +34,7 @@ class BusSeatBottomSheet extends StatefulWidget {
 class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
   @override
   Widget build(BuildContext context) {
+    // Bloc.observer = CounterObserver();
     SizeConfig().init(context);
 
     List<Widget> myRowChildren = [];
@@ -46,7 +49,9 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
       myRowChildren.add(new Column(children: cols));
     }
 
-    return Scaffold(
+    return BlocProvider(
+      create: (_) => CounterCubit(),
+      child: Scaffold(
         body: BottomSheet(
             onClosing: () {
               print('closed');
@@ -70,7 +75,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                     horizontal: 10.0, vertical: 15),
                                 child: Text('View Seats',
                                     style: TextStyle(
-                                       fontSize:
+                                        fontSize:
                                             SizeConfig.safeBlockVertical * 3,
                                         color: Color(0xff4c6792),
                                         fontWeight: FontWeight.bold)),
@@ -78,7 +83,8 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                               Spacer(),
                               IconButton(
                                   icon: Icon(Icons.cancel,
- size: SizeConfig.safeBlockVertical * 4, color: Color(0xff28d6e2)),
+                                      size: SizeConfig.safeBlockVertical * 4,
+                                      color: Color(0xff28d6e2)),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   })
@@ -171,7 +177,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                 color: Colors.orangeAccent,
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(6)))),
-                                          SizedBox(
+                                        SizedBox(
                                             height:
                                                 SizeConfig.safeBlockVertical *
                                                     1.8),
@@ -200,7 +206,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                 color: Color(0xff28d6e2),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(6)))),
-                                         SizedBox(
+                                        SizedBox(
                                             height:
                                                 SizeConfig.safeBlockVertical *
                                                     1.8),
@@ -219,7 +225,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 10),
                                         child: Container(
-                                                height:
+                                            height:
                                                 SizeConfig.safeBlockVertical *
                                                     3.2,
                                             width:
@@ -230,7 +236,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(6)))),
                                       ),
-                                     SizedBox(
+                                      SizedBox(
                                           height: SizeConfig.safeBlockVertical *
                                               1.8),
                                       Text('AVAILABLE SEAT ',
@@ -250,6 +256,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                           builder: (BuildContext context,
                               ScrollController scrollController) {
                             var totalAmount = widget.price * 2;
+
                             return Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
@@ -263,11 +270,12 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                     Padding(
                                         padding: const EdgeInsets.all(20.0),
                                         child: SingleChildScrollView(
-                                                                                  child: Container(
+                                          child: Container(
                                             width:
                                                 SizeConfig.safeBlockHorizontal *
                                                     90,
-                                            height: SizeConfig.safeBlockVertical *
+                                            height: SizeConfig
+                                                    .safeBlockVertical *
                                                 10 *
                                                 widget
                                                     .row, // assuming one row takes 10 size
@@ -309,24 +317,22 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                   ],
                                                 ),
                                               ),
-                                              
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                    // children: <Widget>[
-                                                    //   Row(
-                                                    //     children: numbers.map((i, element) => MapEntry(i, Stack(
-                                                    //       GestureDetector(onTap: () {
-                                                    //         setState() {
-                                                    //           // print("element=${element.toString()}");
-                                                    //           // print("element=${userBoard[i].toString()}");
-                                                    //         }
-                                                    //       })
-                                                    //     )).values.toList()
-                                                    //   ))
-                                                    // ]),
-                                                    children: myRowChildren),
-                                            
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  // children: <Widget>[
+                                                  //   Row(
+                                                  //     children: numbers.map((i, element) => MapEntry(i, Stack(
+                                                  //       GestureDetector(onTap: () {
+                                                  //         setState() {
+                                                  //           // print("element=${element.toString()}");
+                                                  //           // print("element=${userBoard[i].toString()}");
+                                                  //         }
+                                                  //       })
+                                                  //     )).values.toList()
+                                                  //   ))
+                                                  // ]),
+                                                  children: myRowChildren),
                                             ]),
                                           ),
                                         )),
@@ -385,7 +391,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text('No Of Ticket',
+                                                      Text('No. Of Ticket',
                                                           style: TextStyle(
                                                               fontSize: SizeConfig
                                                                       .safeBlockHorizontal *
@@ -396,13 +402,18 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                                   FontWeight
                                                                       .w400)),
                                                       Spacer(),
-                                                      Text('2',
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .safeBlockHorizontal *
-                                                                  3,
-                                                              color:
-                                                                  Colors.red))
+                                                      BlocBuilder<CounterCubit,
+                                                          int>(
+                                                        builder: (context, count) => Center(
+                                                            child: Text(
+                                                                '$count',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        SizeConfig.safeBlockHorizontal *
+                                                                            3,
+                                                                    color: Colors
+                                                                        .red))),
+                                                      ),
                                                     ]),
                                               ),
                                               Padding(
@@ -424,16 +435,27 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                                   FontWeight
                                                                       .w400)),
                                                       Spacer(),
-                                                      Text(
-                                                          'Rs. ' +
-                                                              totalAmount
-                                                                  .toString(),
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .safeBlockHorizontal *
-                                                                  3,
-                                                              color:
-                                                                  Colors.red))
+                                                      BlocBuilder<CounterCubit,
+                                                          int>(
+                                                        builder: (context,
+                                                                count) =>
+                                                            Center(
+                                                                child: Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                              'Rs.' +
+                                                                  '$count' *
+                                                                      widget
+                                                                          .price,
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      SizeConfig
+                                                                              .safeBlockHorizontal *
+                                                                          3,
+                                                                  color: Colors
+                                                                      .red)),
+                                                        )),
+                                                      ),
                                                     ]),
                                               )
                                             ]),
@@ -455,7 +477,8 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           onPressed: () {
-                                            print(totalAmount.toString());
+                                            // print(totalAmount.toString());
+
                                             showDialog(
                                                 context: context,
                                                 builder: (_) =>
@@ -482,6 +505,8 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                           })
                     ]),
                   ),
-                )));
+                )),
+      ),
+    );
   }
 }

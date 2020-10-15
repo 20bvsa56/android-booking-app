@@ -19,7 +19,7 @@ class TicketsModel {
       this.email,
       this.phoneNumber,
       this.amount,
-      this.allocatedSeats,
+      this.allocatedSeats ,
       this.title,
       this.departureDate,
       this.startPoint,
@@ -44,4 +44,5 @@ class TicketsModel {
     price = json['price'];
   }
 
+ 
 }

@@ -324,7 +324,7 @@ class _TicketsUIState extends State<TicketsUI> {
                                                     ),
                                                     Text(
                                                         widget.ticketsModel
-                                                            .allocatedSeats,
+                                                            .allocatedSeats.toString(),
                                                         style: TextStyle(
                                                           fontSize: 18,
                                                         )),

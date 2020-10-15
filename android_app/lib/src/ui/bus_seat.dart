@@ -1,5 +1,6 @@
+import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:android_app/src/ui/book_seat.dart';
 
 class BusSeat extends StatefulWidget {
@@ -40,9 +41,12 @@ class _BusSeatState extends State<BusSeat> {
             if (!widget.isReserved) {
               widget.isSelected = !widget.isSelected;
               if (widget.isSelected) {
+                context.bloc<CounterCubit>().addSeat();
+
                 BOOKED_SEATS[4 * widget.rowNum + widget.colNum] =
                     '1'; // change 2D row, col to 1D index
               } else {
+                context.bloc<CounterCubit>().subtractSeat();
                 BOOKED_SEATS[4 * widget.rowNum + widget.colNum] = '0';
               }
             }
@@ -61,7 +65,9 @@ class _BusSeatState extends State<BusSeat> {
                   ? Colors.orangeAccent
                   : widget.isSelected
                       ? Color(0xff28d6e2)
-                      : widget.isAvailable ? Colors.grey : null,
+                      : widget.isAvailable
+                          ? Colors.grey
+                          : null,
               border: widget.isAvailable
                   ? Border.all(color: Colors.white, width: 3.0)
                   : null,
