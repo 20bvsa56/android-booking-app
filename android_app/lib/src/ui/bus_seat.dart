@@ -1,7 +1,7 @@
 import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
+import 'package:android_app/src/ui/book_seat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:android_app/src/ui/book_seat.dart';
 
 class BusSeat extends StatefulWidget {
   bool isReserved;

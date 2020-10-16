@@ -1,4 +1,5 @@
 class BusDetailsModel {
+  int tripId;
   int vehicleId;
   String startPoint;
   String endPoint;
@@ -11,9 +12,11 @@ class BusDetailsModel {
   int seatColumn;
   String seatLayout;
   String departureDate;
+  String allocatedSeats;
 
   BusDetailsModel(
-      {this.vehicleId,
+      {this.tripId,
+      this.vehicleId,
       this.startPoint,
       this.endPoint,
       this.stoppagePoints,
@@ -24,9 +27,11 @@ class BusDetailsModel {
       this.seatRow,
       this.seatColumn,
       this.seatLayout,
-      this.departureDate});
+      this.departureDate,
+      this.allocatedSeats});
 
   BusDetailsModel.fromJson(Map<String, dynamic> json) {
+    tripId = json['trip_id'];
     vehicleId = json['vehicle_id'];
     startPoint = json['start_point'];
     endPoint = json['end_point'];
@@ -39,6 +44,6 @@ class BusDetailsModel {
     seatColumn = json['seat_column'];
     seatLayout = json['seat_layout'];
     departureDate = json['departure_date'];
+    allocatedSeats = json['allocated_seats'];
   }
-
 }

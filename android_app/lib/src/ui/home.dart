@@ -33,10 +33,10 @@ class _HomePageState extends State<HomePage> {
   bool loading = true;
 
   void getDestinations() async {
-    // final response =
-    //     await http.get("http://192.168.1.101:8000/api/getDestinations");
     final response =
-        await http.get("http://192.168.254.78:8000/api/getDestinations");
+        await http.get("http://192.168.1.101:8000/api/getDestinations");
+    // final response =
+    //     await http.get("http://192.168.254.78:8000/api/getDestinations");
     if (response.statusCode == 200) {
       destinations =
           loadDestinations(response.body); //get from routes list from function

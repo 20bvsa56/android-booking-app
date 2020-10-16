@@ -136,6 +136,7 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => BusSeatBottomSheet(
+                                  trip_id: widget.busDetailsModel.tripId,
                                   id: widget.busDetailsModel.vehicleId,
                                   name: widget.busDetailsModel.vehicleName,
                                   start_point:
@@ -147,6 +148,7 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                                   column: widget.busDetailsModel.seatColumn,
                                   // layout: widget.busDetailsModel.seatLayout,
                                   price: widget.busDetailsModel.price,
+                                  allocated_seats: widget.busDetailsModel.allocatedSeats
                                 )),
                       );
                     },

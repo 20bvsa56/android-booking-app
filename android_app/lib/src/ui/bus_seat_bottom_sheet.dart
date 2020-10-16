@@ -1,27 +1,30 @@
 import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
-import 'package:android_app/src/ui/signup_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:android_app/src/ui/bus_seat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class BusSeatBottomSheet extends StatefulWidget {
-  final int id, price, row, column, layout;
-  final String name, start_point, end_point, departure_date;
+  final int trip_id, id, price, row, column, layout;
+  final String name, start_point, end_point, departure_date, allocated_seats;
   bool isReserved;
   bool isSelected;
   bool isAvailable;
 
   BusSeatBottomSheet(
       {Key key,
+      this.trip_id,
       this.id,
       this.price,
       this.name,
       this.start_point,
       this.end_point,
       this.departure_date,
+      this.allocated_seats,
       this.row,
       this.column,
       this.layout,
@@ -29,11 +32,14 @@ class BusSeatBottomSheet extends StatefulWidget {
       this.isReserved = false,
       this.isSelected = false})
       : super(key: key);
+
   @override
   _BusSeatBottomSheetState createState() => _BusSeatBottomSheetState();
 }
 
 class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
+  var scaffoldkey = GlobalKey<ScaffoldState>();
+  bool visible = false;
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -57,17 +63,14 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
 
       final smtpServer = gmail(username, password);
       // Use the SmtpServer class to configure an SMTP server:
-      // final smtpServer = SmtpServer('smtp.domain.com');
-      // See the named arguments of SmtpServer for further configuration
-      // options.
 
       // Create our message.
       final message = Message()
         ..from = Address(username, 'Auto Bus Sewa')
-        ..recipients.add('mauntarani88@gmail.com')
+        ..recipients.add('bivisha2056@gmail.com')
         ..subject = 'Thankyou for booking bus ticket with Auto Bus Sewa.'
         ..html =
-            "<h2>Dear Maunta,</h2><h3>Your booking has been confirmed for ${widget.name} for the date ${widget.departure_date}.</h3><h3>Please collect your ticket details.</h3><p>Ticket Id: ${widget.id}</p><p>Start Point: ${widget.start_point}</p><p>End Point: ${widget.end_point}</p><p>Departure Date: ${widget.departure_date}</p><p>Price: Rs.${widget.price}</p><p>Booking Date and Time: ${DateTime.now()}</p>";
+            "<h2>Dear customer,</h2><h3>Your booking has been confirmed for ${widget.name} for the date ${widget.departure_date}.</h3><h3>Please collect your ticket details.</h3><p>Ticket Id: ${widget.id}</p><p>Start Point: ${widget.start_point}</p><p>End Point: ${widget.end_point}</p><p>Departure Date: ${widget.departure_date}</p><p>Price: Rs.${widget.price}</p><p>Booking Date and Time: ${DateTime.now()}</p>";
 
       try {
         final sendReport = await send(message, smtpServer);
@@ -80,9 +83,74 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
       }
     }
 
+    bookedMessage(BuildContext context) {
+      scaffoldkey.currentState.showSnackBar(SnackBar(
+        content: Text(
+          'Ticket booked. Please check your mail.',
+          style: TextStyle(
+              fontSize: SizeConfig.safeBlockHorizontal * 5,
+              fontWeight: FontWeight.w500),
+        ),
+        backgroundColor: Color(0xff4c6792),
+        duration: Duration(seconds: 8),
+      ));
+    }
+
+    notBookedMessage(BuildContext context) {
+      scaffoldkey.currentState.showSnackBar(SnackBar(
+        content: Text(
+          'Ticket cannot be booked. Please try again.',
+          style: TextStyle(
+              fontSize: SizeConfig.safeBlockHorizontal * 5,
+              fontWeight: FontWeight.w500),
+        ),
+        backgroundColor: Color(0xff4c6792),
+        duration: Duration(seconds: 8),
+      ));
+    }
+
+    Future bookTicket() async {
+      final response = await http.post(
+        'http://192.168.1.101:8000/api/saveBookedTickets',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'trip_id': widget.trip_id,
+          'name': 'Flutter5',
+          'email': 'flutter5@gmail.com',
+          'phoneNumber': 0987654321,
+          'no_of_passenger': 18,
+          'amount': widget.price,
+          'allocated_seats': widget.allocated_seats,
+        }),
+      );
+      if (response.statusCode == 201) {
+        setState(() {
+          visible = true;
+        });
+        print('Ment Sent');
+        await sendMail();
+        setState(() {
+          visible = false;
+        });
+        bookedMessage(context);
+      } else {
+        setState(() {
+          visible = true;
+        });
+        print('Ment Not Sent');
+        setState(() {
+          visible = false;
+        });
+        notBookedMessage(context);
+      }
+    }
+
     return BlocProvider(
       create: (_) => CounterCubit(),
       child: Scaffold(
+        key: scaffoldkey,
         body: BottomSheet(
             onClosing: () {
               print('closed');
@@ -293,8 +361,8 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(30),
                                       topRight: Radius.circular(30)),
-                                  // color: Colors.white,
-                                  color: Color(0xff4c6792)),
+                                  color: Colors.white),
+                              // color: Color(0xff4c6792)),
                               child: SingleChildScrollView(
                                 child: Container(
                                   child: Column(children: [
@@ -322,28 +390,38 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                                 ),
                                                 child: Row(
                                                   children: [
-                                                    Container(
-                                                      width: SizeConfig
-                                                              .safeBlockHorizontal *
-                                                          10,
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          10,
-                                                      child: Image.asset(
-                                                        'lib/src/images/door.png',
-                                                      ),
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          width: SizeConfig
+                                                                  .safeBlockHorizontal *
+                                                              10,
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              10,
+                                                          child: Image.asset(
+                                                            'lib/src/images/door.png',
+                                                          ),
+                                                        ),
+                                                        Text('Entry')
+                                                      ],
                                                     ),
                                                     Spacer(),
-                                                    Container(
-                                                      width: SizeConfig
-                                                              .safeBlockHorizontal *
-                                                          10,
-                                                      height: SizeConfig
-                                                              .safeBlockVertical *
-                                                          9,
-                                                      child: Image.asset(
-                                                        'lib/src/images/steering.png',
-                                                      ),
+                                                    Row(
+                                                      children: [
+                                                        Text('Driver  '),
+                                                        Container(
+                                                          width: SizeConfig
+                                                                  .safeBlockHorizontal *
+                                                              10,
+                                                          height: SizeConfig
+                                                                  .safeBlockVertical *
+                                                              9,
+                                                          child: Image.asset(
+                                                            'lib/src/images/steering.png',
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
@@ -379,122 +457,147 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                             color: Colors.grey[200],
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Ticket Rate',
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .safeBlockHorizontal *
-                                                                  4,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400)),
-                                                      Spacer(),
-                                                      Text(
-                                                          'Rs. ' +
-                                                              widget.price
-                                                                  .toString(),
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .safeBlockHorizontal *
-                                                                  3,
-                                                              color:
-                                                                  Colors.red))
-                                                    ]),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('No. Of Ticket',
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .safeBlockHorizontal *
-                                                                  4,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400)),
-                                                      Spacer(),
-                                                      BlocBuilder<CounterCubit,
-                                                          int>(
-                                                        builder: (context, count) => Center(
-                                                            child: Text(
-                                                                '$count',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        SizeConfig.safeBlockHorizontal *
-                                                                            3,
-                                                                    color: Colors
-                                                                        .red))),
-                                                      ),
-                                                    ]),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Total Rate',
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .safeBlockHorizontal *
-                                                                  4,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400)),
-                                                      Spacer(),
-                                                      BlocBuilder<CounterCubit,
-                                                          int>(
-                                                        builder: (context,
-                                                                count) =>
-                                                            Center(
-                                                                child: Expanded(
-                                                          flex: 1,
-                                                          child: Text(
-                                                              'Rs.' +
-                                                                  '$count' *
-                                                                      widget
-                                                                          .price,
+                                        child: Expanded(
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Expanded(
+                                                    child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('Ticket Rate',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      SizeConfig
+                                                                              .safeBlockHorizontal *
+                                                                          4,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400)),
+                                                          Spacer(),
+                                                          Text(
+                                                              'Rs. ' +
+                                                                  widget.price
+                                                                      .toString(),
                                                               style: TextStyle(
                                                                   fontSize:
                                                                       SizeConfig
                                                                               .safeBlockHorizontal *
                                                                           3,
                                                                   color: Colors
-                                                                      .red)),
-                                                        )),
-                                                      ),
-                                                    ]),
-                                              )
-                                            ]),
+                                                                      .red))
+                                                        ]),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Expanded(
+                                                    child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('No. Of Ticket',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      SizeConfig
+                                                                              .safeBlockHorizontal *
+                                                                          4,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400)),
+                                                          Spacer(),
+                                                          BlocBuilder<
+                                                              CounterCubit,
+                                                              int>(
+                                                            builder: (context, count) => Center(
+                                                                child: Text(
+                                                                    '$count',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            SizeConfig.safeBlockHorizontal *
+                                                                                3,
+                                                                        color: Colors
+                                                                            .red))),
+                                                          ),
+                                                        ]),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Expanded(
+                                                    child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('Total Rate',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      SizeConfig
+                                                                              .safeBlockHorizontal *
+                                                                          4,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400)),
+                                                          Spacer(),
+                                                          BlocBuilder<
+                                                              CounterCubit,
+                                                              int>(
+                                                            builder: (context,
+                                                                    count) =>
+                                                                Center(
+                                                                    child:
+                                                                        Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                  'Rs.' +
+                                                                      '$count' *
+                                                                          widget
+                                                                              .price,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          SizeConfig.safeBlockHorizontal *
+                                                                              3,
+                                                                      color: Colors
+                                                                          .red)),
+                                                            )),
+                                                          ),
+                                                        ]),
+                                                  ),
+                                                )
+                                              ]),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
                                         height:
                                             SizeConfig.safeBlockVertical * 3),
+                                    Visibility(
+                                        visible: visible,
+                                        child: Container(
+                                            child: Center(
+                                          child: CircularProgressIndicator(
+                                              backgroundColor:
+                                                  Color(0xff4c6792)),
+                                        ))),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 120.0),
@@ -508,7 +611,8 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           onPressed: () async {
-                                            await sendMail();
+                                            await bookTicket();
+                                            // await sendMail();
                                             // print(totalAmount.toString());
 
                                             // showDialog(
@@ -529,7 +633,7 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                     ),
                                     SizedBox(
                                         height:
-                                            SizeConfig.safeBlockVertical * 1)
+                                            SizeConfig.safeBlockVertical * 1),
                                   ]),
                                 ),
                               ),
