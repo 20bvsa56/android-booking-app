@@ -147,210 +147,200 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
       }
     }
 
-    return BlocProvider(
-      create: (_) => CounterCubit(),
-      child: Scaffold(
-        key: scaffoldkey,
-        body: BottomSheet(
-            onClosing: () {
-              print('closed');
-            },
-            backgroundColor: Colors.transparent,
-            builder: (context) => Container(
-                  color: Color(0xff4c6792),
-                  height: SizeConfig.safeBlockVertical * 100,
-                  child: Container(
-                    height: SizeConfig.safeBlockVertical * 70,
-                    child: Stack(children: [
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 10,
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 27),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 15),
-                                child: Text('View Seats',
-                                    style: TextStyle(
-                                        fontSize:
-                                            SizeConfig.safeBlockVertical * 3,
-                                        color: Color(0xff4c6792),
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Spacer(),
-                              IconButton(
-                                  icon: Icon(Icons.cancel,
-                                      size: SizeConfig.safeBlockVertical * 4,
-                                      color: Color(0xff28d6e2)),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  })
-                            ],
-                          ),
+    return Scaffold(
+      key: scaffoldkey,
+      body: BottomSheet(
+          onClosing: () {
+            print('closed');
+          },
+          backgroundColor: Colors.transparent,
+          builder: (context) => Container(
+                color: Color(0xff4c6792),
+                height: SizeConfig.safeBlockVertical * 100,
+                child: Container(
+                  height: SizeConfig.safeBlockVertical * 70,
+                  child: Stack(children: [
+                    Container(
+                      height: SizeConfig.safeBlockVertical * 10,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 27),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 15),
+                              child: Text('View Seats',
+                                  style: TextStyle(
+                                      fontSize:
+                                          SizeConfig.safeBlockVertical * 3,
+                                      color: Color(0xff4c6792),
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            Spacer(),
+                            IconButton(
+                                icon: Icon(Icons.cancel,
+                                    size: SizeConfig.safeBlockVertical * 4,
+                                    color: Color(0xff28d6e2)),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                })
+                          ],
                         ),
                       ),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 70, left: 5),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 5.0, top: 15),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      widget.name,
-                                      style: TextStyle(
-                                          fontSize:
-                                              SizeConfig.safeBlockHorizontal *
-                                                  8,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                  height: SizeConfig.safeBlockVertical * 1.5),
-                              Row(
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 70, left: 5),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5.0, top: 15),
+                              child: Row(
                                 children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    color: Colors.white,
-                                    size: SizeConfig.safeBlockHorizontal * 4,
-                                  ),
                                   Text(
-                                    ' ' +
-                                        widget.start_point +
-                                        ' - ' +
-                                        widget.end_point,
+                                    widget.name,
                                     style: TextStyle(
                                         fontSize:
-                                            SizeConfig.safeBlockHorizontal *
-                                                4.5,
-                                        color: Colors.white),
+                                            SizeConfig.safeBlockHorizontal * 8,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                  height: SizeConfig.safeBlockVertical * 1),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.calendar_today,
-                                    color: Colors.white,
-                                    size: SizeConfig.safeBlockHorizontal * 4,
-                                  ),
-                                  Text(' ' + widget.departure_date,
-                                      style: TextStyle(
-                                          fontSize:
-                                              SizeConfig.safeBlockHorizontal *
-                                                  4,
-                                          color: Colors.white))
-                                ],
-                              ),
-                              SizedBox(
-                                  height: SizeConfig.safeBlockVertical * 3),
-                              Container(
-                                height: SizeConfig.safeBlockVertical * 10,
-                                width: SizeConfig.safeBlockHorizontal * 90,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Row(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                            height:
-                                                SizeConfig.safeBlockVertical *
-                                                    3.2,
-                                            width:
-                                                SizeConfig.safeBlockHorizontal *
-                                                    6,
-                                            decoration: BoxDecoration(
-                                                color: Colors.orangeAccent,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(6)))),
-                                        SizedBox(
-                                            height:
-                                                SizeConfig.safeBlockVertical *
-                                                    1.8),
-                                        Text(' BOOKED SEAT',
-                                            style: TextStyle(
-                                                fontSize: SizeConfig
-                                                        .safeBlockHorizontal *
-                                                    3,
-                                                fontWeight: FontWeight.w400))
-                                      ],
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                            height:
-                                                SizeConfig.safeBlockVertical *
-                                                    3.2,
-                                            width:
-                                                SizeConfig.safeBlockHorizontal *
-                                                    6,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff28d6e2),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(6)))),
-                                        SizedBox(
-                                            height:
-                                                SizeConfig.safeBlockVertical *
-                                                    1.8),
-                                        Text('SELECTED SEAT',
-                                            style: TextStyle(
-                                                fontSize: SizeConfig
-                                                        .safeBlockHorizontal *
-                                                    3,
-                                                fontWeight: FontWeight.w400))
-                                      ],
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Column(
+                            ),
+                            SizedBox(
+                                height: SizeConfig.safeBlockVertical * 1.5),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.white,
+                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                ),
+                                Text(
+                                  ' ' +
+                                      widget.start_point +
+                                      ' - ' +
+                                      widget.end_point,
+                                  style: TextStyle(
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 4.5,
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: SizeConfig.safeBlockVertical * 1),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.white,
+                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                ),
+                                Text(' ' + widget.departure_date,
+                                    style: TextStyle(
+                                        fontSize:
+                                            SizeConfig.safeBlockHorizontal * 4,
+                                        color: Colors.white))
+                              ],
+                            ),
+                            SizedBox(height: SizeConfig.safeBlockVertical * 3),
+                            Container(
+                              height: SizeConfig.safeBlockVertical * 10,
+                              width: SizeConfig.safeBlockHorizontal * 90,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Row(children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Column(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Container(
-                                            height:
-                                                SizeConfig.safeBlockVertical *
-                                                    3.2,
-                                            width:
-                                                SizeConfig.safeBlockHorizontal *
-                                                    6,
-                                            decoration: BoxDecoration(
-                                                color: Colors.grey,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(6)))),
-                                      ),
+                                      Container(
+                                          height: SizeConfig.safeBlockVertical *
+                                              3.2,
+                                          width:
+                                              SizeConfig.safeBlockHorizontal *
+                                                  6,
+                                          decoration: BoxDecoration(
+                                              color: Colors.orangeAccent,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(6)))),
                                       SizedBox(
                                           height: SizeConfig.safeBlockVertical *
                                               1.8),
-                                      Text('AVAILABLE SEAT ',
+                                      Text(' BOOKED SEAT',
                                           style: TextStyle(
                                               fontSize: SizeConfig
                                                       .safeBlockHorizontal *
                                                   3,
                                               fontWeight: FontWeight.w400))
                                     ],
-                                  )
-                                ]),
-                              )
-                            ],
-                          )),
-                      DraggableScrollableSheet(
+                                  ),
+                                ),
+                                Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          height: SizeConfig.safeBlockVertical *
+                                              3.2,
+                                          width:
+                                              SizeConfig.safeBlockHorizontal *
+                                                  6,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff28d6e2),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(6)))),
+                                      SizedBox(
+                                          height: SizeConfig.safeBlockVertical *
+                                              1.8),
+                                      Text('SELECTED SEAT',
+                                          style: TextStyle(
+                                              fontSize: SizeConfig
+                                                      .safeBlockHorizontal *
+                                                  3,
+                                              fontWeight: FontWeight.w400))
+                                    ],
+                                  ),
+                                ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Container(
+                                          height: SizeConfig.safeBlockVertical *
+                                              3.2,
+                                          width:
+                                              SizeConfig.safeBlockHorizontal *
+                                                  6,
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(6)))),
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            SizeConfig.safeBlockVertical * 1.8),
+                                    Text('AVAILABLE SEAT ',
+                                        style: TextStyle(
+                                            fontSize:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    3,
+                                            fontWeight: FontWeight.w400))
+                                  ],
+                                )
+                              ]),
+                            )
+                          ],
+                        )),
+                    BlocProvider(
+                      create: (_) => CounterCubit(),
+                      child: DraggableScrollableSheet(
                           initialChildSize: 0.6,
                           builder: (BuildContext context,
                               ScrollController scrollController) {
@@ -429,18 +419,6 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                               Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
-                                                  // children: <Widget>[
-                                                  //   Row(
-                                                  //     children: numbers.map((i, element) => MapEntry(i, Stack(
-                                                  //       GestureDetector(onTap: () {
-                                                  //         setState() {
-                                                  //           // print("element=${element.toString()}");
-                                                  //           // print("element=${userBoard[i].toString()}");
-                                                  //         }
-                                                  //       })
-                                                  //     )).values.toList()
-                                                  //   ))
-                                                  // ]),
                                                   children: myRowChildren),
                                             ]),
                                           ),
@@ -457,134 +435,123 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                             color: Colors.grey[200],
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
-                                        child: Expanded(
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Expanded(
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text('Ticket Rate',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      SizeConfig
-                                                                              .safeBlockHorizontal *
-                                                                          4,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
-                                                          Spacer(),
-                                                          Text(
-                                                              'Rs. ' +
-                                                                  widget.price
-                                                                      .toString(),
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      SizeConfig
-                                                                              .safeBlockHorizontal *
-                                                                          3,
-                                                                  color: Colors
-                                                                      .red))
-                                                        ]),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Expanded(
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text('No. Of Ticket',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      SizeConfig
-                                                                              .safeBlockHorizontal *
-                                                                          4,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
-                                                          Spacer(),
-                                                          BlocBuilder<
-                                                              CounterCubit,
-                                                              int>(
-                                                            builder: (context, count) => Center(
-                                                                child: Text(
-                                                                    '$count',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            SizeConfig.safeBlockHorizontal *
-                                                                                3,
-                                                                        color: Colors
-                                                                            .red))),
-                                                          ),
-                                                        ]),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Expanded(
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text('Total Rate',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      SizeConfig
-                                                                              .safeBlockHorizontal *
-                                                                          4,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
-                                                          Spacer(),
-                                                          BlocBuilder<
-                                                              CounterCubit,
-                                                              int>(
-                                                            builder: (context,
-                                                                    count) =>
-                                                                Center(
-                                                                    child:
-                                                                        Expanded(
-                                                              flex: 1,
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Ticket Rate',
+                                                          style: TextStyle(
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  4,
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400)),
+                                                      Spacer(),
+                                                      Text(
+                                                          'Rs. ' +
+                                                              widget.price
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: SizeConfig
+                                                                      .safeBlockHorizontal *
+                                                                  3,
+                                                              color:
+                                                                  Colors.red))
+                                                    ]),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Expanded(
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('No. Of Ticket',
+                                                            style: TextStyle(
+                                                                fontSize: SizeConfig
+                                                                        .safeBlockHorizontal *
+                                                                    4,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400)),
+                                                        Spacer(),
+                                                        BlocBuilder<
+                                                            CounterCubit, int>(
+                                                          builder: (context, count) => Center(
                                                               child: Text(
-                                                                  'Rs.' +
-                                                                      '$count' *
-                                                                          widget
-                                                                              .price,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                                                  '$count',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           SizeConfig.safeBlockHorizontal *
                                                                               3,
                                                                       color: Colors
-                                                                          .red)),
-                                                            )),
-                                                          ),
-                                                        ]),
-                                                  ),
-                                                )
-                                              ]),
-                                        ),
+                                                                          .red))),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Expanded(
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('Total Rate',
+                                                            style: TextStyle(
+                                                                fontSize: SizeConfig
+                                                                        .safeBlockHorizontal *
+                                                                    4,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400)),
+                                                        Spacer(),
+                                                        BlocBuilder<
+                                                            CounterCubit, int>(
+                                                          builder: (context,
+                                                                  count) =>
+                                                              Center(
+                                                                  child:
+                                                                      Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                                'Rs.' +
+                                                                    widget.price
+                                                                        .toString(),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        SizeConfig.safeBlockHorizontal *
+                                                                            3,
+                                                                    color: Colors
+                                                                        .red)),
+                                                          )),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              )
+                                            ]),
                                       ),
                                     ),
                                     SizedBox(
@@ -638,11 +605,11 @@ class _BusSeatBottomSheetState extends State<BusSeatBottomSheet> {
                                 ),
                               ),
                             );
-                          })
-                    ]),
-                  ),
-                )),
-      ),
+                          }),
+                    )
+                  ]),
+                ),
+              )),
     );
   }
 }

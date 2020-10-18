@@ -2,6 +2,8 @@ import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
 import 'package:android_app/src/ui/book_seat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class BusSeat extends StatefulWidget {
   bool isReserved;
@@ -23,6 +25,40 @@ class BusSeat extends StatefulWidget {
 }
 
 class _BusSeatState extends State<BusSeat> {
+  // List<String> BOOKED_SEATS = [];
+  // Future<List<String>> allocatedSeatsArray(int trip_id) async {
+  //   var data =
+  //       await http.get("http://192.168.254.78:8000/api/getSeats?id=$trip_id");
+  //   var jsonData = json.decode(data.body);
+  //   print(jsonData.length);
+  //   print(trip_id);
+
+  //   print(BOOKED_SEATS);
+  //   return BOOKED_SEATS;
+  // }
+  List<String> BOOKED_SEATS = [
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

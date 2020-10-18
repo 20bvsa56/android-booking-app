@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
-  //static final url = 'http://192.168.1.68:8000/api/login/';
   static final url = 'http://192.168.1.68:8000/api/login/';
+  //static final url = 'http://192.168.1.68:8000/api/login/';
 
   const LoginPage({Key key}) : super(key: key);
 
