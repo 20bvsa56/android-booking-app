@@ -1,4 +1,5 @@
 import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
+import 'package:android_app/src/model/bus_details_model.dart';
 import 'package:android_app/src/ui/book_seat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,39 +26,44 @@ class BusSeat extends StatefulWidget {
 }
 
 class _BusSeatState extends State<BusSeat> {
-  // List<String> BOOKED_SEATS = [];
-  // Future<List<String>> allocatedSeatsArray(int trip_id) async {
-  //   var data =
-  //       await http.get("http://192.168.254.78:8000/api/getSeats?id=$trip_id");
-  //   var jsonData = json.decode(data.body);
-  //   print(jsonData.length);
-  //   print(trip_id);
+  List<int> BOOKED_SEATS = [];
+  Future<List<int>> allocatedSeatsArray(int trip_id) async {
+    var data =
+        await http.get("http://192.168.1.101:8000/api/getSeats?id=$trip_id");
+    var jsonData = json.decode(data.body);
 
-  //   print(BOOKED_SEATS);
-  //   return BOOKED_SEATS;
-  // }
-  List<String> BOOKED_SEATS = [
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0',
-    '0'
-  ];
+    // for (var i = 0; i < jsonData.length; i++) {
+    //   final detail = BusDetailsModel.fromJson(jsonData[i]);
+    //   BOOKED_SEATS.add(detail.toString());
+    //   print(BOOKED_SEATS.length.toString());
+    // }
+
+    print(jsonData.length);
+
+    return jsonData;
+  }
+  // List<String> BOOKED_SEATS = [
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0',
+  //   '0'
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +86,11 @@ class _BusSeatState extends State<BusSeat> {
                 context.bloc<CounterCubit>().addSeat();
 
                 BOOKED_SEATS[4 * widget.rowNum + widget.colNum] =
-                    '1'; // change 2D row, col to 1D index
+                    1; // change 2D row, col to 1D index
+
               } else {
                 context.bloc<CounterCubit>().subtractSeat();
-                BOOKED_SEATS[4 * widget.rowNum + widget.colNum] = '0';
+                BOOKED_SEATS[4 * widget.rowNum + widget.colNum] = 0;
               }
             }
 

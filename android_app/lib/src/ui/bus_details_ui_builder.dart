@@ -25,8 +25,8 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
   Future<List<BusDetailsModel>> busDetails(
       String start_point, String end_point, String departure_date) async {
     var data = await http.get(
-         "http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
-        //"http://192.168.1.101:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
+        //"http://192.168.254.78:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
+        "http://192.168.1.101:8000/api/getBusDetails?start_point=$start_point&end_point=$end_point&departure_date=$departure_date");
     var jsonData = json.decode(data.body);
 
     // print(start_point);
@@ -45,7 +45,14 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            appBar: MyAppBar(),
+            appBar: MyAppBar(
+              leading: IconButton(
+                icon: Icon(Icons.keyboard_backspace),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
             body: SingleChildScrollView(
               child: Center(
                 child: Column(

@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 class HomePage extends StatefulWidget {
   final ValueChanged<int> onPush;
 
-  HomePage({Key key, this.onPush}) : super(key: key);
+  HomePage({Key key,this.onPush}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -33,10 +33,10 @@ class _HomePageState extends State<HomePage> {
   bool loading = true;
 
   void getDestinations() async {
-    // final response =
-    //     await http.get("http://192.168.1.101:8000/api/getDestinations");
     final response =
-        await http.get("http://192.168.254.78:8000/api/getDestinations");
+        await http.get("http://192.168.1.101:8000/api/getDestinations");
+    // final response =
+    //     await http.get("http://192.168.254.78:8000/api/getDestinations");
     if (response.statusCode == 200) {
       destinations =
           loadDestinations(response.body); //get from routes list from function

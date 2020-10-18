@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {
-  MyAppBar({Key key, Widget title})
+  MyAppBar({Key key, Widget title, Widget leading})
       : super(
             key: key,
             title: title,
-            automaticallyImplyLeading:false,
+            leading: leading,
             backgroundColor: Color(0xff4c6792),
             elevation: 10,
             centerTitle: true,

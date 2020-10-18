@@ -17,8 +17,8 @@ class _TicketsUIBuilderState extends State<TicketsUIBuilder> {
   List<TicketsModel> ticketsList = [];
 
   Future<List<TicketsModel>> tickets() async {
-    //var data = await http.get('http://192.168.1.101:8000/api/getTickets');
-    var data = await http.get('http://192.168.254.78:8000/api/getTickets');
+    var data = await http.get('http://192.168.1.101:8000/api/getTickets');
+    //var data = await http.get('http://192.168.254.78:8000/api/getTickets');
     var jsonData = json.decode(data.body);
 
     // print(start_point);
@@ -76,4 +76,3 @@ class _TicketsUIBuilderState extends State<TicketsUIBuilder> {
             )));
   }
 }
-

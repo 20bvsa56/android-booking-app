@@ -4,13 +4,14 @@ import 'package:android_app/src/ui/appbar.dart';
 import 'package:android_app/src/ui/register.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
-import 'bottom_nav_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'bottom_navigation_bar.dart';
+
 class LoginPage extends StatefulWidget {
-  static final url = 'http://192.168.1.68:8000/api/login/';
-  //static final url = 'http://192.168.1.68:8000/api/login/';
+ // static final url = 'http://192.168.1.68:8000/api/login/';
+  static final url = 'http://192.168.1.101:8000/api/login/';
 
   const LoginPage({Key key}) : super(key: key);
 
@@ -40,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   goToHomePage(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NavigationBarPage()),
+      MaterialPageRoute(builder: (context) => App()),
     );
   }
 

@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
-  static final url = 'http://192.168.254.78:8000/api/register/';
- // static final url = 'http://192.168.1.101:8000/api/register/';
+ // static final url = 'http://192.168.254.78:8000/api/register/';
+  static final url = 'http://192.168.1.101:8000/api/register/';
   const RegisterPage({Key key}) : super(key: key);
 
   @override

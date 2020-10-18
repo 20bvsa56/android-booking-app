@@ -45,5 +45,6 @@ class BusDetailsModel {
     seatLayout = json['seat_layout'];
     departureDate = json['departure_date'];
     allocatedSeats = json['allocated_seats'];
+    //allocatedSeats = json['allocated_seats'].cast<int>();
   }
 }

@@ -136,20 +136,19 @@ class _BusDetailsUIState extends State<BusDetailsUI> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => BusSeatBottomSheet(
-                                  trip_id: widget.busDetailsModel.tripId,
-                                  id: widget.busDetailsModel.vehicleId,
-                                  name: widget.busDetailsModel.vehicleName,
-                                  start_point:
-                                      widget.busDetailsModel.startPoint,
-                                  end_point: widget.busDetailsModel.endPoint,
-                                  departure_date:
-                                      widget.busDetailsModel.departureDate,
-                                  row: widget.busDetailsModel.seatRow,
-                                  column: widget.busDetailsModel.seatColumn,
-                                  // layout: widget.busDetailsModel.seatLayout,
-                                  price: widget.busDetailsModel.price,
-                                  allocated_seats: widget.busDetailsModel.allocatedSeats
-                                )),
+                                trip_id: widget.busDetailsModel.tripId,
+                                id: widget.busDetailsModel.vehicleId,
+                                name: widget.busDetailsModel.vehicleName,
+                                start_point: widget.busDetailsModel.startPoint,
+                                end_point: widget.busDetailsModel.endPoint,
+                                departure_date:
+                                    widget.busDetailsModel.departureDate,
+                                row: widget.busDetailsModel.seatRow,
+                                column: widget.busDetailsModel.seatColumn,
+                                // layout: widget.busDetailsModel.seatLayout,
+                                price: widget.busDetailsModel.price,
+                                allocated_seats:
+                                    widget.busDetailsModel.allocatedSeats)),
                       );
                     },
                     child: Text(

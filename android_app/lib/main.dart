@@ -1,5 +1,5 @@
 import 'package:android_app/src/model/slider.dart';
-import 'package:android_app/src/ui/bottom_nav_bar.dart';
+import 'package:android_app/src/ui/bottom_navigation_bar.dart';
 import 'package:android_app/src/ui/login.dart';
 import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the Login Page widget.
         // '/': (context) => LoginPage(),
         // When navigating to the "/navbarpage" route, build the navbarpage widget.
-        '/navbarpage': (context) => NavigationBarPage(),
+        '/navbarpage': (context) => App(),
         // When navigating to the "/navbarpage" route, build the Login widget.
         '/login': (context) => LoginPage()
       },
@@ -144,7 +144,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NavigationBarPage()),
+                  MaterialPageRoute(builder: (context) => App()),
                 );
               },
               child: Container(
