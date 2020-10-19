@@ -42,34 +42,48 @@ class _TicketsUIBuilderState extends State<TicketsUIBuilder> {
               child: Center(
                 child: Column(
                   children: <Widget>[
-                    // Text(busDetailsList.length.toString() + ' buses found.',
-                    // style: TextStyle(fontSize:20,color: Color(0xff4c6792)),),
                     FutureBuilder(
-                      future: tickets(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.data != null) {
-                          return Container(
-                            height: SizeConfig.screenHeight,
-                            width: SizeConfig.screenWidth,
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  TicketsModel ticketsModel =
-                                      snapshot.data[index];
+                        future: tickets(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          print('length of list ${ticketsList.length}');
 
-                                  return TicketsUI(
-                                    ticketsModel: ticketsModel,
-                                  );
-                                }),
-                          );
-                        } else {
-                          return CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Color(0xff4c6792)));
-                        }
-                      },
-                    ),
+                          if (ticketsList.length == 0) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 300),
+                              child: Text(
+                                'No tickets booked yet.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                    color: Color(0xff4c6792),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            );
+                          } else if (!snapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return Container(
+                              height: SizeConfig.screenHeight,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    TicketsModel ticketsModel =
+                                        snapshot.data[index];
+
+                                    return TicketsUI(
+                                      ticketsModel: ticketsModel,
+                                    );
+                                  }),
+                            );
+                          }
+                        }),
                   ],
                 ),
               ),

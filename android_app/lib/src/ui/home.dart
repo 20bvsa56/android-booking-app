@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 class HomePage extends StatefulWidget {
   final ValueChanged<int> onPush;
 
-  HomePage({Key key,this.onPush}) : super(key: key);
+  HomePage({Key key, this.onPush}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();

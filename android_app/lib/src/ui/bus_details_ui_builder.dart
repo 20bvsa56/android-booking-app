@@ -41,6 +41,7 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    var length = busDetailsList.length + 1;
     SizeConfig().init(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -57,34 +58,55 @@ class _BusDetailsUIBuilderState extends State<BusDetailsUIBuilder> {
               child: Center(
                 child: Column(
                   children: <Widget>[
-                    // Text(busDetailsList.length.toString() + ' buses found.',
-                    // style: TextStyle(fontSize:20,color: Color(0xff4c6792)),),
                     FutureBuilder(
-                      future: busDetails(widget.start_point, widget.end_point,
-                          widget.departure_date),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.data != null) {
-                          return Container(
-                            height: SizeConfig.screenHeight,
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  BusDetailsModel busDetailsModel =
-                                      snapshot.data[index];
+                        future: busDetails(widget.start_point, widget.end_point,
+                            widget.departure_date),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          print('length of list ${busDetailsList.length}');
 
-                                  return BusDetailsUI(
-                                    busDetailsModel: busDetailsModel,
-                                  );
-                                }),
-                          );
-                        } else {
-                          return CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Color(0xff4c6792)));
-                        }
-                      },
-                    ),
+                          if (busDetailsList.length == 0) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 300),
+                              child: Text(
+                                'No bus available for the route ' +
+                                    widget.start_point +
+                                    ' and ' +
+                                    widget.end_point +
+                                    ' on ' +
+                                    widget.departure_date +
+                                    '.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.blockSizeHorizontal * 5,
+                                    color: Color(0xff4c6792),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            );
+                          } else if (!snapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return Container(
+                              height: SizeConfig.screenHeight,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    BusDetailsModel busDetailsModel =
+                                        snapshot.data[index];
+
+                                    return BusDetailsUI(
+                                      busDetailsModel: busDetailsModel,
+                                    );
+                                  }),
+                            );
+                          }
+                        }),
                   ],
                 ),
               ),

@@ -1,10 +1,9 @@
 import 'package:android_app/src/bloc/seat_count/counter_bloc.dart';
-import 'package:android_app/src/model/bus_details_model.dart';
-import 'package:android_app/src/ui/book_seat.dart';
+import 'package:android_app/src/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+List<String> BOOKED_SEATS;
 
 class BusSeat extends StatefulWidget {
   bool isReserved;
@@ -16,8 +15,8 @@ class BusSeat extends StatefulWidget {
   BusSeat({
     this.rowNum,
     this.colNum,
-    this.isSelected = false,
     this.isReserved = false,
+    this.isSelected = false,
     this.isAvailable = true,
   });
 
@@ -26,45 +25,6 @@ class BusSeat extends StatefulWidget {
 }
 
 class _BusSeatState extends State<BusSeat> {
-  List<int> BOOKED_SEATS = [];
-  Future<List<int>> allocatedSeatsArray(int trip_id) async {
-    var data =
-        await http.get("http://192.168.1.101:8000/api/getSeats?id=$trip_id");
-    var jsonData = json.decode(data.body);
-
-    // for (var i = 0; i < jsonData.length; i++) {
-    //   final detail = BusDetailsModel.fromJson(jsonData[i]);
-    //   BOOKED_SEATS.add(detail.toString());
-    //   print(BOOKED_SEATS.length.toString());
-    // }
-
-    print(jsonData.length);
-
-    return jsonData;
-  }
-  // List<String> BOOKED_SEATS = [
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0',
-  //   '0'
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -86,11 +46,10 @@ class _BusSeatState extends State<BusSeat> {
                 context.bloc<CounterCubit>().addSeat();
 
                 BOOKED_SEATS[4 * widget.rowNum + widget.colNum] =
-                    1; // change 2D row, col to 1D index
-
+                    '1'; // change 2D row, col to 1D index
               } else {
                 context.bloc<CounterCubit>().subtractSeat();
-                BOOKED_SEATS[4 * widget.rowNum + widget.colNum] = 0;
+                BOOKED_SEATS[4 * widget.rowNum + widget.colNum] = '0';
               }
             }
 
@@ -98,11 +57,11 @@ class _BusSeatState extends State<BusSeat> {
           });
       },
       child: Container(
-          child: Icon(Icons.airline_seat_legroom_reduced,
-              size: 30, color: Colors.white),
+          child: Icon(Icons.airline_seat_recline_extra,
+              size: 32, color: Colors.white),
           margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-          width: MediaQuery.of(context).size.width / 10,
-          height: MediaQuery.of(context).size.width / 10,
+          width: SizeConfig.safeBlockHorizontal * 10,
+          height: SizeConfig.safeBlockVertical * 6,
           decoration: BoxDecoration(
               color: widget.isReserved
                   ? Colors.orangeAccent
